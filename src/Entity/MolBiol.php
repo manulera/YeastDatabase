@@ -6,20 +6,19 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MolBiolRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="molBiolType", type="string")
+ * @ORM\DiscriminatorMap({
+ *      "deletionBahlerMethod" = "DeletionBahlerMethod"
+ * })
  */
-class MolBiol
+abstract class MolBiol extends StrainSource
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=20)
      */
-    private $type;
+    private $molBiolType;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Strain", inversedBy="molBiolInput")
@@ -27,21 +26,14 @@ class MolBiol
      */
     private $inputStrain;
 
+    public function __construct()
+    {
+        StrainSource::__construct();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
     }
 
     public function getInputStrain(): ?Strain
@@ -52,6 +44,18 @@ class MolBiol
     public function setInputStrain(?Strain $inputStrain): self
     {
         $this->inputStrain = $inputStrain;
+
+        return $this;
+    }
+
+    public function getMolBiolType(): ?string
+    {
+        return $this->molBiolType;
+    }
+
+    public function setMolBiolType(string $molBiolType): self
+    {
+        $this->molBiolType = $molBiolType;
 
         return $this;
     }

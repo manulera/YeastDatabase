@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Markers{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{message}}
+    </div>
+{% endfor %}
+<h1>Markers</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+    <td class="">Marker name</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for marker in markers %}
+    <tr>
+        <td>{{marker.name}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

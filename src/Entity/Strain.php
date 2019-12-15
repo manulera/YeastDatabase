@@ -28,6 +28,17 @@ class Strain
      */
     private $molBiolInput;
 
+    /**
+     * @ORM\Column(type="string",nullable=true)
+     */
+    private $genotype;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\StrainSource", inversedBy="strainsOut")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $source;
+
     public function __construct()
     {
         $this->allele = new ArrayCollection();
@@ -94,5 +105,46 @@ class Strain
         }
 
         return $this;
+    }
+
+    public function getSource(): ?StrainSource
+    {
+        return $this->source;
+    }
+
+    public function setSource(?StrainSource $source): self
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    public function getGenotype(): ?string
+    {
+        return $this->genotype;
+    }
+
+    public function setGenotype(?string $genotype): self
+    {
+        $this->genotype = $genotype;
+
+        return $this;
+    }
+
+    public function sortGenotype(?array $genotype_array)
+    {
+        return $genotype_array;
+    }
+
+    public function updateGenotype(): void
+    {
+        $genotype_array = [];
+
+        foreach ($this->getAllele() as $allele) {
+            $genotype_array[] = $allele->getName();
+        }
+        // Some sorting function
+        $genotype_array = $this->sortGenotype($genotype_array);
+        $this->genotype = implode(' ', $genotype_array);
     }
 }

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Strains{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{message}}
+    </div>
+{% endfor %}
+<h1>Strains</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+    <td class="">ID</td>
+    <td class="">Genotype</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for strain in strains %}
+    <tr>
+        <td>{{strain.id}}</td>
+        <td>{{strain.genotype}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

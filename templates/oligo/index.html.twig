@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Oligos{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{message}}
+    </div>
+{% endfor %}
+<h1>Oligos</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+    <td class="">Oligo name</td>
+    <td class="">Sequence</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for oligo in oligos %}
+    <tr>
+        <td>{{oligo.name}}</td>
+        <td>{{oligo.sequence}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

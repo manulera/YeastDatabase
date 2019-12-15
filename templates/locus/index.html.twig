@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Loci{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{message}}
+    </div>
+{% endfor %}
+<h1>Loci</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+    <td class="">Loci name</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for locus in loci %}
+    <tr>
+        <td>{{locus.name}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

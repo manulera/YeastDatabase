@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plasmids{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{message}}
+    </div>
+{% endfor %}
+<h1>Plasmids</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+    <td class="">Plasmid name</td>
+    <td class="">File</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for plasmid in plasmids %}
+    <tr>
+        <td>{{plasmid.name}}</td>
+        <td>{{plasmid.file}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
