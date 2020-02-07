@@ -9,10 +9,6 @@
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 var $ = require('jquery');
 
-
-
-
-
 $(document).ready( function() {
     
     var $select_element = $('.data-combinations-url');
@@ -30,10 +26,9 @@ $(document).ready( function() {
                 
                 if (!html) {
                     $js_target.find('combinations').remove();
-                    $js_target.addClass('d-none');
                     return;
                 }
-                $("#mating_outcomes").text("reached3");
+
                 // Replace the current field and show
                 $js_target
                     .html(html)
