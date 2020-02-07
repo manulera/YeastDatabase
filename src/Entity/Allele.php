@@ -48,6 +48,13 @@ class Allele
      */
     private $strains;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\StrainSource", inversedBy="alleles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $strainSource;
+
+
     public function __construct()
     {
         $this->strains = new ArrayCollection();
@@ -135,6 +142,20 @@ class Allele
             $this->strains->removeElement($strain);
             $strain->removeAllele($this);
         }
+
+        return $this;
+    }
+
+
+
+    public function getStrainSource(): ?StrainSource
+    {
+        return $this->strainSource;
+    }
+
+    public function setStrainSource(?StrainSource $strainSource): self
+    {
+        $this->strainSource = $strainSource;
 
         return $this;
     }

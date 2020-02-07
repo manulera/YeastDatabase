@@ -1,6 +1,35 @@
 
+
 {% extends 'strain/create.html.twig' %}
 {% block create_body %}
 <h2>{{ method_name }}</h2>
-{{ form(form) }}
+{{form_start(form)}}
+{{ form_row(form.strain1) }}
+{{ form_row(form.strain2) }}
+<button type = "button" id = "combinations_button" class = 'btn btn-secondary'>See possibilities</button>
+{% if form.combinations is defined %}
+    <div class="js-combination-target">
+    {{ form_row(form.combinations, 
+        {
+            attr: {
+                'data-combinations-url': path('strain.create.method.mating.get'),
+                'class': 'js-form-combinations'
+            }
+        }) 
+    }}
+    </div>
+{% endif %}  
+
+{{ form_row(form.save) }}
+{{ form_end(form) }}
+
+<p id="mating_outcomes"></p>
+<p id="mating_outcomes2"></p>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('strain/create2') }}
 {% endblock %}

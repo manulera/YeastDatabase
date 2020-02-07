@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\CustomStrainSource;
 use App\Entity\DeletionBahlerMethod;
+use App\Entity\Mating;
 use App\Entity\Strain;
 use App\Entity\StrainSource;
 use App\Form\CustomStrainSourceType;
 use App\Form\DeletionBahlerMethodType;
+use App\Form\MatingType;
 use App\Repository\StrainRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -29,14 +31,17 @@ class StrainController extends AbstractController
      * @var array
      * An array of strings containing the types of the forms
      */
-    private $formTypes;
+    private $strainSourceControllers;
 
     public function __construct()
     {
         // We create a form with the types of forms one can have
-        $this->formTypes = [
-            'Custom' => CustomStrainSource::class,
-            'Deletion Bahler method' => DeletionBahlerMethod::class
+        $this->strainSourceControllers = [
+            'Custom' => customStrainSource::class,
+            'Deletion Bahler method' => DeletionBahlerMethod::class,
+            'Mating' => Mating::class
+
+
         ];
     }
     /**
@@ -44,10 +49,10 @@ class StrainController extends AbstractController
      *
      * @return array
      */
-    public function formTypesChoice()
+    public function strainSourceControllersChoice()
     {
         $out = [];
-        foreach (array_keys($this->formTypes) as $value) {
+        foreach (array_keys($this->strainSourceControllers) as $value) {
             $out[$value] = $value;
         }
         return $out;
@@ -72,7 +77,7 @@ class StrainController extends AbstractController
 
         $formBuilder = $this->createFormBuilder()
             ->add('Method', ChoiceType::class, [
-                'choices' => $this->formTypesChoice()
+                'choices' => $this->strainSourceControllersChoice()
             ])
             ->add('Choose', SubmitType::class, [
                 'attr' => [
@@ -105,24 +110,27 @@ class StrainController extends AbstractController
     public function renderStrainForm(Request $request, $method_name)
     {
         /* @var $strain_source StrainSource */
-        $strain_source = new $this->formTypes[$method_name];
+        $strain_source = new $this->strainSourceControllers[$method_name];
+        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm($strain_source->getFormClass(), $strain_source);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
-            $strain_source->createStrains();
-            dump($strain_source);
-            // Include the value
-            $em = $this->getDoctrine()->getManager();
+            // Create the strains
+            $strain_source->createStrains($form);
 
-            // Bidirectional relationships are not handled by Doctrine (it cannot persist
-            // if the joincolumn is not null, because it will try to insert the strain into the
-            // database, but needs the source, and viceversa)
-
-            foreach ($strain_source->getStrainsOut() as $strain) {
-                $strain->updateGenotype();
-                $em->persist($strain);
-            }
+            // One has to insert the strains instead of the strain source for the
+            // cascading to work
             $em->persist($strain_source);
+
+            foreach ($strain_source->getAlleles() as $allele) {
+                $em->persist($allele);
+            }
+            foreach ($strain_source->getStrainsOut() as $strain) {
+                $em->persist($strain);
+                dump($strain->getSource());
+            }
+
+
             // Run the query
             $em->flush();
             $this->addFlash('success', 'Strain created');
@@ -135,5 +143,27 @@ class StrainController extends AbstractController
                 'method_name' => $method_name,
             ]
         );
+    }
+    /**
+     * @Route("/create/Mating/combinations", name="create.method.mating.get")
+     */
+
+    public function getStrainPair(Request $request)
+    {
+
+        $mating = new Mating();
+        $repository = $this->getDoctrine()->getRepository(Strain::class);
+
+        $strain1 = $repository->find($request->query->get('strain1'));
+        $strain2 = $repository->find($request->query->get('strain2'));
+
+        $mating->setStrain1($strain1);
+        $mating->setStrain2($strain2);
+
+        $form = $this->createForm(MatingType::class, $mating);
+
+        return $this->render('strain/create_form_mating_possibilities.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

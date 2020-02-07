@@ -34,15 +34,29 @@ class Strain
     private $genotype;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\StrainSource", inversedBy="strainsOut")
+     * @ORM\ManyToOne(targetEntity="App\Entity\StrainSource", inversedBy="strainsOut",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $source;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Mating", mappedBy="strains")
+     */
+    private $matings;
+
 
     public function __construct()
     {
         $this->allele = new ArrayCollection();
         $this->molBiolInput = new ArrayCollection();
+        $this->matings = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        // TODO understand why this is necessary
+        $this->updateGenotype();
+        return strval($this->id) . " - " . $this->getGenotype();
     }
 
     public function getId(): ?int
@@ -146,5 +160,33 @@ class Strain
         // Some sorting function
         $genotype_array = $this->sortGenotype($genotype_array);
         $this->genotype = implode(' ', $genotype_array);
+    }
+
+    /**
+     * @return Collection|Mating[]
+     */
+    public function getMatings(): Collection
+    {
+        return $this->matings;
+    }
+
+    public function addMating(Mating $mating): self
+    {
+        if (!$this->matings->contains($mating)) {
+            $this->matings[] = $mating;
+            $mating->addStrain($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMating(Mating $mating): self
+    {
+        if ($this->matings->contains($mating)) {
+            $this->matings->removeElement($mating);
+            $mating->removeStrain($this);
+        }
+
+        return $this;
     }
 }

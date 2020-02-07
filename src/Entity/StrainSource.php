@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Form;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StrainSourceRepository")
@@ -12,7 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({
  *      "molbiol" = "MolBiol",
- *      "custom" = "CustomStrainSource"
+ *      "custom" = "CustomStrainSource",
+ *      "deletionBahlerMethod" = "DeletionBahlerMethod",
+ *      "mating" = "Mating"
  * })
  */
 abstract class StrainSource
@@ -22,12 +26,12 @@ abstract class StrainSource
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Strain", mappedBy="source", orphanRemoval=true)
      */
-    private $strainsOut;
+    protected $strainsOut;
 
     // The associated form class
 
@@ -37,12 +41,22 @@ abstract class StrainSource
     // @var string
     protected $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Allele", mappedBy="strainSource")
+     */
+    protected $alleles;
+
     public function __construct()
     {
         $this->strainsOut = new ArrayCollection();
+        $this->alleles = new ArrayCollection();
     }
 
-    public function createStrains()
+
+    public function createStrains(Form $form)
+    { }
+
+    public function createAlleles(Form $form)
     { }
 
     public function getFormClass()
@@ -86,6 +100,37 @@ abstract class StrainSource
             // set the owning side to null (unless already changed)
             if ($strainsOut->getSource() === $this) {
                 $strainsOut->setSource(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Allele[]
+     */
+    public function getAlleles(): Collection
+    {
+        return $this->alleles;
+    }
+
+    public function addAllele(Allele $allele): self
+    {
+        if (!$this->alleles->contains($allele)) {
+            $this->alleles[] = $allele;
+            $allele->setStrainSource($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAllele(Allele $allele): self
+    {
+        if ($this->alleles->contains($allele)) {
+            $this->alleles->removeElement($allele);
+            // set the owning side to null (unless already changed)
+            if ($allele->getStrainSource() === $this) {
+                $allele->setStrainSource(null);
             }
         }
 
