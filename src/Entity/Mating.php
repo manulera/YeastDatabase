@@ -6,6 +6,7 @@ use App\Form\MatingType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Form;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MatingRepository")
@@ -86,5 +87,35 @@ class Mating extends StrainSource
         $this->strain2 = $strain2;
 
         return $this;
+    }
+
+    public function createStrains(Form $form)
+    {
+        dd($form);
+        $chosen_strains = $form["strain_choice"]->getData();
+
+        $nb_clones = $form->get("number_of_clones")->getData();
+        $marker = $form->get("marker")->getData();
+        for ($i = 0; $i < $nb_clones; $i++) {
+
+            $new_allele = new Allele;
+            $new_allele->setLocus($locus);
+            $new_allele->setMarker($marker);
+            $new_allele->setName($this->nameAllele($new_allele));
+            $this->addAllele($new_allele);
+
+            $new_strain = new Strain;
+            $old_strain = $this->inputStrain;
+
+            $new_strain->addAllele($new_allele);
+
+            foreach ($old_strain->getAllele() as $old_allele) {
+                if ($old_allele->getLocus() != $new_allele->getLocus()) {
+                    $new_strain->addAllele($old_allele);
+                }
+            }
+            $new_strain->updateGenotype();
+            $this->addStrainsOut($new_strain);
+        }
     }
 }

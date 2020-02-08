@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\CustomStrainSource;
 use App\Entity\DeletionBahlerMethod;
+use App\Entity\Locus;
 use App\Entity\Mating;
 use App\Entity\Strain;
 use App\Entity\StrainSource;
@@ -144,13 +145,13 @@ class StrainController extends AbstractController
             ]
         );
     }
+
     /**
      * @Route("/create/Mating/combinations", name="create.method.mating.get")
      */
 
     public function getStrainPair(Request $request)
     {
-
         $mating = new Mating();
         $repository = $this->getDoctrine()->getRepository(Strain::class);
 
@@ -162,8 +163,9 @@ class StrainController extends AbstractController
 
         $form = $this->createForm(MatingType::class, $mating);
 
+
         return $this->render('strain/create_form_mating_possibilities.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 }

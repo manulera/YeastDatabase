@@ -11,11 +11,7 @@ var $ = require('jquery');
 
 $(document).ready( function() {
     
-    var $select_element = $('.data-combinations-url');
-    var $js_target = $('.js-combination-target');
-
     $('#combinations_button').click(function(e) {
-        $("#mating_outcomes").text("reached");
         $.ajax({
             url: "/strain/create/Mating/combinations",
             data: {
@@ -23,16 +19,15 @@ $(document).ready( function() {
                 strain2: $("#mating_strain2").val()
             },
             success: function (html) {
-                
-                if (!html) {
-                    $js_target.find('combinations').remove();
-                    return;
-                }
 
                 // Replace the current field and show
-                $js_target
-                    .html(html)
-                    .removeClass('d-none')
+                $("#ajax_outcome").text("Success in ajax request");
+                $("#mating_strain_choice").replaceWith($(html).find("#mating_strain_choice"));
+                $("#submission_button").replaceWith($(html).find("#mating_save"));
+            },
+            error: function()
+            {
+                $("#ajax_outcome").text("Error in ajax request");
             }
         });
 

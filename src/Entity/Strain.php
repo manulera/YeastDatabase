@@ -59,6 +59,12 @@ class Strain
         return strval($this->id) . " - " . $this->getGenotype();
     }
 
+    // To give it a temporary id when creating the temporary strains.
+    public function setId(?int $id)
+    {
+        $this->id = $id;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -188,5 +194,9 @@ class Strain
         }
 
         return $this;
+    }
+
+    public function matingPossibilities(Strain $strain2)
+    {
     }
 }
