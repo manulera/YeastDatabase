@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Session;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MatingRepository")
@@ -89,10 +90,12 @@ class Mating extends StrainSource
         return $this;
     }
 
-    public function createStrains(Form $form)
+    public function createStrains(Form $form, array $options = [])
     {
-        dd($form);
         $chosen_strains = $form["strain_choice"]->getData();
+
+        dd($chosen_strains);
+
 
         $nb_clones = $form->get("number_of_clones")->getData();
         $marker = $form->get("marker")->getData();

@@ -53,7 +53,7 @@ abstract class StrainSource
     }
 
 
-    public function createStrains(Form $form)
+    public function createStrains(Form $form,array $options = [])
     { }
 
     public function createAlleles(Form $form)

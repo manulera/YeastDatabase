@@ -23,6 +23,7 @@ $(document).ready( function() {
                 // Replace the current field and show
                 $("#ajax_outcome").text("Success in ajax request");
                 $("#mating_strain_choice").replaceWith($(html).find("#mating_strain_choice"));
+                $("#mating_dummy").replaceWith($(html).find("#mating_dummy"));
                 $("#submission_button").replaceWith($(html).find("#mating_save"));
             },
             error: function()

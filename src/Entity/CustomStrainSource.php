@@ -19,7 +19,7 @@ class CustomStrainSource extends StrainSource
         $this->name = "Custom strain creation";
     }
 
-    public function createStrains(Form $form)
+    public function createStrains(Form $form, array $options = [])
     {
         $new_strain = new Strain;
         $new_strain->updateGenotype();

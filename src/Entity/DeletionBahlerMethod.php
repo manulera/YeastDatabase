@@ -81,7 +81,7 @@ class DeletionBahlerMethod extends MolBiol
         return $name;
     }
 
-    public function createStrains(Form $form)
+    public function createStrains(Form $form,array $options = [])
     {
         $locus = $form->get("locus")->getData();
         $nb_clones = $form->get("number_of_clones")->getData();
