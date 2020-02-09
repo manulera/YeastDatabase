@@ -6,6 +6,7 @@ use App\Entity\Mating;
 use App\Entity\Strain;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -13,27 +14,52 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\Test\FormInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class MatingType extends AbstractType
 {
 
+    public function getGenotypeIndex(): array
+    {
+        $genotype_index = $this->session->get('genotype_index');
+        if (null === $genotype_index) {
+            return [];
+        }
+        return $genotype_index;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $genotype_index = $this->getGenotypeIndex();
 
         $builder
             ->add('strain1')
             ->add('strain2')
+            ->add('dummy', TextareaType::class, ['mapped' => false, 'data' => 'none'])
             ->add('strain_choice', ChoiceType::class, [
-                'choices' => $options["genotype_index"],
                 'mapped' => false,
-                // 'by_reference' => false,
+                'expanded' => true,
+                'multiple' => true,
+                'choices' => $genotype_index
+            ]);
+        $formModifier = function (Form $form, array $genotype_index) {
+            $form->add('strain_choice', ChoiceType::class, [
+                'mapped' => false,
+                'expanded' => true,
+                'multiple' => true,
+                'choices' => $genotype_index
+                // 'choices' => [1, 2, 3]
+                // 'data' => $a_key
                 // 'expanded' => true
-            ])
-            ->add('dummy', TextareaType::class, ['mapped' => false, 'data' => 'none']);
+            ]);
+        };
 
-        if (count($options["genotype_index"])) {
-
+        // TODO this could be made an event listener PRE_SET_DATA I just dont
+        // see it makes it clearer
+        if (count($genotype_index)) {
             $builder
                 ->add('dummy', TextareaType::class, ['mapped' => false, 'data' => 'dummy'])
                 ->add('save', SubmitType::class, [
@@ -43,7 +69,23 @@ class MatingType extends AbstractType
                 ]);
         }
 
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            // TODO: What is this syntax???
+            function (FormEvent $event) use ($formModifier) {
+                $formModifier($event->getForm(), $this->getGenotypeIndex());
+            }
+        );
 
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            // TODO: What is this syntax???
+            function (FormEvent $event) use ($formModifier) {
+                $formModifier($event->getForm(), $this->getGenotypeIndex());
+            }
+        );
+
+        // $builder->get('strain_choice')->resetViewTransformers();
         // $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
         //     /** @var Mating|null $data */
 
@@ -86,11 +128,19 @@ class MatingType extends AbstractType
         // });
     }
 
+
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Mating::class,
-            'genotype_index' => [],
         ]);
+    }
+
+    private $session;
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
     }
 }

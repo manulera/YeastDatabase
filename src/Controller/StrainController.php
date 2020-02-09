@@ -4,12 +4,8 @@ namespace App\Controller;
 
 use App\Entity\CustomStrainSource;
 use App\Entity\DeletionBahlerMethod;
-use App\Entity\Locus;
 use App\Entity\Mating;
 use App\Entity\Strain;
-use App\Entity\StrainSource;
-use App\Form\CustomStrainSourceType;
-use App\Form\DeletionBahlerMethodType;
 use App\Form\MatingType;
 use App\Repository\StrainRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session;
+
 
 
 
@@ -112,12 +108,15 @@ class StrainController extends AbstractController
     {
         /* @var $strain_source StrainSource */
         $strain_source = new $this->strainSourceControllers[$method_name];
+        $session = $this->get('session');
+        
+
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm($strain_source->getFormClass(), $strain_source);
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             // Create the strains
-            $session = $this->get('session');
+            
             $opt['possible_strains'] = $session->get('possible_strains');
 
             $strain_source->createStrains($form, $opt);
@@ -183,16 +182,23 @@ class StrainController extends AbstractController
         // the values are the indexes of the strain in this list
 
         $genotype_index = [];
+
         for ($i = 0; $i < count($possible_strains); $i++) {
-            $genotype_index[$possible_strains[$i]->getGenotype()] = $i;
+            $geno = $possible_strains[$i]->getGenotype();
+            if ($geno) {
+                $genotype_index[$possible_strains[$i]->getGenotype()] = $i;
+            } else {
+                $genotype_index["wt"] = $i;
+            }
         }
 
-        $options["genotype_index"] = $genotype_index;
-        $form = $this->createForm(MatingType::class, $mating, $options);
+
+        $form = $this->createForm(MatingType::class, $mating);
+
         //TODO implement serialize in the strain class?
         $session = $this->get("session");
         $session->set('possible_strains', $possible_strains);
-
+        $session->set('genotype_index', $genotype_index);
         return $this->render('strain/create_form_mating_possibilities.html.twig', [
             'form' => $form->createView()
         ]);
