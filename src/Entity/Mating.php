@@ -92,33 +92,32 @@ class Mating extends StrainSource
 
     public function createStrains(Form $form, array $options = [])
     {
-        $chosen_strains = $form["strain_choice"]->getData();
 
-        dd($chosen_strains);
+        // dd($form->get("strain_choice")->getData());
 
 
-        $nb_clones = $form->get("number_of_clones")->getData();
-        $marker = $form->get("marker")->getData();
-        for ($i = 0; $i < $nb_clones; $i++) {
+        //     $nb_clones = $form->get("number_of_clones")->getData();
+        //     $marker = $form->get("marker")->getData();
+        //     for ($i = 0; $i < $nb_clones; $i++) {
 
-            $new_allele = new Allele;
-            $new_allele->setLocus($locus);
-            $new_allele->setMarker($marker);
-            $new_allele->setName($this->nameAllele($new_allele));
-            $this->addAllele($new_allele);
+        //         $new_allele = new Allele;
+        //         $new_allele->setLocus($locus);
+        //         $new_allele->setMarker($marker);
+        //         $new_allele->setName($this->nameAllele($new_allele));
+        //         $this->addAllele($new_allele);
 
-            $new_strain = new Strain;
-            $old_strain = $this->inputStrain;
+        //         $new_strain = new Strain;
+        //         $old_strain = $this->inputStrain;
 
-            $new_strain->addAllele($new_allele);
+        //         $new_strain->addAllele($new_allele);
 
-            foreach ($old_strain->getAllele() as $old_allele) {
-                if ($old_allele->getLocus() != $new_allele->getLocus()) {
-                    $new_strain->addAllele($old_allele);
-                }
-            }
-            $new_strain->updateGenotype();
-            $this->addStrainsOut($new_strain);
-        }
+        //         foreach ($old_strain->getAllele() as $old_allele) {
+        //             if ($old_allele->getLocus() != $new_allele->getLocus()) {
+        //                 $new_strain->addAllele($old_allele);
+        //             }
+        //         }
+        //         $new_strain->updateGenotype();
+        //         $this->addStrainsOut($new_strain);
+        //     }
     }
 }

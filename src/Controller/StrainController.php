@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Allele;
 use App\Entity\CustomStrainSource;
 use App\Entity\DeletionBahlerMethod;
 use App\Entity\Mating;
@@ -109,28 +110,41 @@ class StrainController extends AbstractController
         /* @var $strain_source StrainSource */
         $strain_source = new $this->strainSourceControllers[$method_name];
         $session = $this->get('session');
-        
 
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm($strain_source->getFormClass(), $strain_source);
         $form->handleRequest($request);
+        $session->remove('genotype_index');
         if ($form->isSubmitted()) {
             // Create the strains
-            
-            $opt['possible_strains'] = $session->get('possible_strains');
 
-            $strain_source->createStrains($form, $opt);
+            $possible_arrays = $session->remove('possible_arrays');
+            $chosen_arrays = $form->get("strain_choice")->getData();
+            $alle_repo = $this->getDoctrine()->getRepository(Allele::class);
+            foreach ($chosen_arrays as $i) {
+                $strain = new Strain;
+                $strain->addMating($strain_source);
+                foreach ($possible_arrays[$i] as $allele_id) {
+                    dump($allele_id);
+                    $alle = $alle_repo->find($allele_id);
+                    $strain->addAllele($alle);
+                }
+                $strain->updateGenotype();
+                $strain_source->addStrainsOut($strain);
+            }
+
+
+            $strain_source->createStrains($form);
 
             // One has to insert the strains instead of the strain source for the
             // cascading to work
             $em->persist($strain_source);
 
-            foreach ($strain_source->getAlleles() as $allele) {
-                $em->persist($allele);
-            }
+            // foreach ($strain_source->getAlleles() as $allele) {
+            //     $em->persist($allele);
+            // }
             foreach ($strain_source->getStrainsOut() as $strain) {
                 $em->persist($strain);
-                dump($strain->getSource());
             }
 
 
@@ -169,21 +183,14 @@ class StrainController extends AbstractController
         // Todo calculate the possibilities inside the mating class
         $possible_strains = $this->strainCombinations($strain1, $strain2);
 
-        // $entityManager = $this->getDoctrine()->getManager();
-
-
-        // TODO maybe a better way of passing the strains?
-        // foreach ($possible_strains as $st) {
-        //     $st = $entityManager->persist($st);
-        // }
-        // $entityManager->flush();
-
-        // We construct an array in which the keys are the genotypes and
-        // the values are the indexes of the strain in this list
-
         $genotype_index = [];
-
+        $possible_arrays = [];
         for ($i = 0; $i < count($possible_strains); $i++) {
+            $allele_ids = [];
+            foreach ($possible_strains[$i]->getAllele() as $alle) {
+                $allele_ids[] = $alle->getId();
+            }
+            $possible_arrays[] = $allele_ids;
             $geno = $possible_strains[$i]->getGenotype();
             if ($geno) {
                 $genotype_index[$possible_strains[$i]->getGenotype()] = $i;
@@ -192,13 +199,14 @@ class StrainController extends AbstractController
             }
         }
 
+        $session = $this->get("session");
+        $session->set('possible_arrays', $possible_arrays);
+        $session->set('genotype_index', $genotype_index);
 
         $form = $this->createForm(MatingType::class, $mating);
 
         //TODO implement serialize in the strain class?
-        $session = $this->get("session");
-        $session->set('possible_strains', $possible_strains);
-        $session->set('genotype_index', $genotype_index);
+
         return $this->render('strain/create_form_mating_possibilities.html.twig', [
             'form' => $form->createView()
         ]);
