@@ -25,23 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StrainController extends AbstractController
 {
-    /**
-     * @var array
-     * An array of strings containing the types of the forms
-     */
-    private $strainSourceControllers;
-
-    public function __construct()
-    {
-        // We create a form with the types of forms one can have
-        $this->strainSourceControllers = [
-            'Custom' => customStrainSource::class,
-            'Deletion Bahler method' => DeletionBahlerMethod::class,
-            'Mating' => Mating::class
-
-
-        ];
-    }
+    
     /**
      * Returns an array to pass as choice
      *
@@ -65,37 +49,6 @@ class StrainController extends AbstractController
         return $this->render('strain/index.html.twig', [
             'strains' => $strains,
         ]);
-    }
-
-    /**
-     * @Route("/create", name="create.select_method")
-     */
-    public function create(Request $request)
-    {
-
-        $formBuilder = $this->createFormBuilder()
-            ->add('Method', ChoiceType::class, [
-                'choices' => $this->strainSourceControllersChoice()
-            ])
-            ->add('Choose', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary float-right',
-                ],
-            ]);
-
-        $form = $formBuilder->getForm();
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-
-            $data = $form->getData();
-            return $this->redirect($this->generateUrl(
-                'strain.create.method',
-                [
-                    "method_name" => $data["Method"]
-                ]
-            ));
-        }
-        return $this->render('strain/create_select_method.html.twig', ['form' => $form->createView()]);
     }
     /**
      * Returns a view with the form of the specific strain type provided
@@ -129,7 +82,7 @@ class StrainController extends AbstractController
                     $alle = $alle_repo->find($allele_id);
                     $strain->addAllele($alle);
                 }
-                $strain->updateGenotype();
+                $strain->updateGenotype($this->genotyper);
                 $strain_source->addStrainsOut($strain);
             }
 
@@ -162,133 +115,5 @@ class StrainController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/create/Mating/combinations", name="create.method.mating.get")
-     */
-
-    public function getStrainPair(Request $request)
-    {
-        $mating = new Mating();
-        $repository = $this->getDoctrine()->getRepository(Strain::class);
-
-        $strain1 = $repository->find($request->query->get('strain1'));
-        $strain2 = $repository->find($request->query->get('strain2'));
-
-        if ($strain1 == $strain2) {
-            return;
-        }
-
-        $mating->setStrain1($strain1);
-        $mating->setStrain2($strain2);
-        // Todo calculate the possibilities inside the mating class
-        $possible_strains = $this->strainCombinations($strain1, $strain2);
-
-        $genotype_index = [];
-        $possible_arrays = [];
-        for ($i = 0; $i < count($possible_strains); $i++) {
-            $allele_ids = [];
-            foreach ($possible_strains[$i]->getAllele() as $alle) {
-                $allele_ids[] = $alle->getId();
-            }
-            $possible_arrays[] = $allele_ids;
-            $geno = $possible_strains[$i]->getGenotype();
-            if ($geno) {
-                $genotype_index[$possible_strains[$i]->getGenotype()] = $i;
-            } else {
-                $genotype_index["wt"] = $i;
-            }
-        }
-
-        $session = $this->get("session");
-        $session->set('possible_arrays', $possible_arrays);
-        $session->set('genotype_index', $genotype_index);
-
-        $form = $this->createForm(MatingType::class, $mating);
-
-        //TODO implement serialize in the strain class?
-
-        return $this->render('strain/create_form_mating_possibilities.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
-    // TODO move this somewhere
-    public function recursiveCombination($in_list, &$result_list, $depth, $current)
-    {
-        if ($depth == count($in_list)) {
-            $result_list[] = $current;
-            return;
-        }
-        for ($i = 0; $i < count($in_list[$depth]); $i++) {
-            $temp = $current;
-            $temp[] = $in_list[$depth][$i];
-            $this->recursiveCombination($in_list, $result_list, $depth + 1, $temp);
-        }
-    }
-
-    public function recursiveStrainCombination($in_list, &$result_list, $depth, $current)
-    {
-        if ($depth == count($in_list)) {
-            $st = new Strain;
-            foreach ($current as $alle) {
-                if ($alle) {
-                    $st->addAllele($alle);
-                }
-            }
-            $result_list[] = $st;
-            return;
-        }
-        for ($i = 0; $i < count($in_list[$depth]); $i++) {
-            $temp = $current;
-            $temp[] = $in_list[$depth][$i];
-            $this->recursiveStrainCombination($in_list, $result_list, $depth + 1, $temp);
-        }
-    }
-
-
-    public function strainCombinations(Strain $strain1, Strain $strain2)
-    {
-        // @var Collection|Allele[]
-        $alleles1 = $strain1->getAllele();
-        // @var Collection|Allele[]
-        $alleles2 = $strain2->getAllele();
-
-        $loci1 = [];
-        $alleles = [];
-
-        foreach ($alleles1 as $alle1) {
-            /* @var $alle Allele */
-            $loci1[$alle1->getLocus()->getName()] = $alle1;
-        }
-
-        foreach ($alleles2 as $alle2) {
-            /* @var $alle Allele */
-            $locus2_name = $alle2->getLocus()->getName();
-
-            if (array_key_exists($locus2_name, $loci1)) {
-                // We only include them if the alleles are different. In principle there would be no way to tell
-                // the difference between the alleles!
-                if ($loci1[$locus2_name] != $alle2) {
-                    $alleles[] = [$loci1[$locus2_name], $alle2];
-                } else {
-                    $alleles[] = [$alle2];
-                }
-                unset($loci1[$locus2_name]);
-            } else {
-                $alleles[] = [null, $alle2];
-            }
-        }
-
-        foreach ($loci1 as $locus => $alle1) {
-            $alleles[] = [$alle1, null];
-        }
-        $out = array();
-        $this->recursiveStrainCombination($alleles, $out, 0, array());
-        $i = 1;
-        foreach ($out as $st) {
-            $st->updateGenotype();
-            $i++;
-        }
-        return $out;
-    }
+    
 }

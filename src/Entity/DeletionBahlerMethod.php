@@ -75,13 +75,13 @@ class DeletionBahlerMethod extends MolBiol
         return $this;
     }
 
-    private function nameAllele(Allele $allele)
+    public function nameAllele(Allele $allele)
     {
         $name = $allele->getLocus()->getName() . "Δ::" . $allele->getMarker();
         return $name;
     }
 
-    public function createStrains(Form $form,array $options = [])
+    public function createStrains(Form $form, array $options = [])
     {
         $locus = $form->get("locus")->getData();
         $nb_clones = $form->get("number_of_clones")->getData();
@@ -104,7 +104,7 @@ class DeletionBahlerMethod extends MolBiol
                     $new_strain->addAllele($old_allele);
                 }
             }
-            $new_strain->updateGenotype();
+            $new_strain->updateGenotype($this->genotyper);
             $this->addStrainsOut($new_strain);
         }
     }

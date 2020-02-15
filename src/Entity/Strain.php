@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Service\Genotyper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -44,7 +45,6 @@ class Strain
      */
     private $matings;
 
-
     public function __construct()
     {
         $this->allele = new ArrayCollection();
@@ -55,11 +55,8 @@ class Strain
     public function __toString()
     {
         // TODO understand why this is necessary
-        $this->updateGenotype();
         return strval($this->id) . " - " . $this->getGenotype();
     }
-
-
 
     public function getId(): ?int
     {
@@ -147,21 +144,9 @@ class Strain
         return $this;
     }
 
-    public function sortGenotype(?array $genotype_array)
+    public function updateGenotype(Genotyper $genotyper): void
     {
-        return $genotype_array;
-    }
-
-    public function updateGenotype(): void
-    {
-        $genotype_array = [];
-
-        foreach ($this->getAllele() as $allele) {
-            $genotype_array[] = $allele->getName();
-        }
-        // Some sorting function
-        $genotype_array = $this->sortGenotype($genotype_array);
-        $this->genotype = implode(' ', $genotype_array);
+        $this->setGenotype($genotyper->getGenotype($this->getAllele()));
     }
 
     /**
