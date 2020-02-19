@@ -54,6 +54,12 @@ class Allele
      */
     private $strainSource;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Promoter", inversedBy="allele")
+     * @JoinColumn(name="promoter_name", referencedColumnName="name")
+     */
+    private $promoter;
+
 
     public function __construct()
     {
@@ -156,6 +162,18 @@ class Allele
     public function setStrainSource(?StrainSource $strainSource): self
     {
         $this->strainSource = $strainSource;
+
+        return $this;
+    }
+
+    public function getPromoter(): ?Promoter
+    {
+        return $this->promoter;
+    }
+
+    public function setPromoter(?Promoter $promoter): self
+    {
+        $this->promoter = $promoter;
 
         return $this;
     }

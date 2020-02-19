@@ -8,6 +8,7 @@ use App\Repository\LocusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * @Route("/locus", name="locus.")
@@ -18,7 +19,7 @@ class LocusController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(LocusRepository $locusRepository)
+    public function indexAction(LocusRepository $locusRepository)
     {
         $loci = $locusRepository->findAll();
         return $this->render('locus/index.html.twig', [
@@ -51,5 +52,18 @@ class LocusController extends AbstractController
         return $this->render('locus/create.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * Finds and displays a locus entity.
+     *
+     * @Route("/{id}", name="show")
+     * @Method("GET")
+     */
+    public function showAction(Locus $locus)
+    {
+        return $this->render('locus/show.html.twig', array(
+            'locus' => $locus
+        ));
     }
 }

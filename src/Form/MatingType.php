@@ -37,8 +37,7 @@ class MatingType extends AbstractType
                     'mapped' => false,
                     'expanded' => true,
                     'multiple' => true,
-                    'choices' => $options,
-                    'attr' => ['display' => false]
+                    'choices' => $options
                 ]);
             if (count($options)) {
                 $form->add('save', SubmitType::class, [

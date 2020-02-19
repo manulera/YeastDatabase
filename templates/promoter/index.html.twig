@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Loci{% endblock %}
+{% block title %}Plasmids{% endblock %}
 
 {% block body %}
 
@@ -9,17 +9,17 @@
         {{message}}
     </div>
 {% endfor %}
-<h1>Loci</h1>
+<h1>Promoters</h1>
 <table class="table table-striped">
     <thead>
     <tr>
-    <td class="">Loci name</td>
+    <td class="">Promoter name</td>
     </tr>
     </thead>
     <tbody>
-    {% for locus in loci %}
+    {% for promoter in promoters %}
     <tr>
-        <td><a href="{{ path('locus.show', { 'id': locus.name }) }}">{{locus.name}}</a></td>
+        <td>{{promoter.name}}</td>
     </tr>
     {% endfor %}
     </tbody>

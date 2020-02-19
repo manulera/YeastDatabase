@@ -21,7 +21,7 @@
     {% for strain in strains %}
     <tr>
         <td>{{strain.id}}</td>
-        <td>{{strain.genotype}}</td>
+        <td><a href="{{ path('strain.show', { 'id': strain.id }) }}">{{strain.genotype}}</a></td>
     </tr>
     {% endfor %}
     </tbody>
