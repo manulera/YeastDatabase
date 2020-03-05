@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{tag.name}}{% endblock %}
+
+{% block body %}
+
+<h1>Promoter: {{tag.name}}</h1>
+
+<h2> Alleles: </h2>
+<ul>
+{% for allele in tag.getAllele%}
+    <li>
+    <strong>{{allele.name}}.</strong> Found in:
+    <ul>
+    {% for strain in allele.getStrains %}
+        <li>{{strain.id}} - {{strain.genotype}}</li>                
+    {% endfor %}
+    </ul>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

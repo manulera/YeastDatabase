@@ -3,10 +3,7 @@
 namespace App\Form;
 
 use App\Entity\DeletionBahlerMethod;
-use App\Entity\Locus;
-use App\Entity\Marker;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,18 +18,21 @@ class DeletionBahlerMethodType extends StrainSourceType
             ->add('inputStrain')
             ->add('primerForward')
             ->add('primerReverse')
-            ->add('plasmid')
-            ->add('locus', EntityType::class, [
-                'class' => Locus::class,
-                'mapped' => false
-            ])
-            ->add('marker', EntityType::class, [
-                'class' => Marker::class,
-                'mapped' => false
-            ])
-            ->add('number_of_clones', IntegerType::class, [
+            ->add('plasmid');
+
+        if ($options['fields2show'] == "deletion") {
+            $builder->add('allele', AlleleDeletionType::class, [
                 'mapped' => false,
-            ])
+            ]);
+        } else {
+            $builder->add('allele', AlleleChunkyType::class, [
+                'mapped' => false,
+                'fields2show' => $options['fields2show']
+            ]);
+        }
+        $builder->add('number_of_clones', IntegerType::class, [
+            'mapped' => false,
+        ])
             ->add('Save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary float-right',
@@ -44,6 +44,7 @@ class DeletionBahlerMethodType extends StrainSourceType
     {
         $resolver->setDefaults([
             'data_class' => DeletionBahlerMethod::class,
+            'fields2show' => ''
         ]);
     }
 }

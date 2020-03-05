@@ -28,9 +28,9 @@ class LocusController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/new", name="new")
      */
-    public function create(Request $request)
+    public function new(Request $request)
     {
         $locus = new Locus();
         $form = $this->createForm(LocusType::class, $locus);
@@ -49,7 +49,7 @@ class LocusController extends AbstractController
         }
 
         // Return a view
-        return $this->render('locus/create.html.twig', [
+        return $this->render('locus/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }

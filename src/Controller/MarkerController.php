@@ -18,7 +18,7 @@ class MarkerController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(MarkerRepository $markerRepository)
+    public function indexAction(MarkerRepository $markerRepository)
     {
         $markers = $markerRepository->findAll();
         return $this->render('marker/index.html.twig', [
@@ -27,9 +27,9 @@ class MarkerController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/new", name="new")
      */
-    public function create(Request $request)
+    public function newAction(Request $request)
     {
         $marker = new Marker();
         $form = $this->createForm(MarkerType::class, $marker);
@@ -48,7 +48,7 @@ class MarkerController extends AbstractController
         }
 
         // Return a view
-        return $this->render('marker/create.html.twig', [
+        return $this->render('marker/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }

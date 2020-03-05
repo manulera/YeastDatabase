@@ -27,9 +27,9 @@ class PlasmidController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/new", name="new")
      */
-    public function create(Request $request)
+    public function newAction(Request $request)
     {
         $plasmid = new Plasmid();
         $form = $this->createForm(PlasmidType::class, $plasmid);
@@ -48,7 +48,7 @@ class PlasmidController extends AbstractController
         }
 
         // Return a view
-        return $this->render('plasmid/create.html.twig', [
+        return $this->render('plasmid/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }

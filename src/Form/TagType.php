@@ -17,7 +17,7 @@ class TagType extends AbstractType
         $builder
             ->add('name')
             ->add('color', ChoiceType::class, [
-                'choices' => $options,
+                'choices' => ['red' => 'red', 'green' => 'green', 'blue' => 'blue', " " => null],
             ])
             ->add('Save', SubmitType::class, [
                 'attr' => [

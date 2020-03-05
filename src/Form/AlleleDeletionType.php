@@ -2,23 +2,23 @@
 
 namespace App\Form;
 
-use App\Entity\Allele;
-use Symfony\Component\Form\AbstractType;
+use App\Entity\AlleleDeletion;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AlleleType extends AbstractType
+class AlleleDeletionType extends AlleleType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
         $builder
-            ->add('locus');
+            ->add('marker');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Allele::class,
+            'data_class' => AlleleDeletion::class,
         ]);
     }
 }

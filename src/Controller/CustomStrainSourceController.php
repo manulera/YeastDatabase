@@ -11,7 +11,7 @@ use App\Controller\StrainSourceController;
 use Symfony\Component\Form\Form;
 
 /**
- * @Route("/strain/create/custom", name="strain.source.custom.")
+ * @Route("/strain/new/custom", name="strain.source.custom.")
  */
 class CustomStrainSourceController extends StrainSourceController
 {
@@ -19,7 +19,7 @@ class CustomStrainSourceController extends StrainSourceController
     /**
      * @Route("/", name="index")
      */
-    public function index(Request $request)
+    public function indexAction(Request $request)
     {
         $strain_source = new CustomStrainSource;
         $form = $this->createForm(CustomStrainSourceType::class, $strain_source);
@@ -30,6 +30,7 @@ class CustomStrainSourceController extends StrainSourceController
             $this->processStrains($form, $strain_source);
             return $this->persistStrainSource($strain_source);
         }
+
         return $this->render(
             'strain/source/custom.html.twig',
             [

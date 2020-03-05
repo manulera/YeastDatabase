@@ -6,12 +6,11 @@ use App\Service\Genotyper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/strain/create", name="strain.source.")
+ * @Route("/strain/new", name="strain.source.")
  */
 class StrainSourceController extends AbstractController
 {
@@ -19,7 +18,7 @@ class StrainSourceController extends AbstractController
      * @var array
      * An array of strings containing the controllers we will redirect to
      */
-    private $controllerPossibilities;
+    protected $controllerPossibilities;
 
     /**
      * @var Genotyper
@@ -32,16 +31,21 @@ class StrainSourceController extends AbstractController
         // We create a form with the subroutes of the other controllers
         $this->controllerPossibilities = [
             'Custom' => 'custom',
-            'Deletion Bahler method' => 'deletion_bahler',
+            'Gene editing' => 'molbiol',
             'Mating' => 'mating'
         ];
         $this->genotyper = $genotyper;
     }
 
+    protected function redirect2Child(string $choice)
+    {
+        return $this->redirectToRoute('strain.source.' . $choice . '.index');
+    }
+
     /**
      * @Route("/", name="index")
      */
-    public function index(Request $request)
+    public function indexAction(Request $request)
     {
         $formBuilder = $this->createFormBuilder()
             ->add('Method', ChoiceType::class, [
@@ -59,7 +63,7 @@ class StrainSourceController extends AbstractController
         if ($form->isSubmitted()) {
             $data = $form->getData();
             // TODO: Maybe there is a better way of doing this?
-            return $this->redirectToRoute('strain.source.' . $data["Method"] . '.index');
+            return $this->redirect2Child($data["Method"]);
         }
         // dump($this->controllerPossibilities['Custom']);
         return $this->render('strain/source/index.html.twig', [

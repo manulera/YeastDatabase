@@ -22,20 +22,26 @@ class Tag
      */
     private $color;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Allele", mappedBy="tag")
-     */
-    private $allele;
-
     public function __construct()
     {
         $this->allele = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getColor(): ?string
@@ -46,37 +52,6 @@ class Tag
     public function setColor(string $color): self
     {
         $this->color = $color;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Allele[]
-     */
-    public function getAllele(): Collection
-    {
-        return $this->allele;
-    }
-
-    public function addAllele(Allele $allele): self
-    {
-        if (!$this->allele->contains($allele)) {
-            $this->allele[] = $allele;
-            $allele->setTag($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAllele(Allele $allele): self
-    {
-        if ($this->allele->contains($allele)) {
-            $this->allele->removeElement($allele);
-            // set the owning side to null (unless already changed)
-            if ($allele->getTag() === $this) {
-                $allele->setTag(null);
-            }
-        }
 
         return $this;
     }

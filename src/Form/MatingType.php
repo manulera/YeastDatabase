@@ -48,17 +48,6 @@ class MatingType extends AbstractType
             }
         };
 
-        // TODO this could be made an event listener PRE_SET_DATA I just dont
-        // see it makes it clearer
-        // if (count($genotype_index)) {
-        //     $builder
-        //         ->add('save', SubmitType::class, [
-        //             'attr' => [
-        //                 'class' => 'btn btn-primary float-right',
-        //             ]
-        //         ]);
-        // }
-
         $builder->addEventListener(
             FormEvents::POST_SET_DATA,
             // TODO: What is this syntax???

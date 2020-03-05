@@ -10,21 +10,21 @@ use App\Form\DeletionBahlerMethodType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Controller\StrainSourceController;
+
 
 /**
- * @Route("/strain/create/deletion_bahler", name="strain.source.deletion_bahler.")
+ * @Route("/strain/new/molbiol/bahler", name="strain.source.molbiol.bahler.")
  */
-class DeletionBahlerMethodController extends StrainSourceController
+class DeletionBahlerMethodController extends MolBiolController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/{option}", name="new")
      */
-    public function index(Request $request)
+    public function newAction(string $option, Request $request)
     {
         // TODO this can be probably moved to the parent class
         $strain_source = new DeletionBahlerMethod;
-        $form = $this->createForm(DeletionBahlerMethodType::class, $strain_source);
+        $form = $this->createForm(DeletionBahlerMethodType::class, $strain_source, ['fields2show' => $option]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -42,21 +42,21 @@ class DeletionBahlerMethodController extends StrainSourceController
 
     public function processStrains(Form $form, DeletionBahlerMethod $strain_source)
     {
-        // @var App\Entity\Locus
-        $locus = $form->get("locus")->getData();
+        //TODO move this up to molbiol
+
+
+        $allele = $form->get("allele")->getData();
+        $allele->updateName();
         $nb_clones = $form->get("number_of_clones")->getData();
-        $marker = $form->get("marker")->getData();
+
         for ($i = 0; $i < $nb_clones; $i++) {
 
-            $new_allele = new Allele;
-            $new_allele->setLocus($locus);
-            $new_allele->setMarker($marker);
-            $new_allele->setName($strain_source->nameAllele($new_allele));
+            $new_allele = clone $allele;
             $strain_source->addAllele($new_allele);
 
             $new_strain = new Strain;
             $old_strain = $strain_source->getInputStrain();
-
+            // TODO check if allele is in the same locus
             $new_strain->addAllele($new_allele);
 
             foreach ($old_strain->getAllele() as $old_allele) {

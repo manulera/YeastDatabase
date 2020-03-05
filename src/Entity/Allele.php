@@ -10,8 +10,14 @@ use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AlleleRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({
+ *      "deletion" = "AlleleDeletion",
+ *      "chunky" = "AlleleChunky"
+ * })
  */
-class Allele
+abstract class Allele
 {
     /**
      * @ORM\Id()
@@ -32,33 +38,10 @@ class Allele
     private $locus;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Tag", inversedBy="allele")
-     * @JoinColumn(name="tag_name", referencedColumnName="name")
-     */
-    private $tag;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Marker", inversedBy="allele")
-     * @JoinColumn(name="marker_name", referencedColumnName="name")
-     */
-    private $marker;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Strain", mappedBy="allele")
-     */
-    private $strains;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\StrainSource", inversedBy="alleles")
      * @ORM\JoinColumn(nullable=false)
      */
     private $strainSource;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Promoter", inversedBy="allele")
-     * @JoinColumn(name="promoter_name", referencedColumnName="name")
-     */
-    private $promoter;
 
 
     public function __construct()
@@ -88,72 +71,6 @@ class Allele
         return $this;
     }
 
-    public function getLocus(): ?Locus
-    {
-        return $this->locus;
-    }
-
-    public function setLocus(?Locus $locus): self
-    {
-        $this->locus = $locus;
-
-        return $this;
-    }
-
-    public function getTag(): ?Tag
-    {
-        return $this->tag;
-    }
-
-    public function setTag(?Tag $tag): self
-    {
-        $this->tag = $tag;
-
-        return $this;
-    }
-
-    public function getMarker(): ?Marker
-    {
-        return $this->marker;
-    }
-
-    public function setMarker(?Marker $marker): self
-    {
-        $this->marker = $marker;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Strain[]
-     */
-    public function getStrains(): Collection
-    {
-        return $this->strains;
-    }
-
-    public function addStrain(Strain $strain): self
-    {
-        if (!$this->strains->contains($strain)) {
-            $this->strains[] = $strain;
-            $strain->addAllele($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStrain(Strain $strain): self
-    {
-        if ($this->strains->contains($strain)) {
-            $this->strains->removeElement($strain);
-            $strain->removeAllele($this);
-        }
-
-        return $this;
-    }
-
-
-
     public function getStrainSource(): ?StrainSource
     {
         return $this->strainSource;
@@ -166,14 +83,18 @@ class Allele
         return $this;
     }
 
-    public function getPromoter(): ?Promoter
+    public function updateName()
     {
-        return $this->promoter;
     }
 
-    public function setPromoter(?Promoter $promoter): self
+    public function getLocus(): ?Locus
     {
-        $this->promoter = $promoter;
+        return $this->locus;
+    }
+
+    public function setLocus(?Locus $locus): self
+    {
+        $this->locus = $locus;
 
         return $this;
     }

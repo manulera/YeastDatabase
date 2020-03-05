@@ -11,7 +11,7 @@ var $ = require('jquery');
 
 var ajaxRequestFunction = function() {
     $.ajax({
-        url: "/strain/create/mating/combinations",
+        url: "/strain/new/mating/combinations",
         data: {
             strain1: $("#mating_strain1").val(),
             strain2: $("#mating_strain2").val()

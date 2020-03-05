@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
 
 /**
- * @Route("/strain/create/mating", name="strain.source.mating.")
+ * @Route("/strain/new/mating", name="strain.source.mating.")
  */
 class MatingController extends StrainSourceController
 {
@@ -20,7 +20,7 @@ class MatingController extends StrainSourceController
     /**
      * @Route("/", name="index")
      */
-    public function index(Request $request)
+    public function indexAction(Request $request)
     {
 
         // TODO this can be probably moved to the parent class

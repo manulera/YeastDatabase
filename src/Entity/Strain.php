@@ -6,6 +6,10 @@ use App\Service\Genotyper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinColumns;
+
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StrainRepository")
@@ -18,11 +22,6 @@ class Strain
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Allele", inversedBy="strains")
-     */
-    private $allele;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\MolBiol", mappedBy="inputStrain", orphanRemoval=true)
@@ -44,6 +43,11 @@ class Strain
      * @ORM\ManyToMany(targetEntity="App\Entity\Mating", mappedBy="strains")
      */
     private $matings;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Allele")
+     */
+    private $allele;
 
     public function __construct()
     {
@@ -148,6 +152,8 @@ class Strain
     {
         $this->setGenotype($genotyper->getGenotype($this->getAllele()));
     }
+
+
 
     /**
      * @return Collection|Mating[]
