@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\StrainSource;
 use App\Service\Genotyper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -72,11 +73,15 @@ class StrainSourceController extends AbstractController
         ]);
     }
 
-    protected function persistStrainSource($strain_source)
+    protected function persistStrainSource(StrainSource $strain_source)
     {
+
         $em = $this->getDoctrine()->getManager();
         // One has to insert the strains instead of the strain source for the
         // cascading to work
+
+        $strain_source->setDate(new \DateTime(date('Y-m-d H:i:s')));
+        $strain_source->setCreator($this->container->get('security.token_storage')->getToken()->getUser());
         $em->persist($strain_source);
         foreach ($strain_source->getAlleles() as $allele) {
             $em->persist($allele);

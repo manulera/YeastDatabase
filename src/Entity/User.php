@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -39,6 +41,21 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $email;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\StrainSource", mappedBy="creator")
+     */
+    private $strainSources;
+
+    public function __construct()
+    {
+        $this->strainSources = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->username;
+    }
 
     public function getId(): ?int
     {
@@ -121,6 +138,37 @@ class User implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|StrainSource[]
+     */
+    public function getStrainSources(): Collection
+    {
+        return $this->strainSources;
+    }
+
+    public function addStrainSource(StrainSource $strainSource): self
+    {
+        if (!$this->strainSources->contains($strainSource)) {
+            $this->strainSources[] = $strainSource;
+            $strainSource->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStrainSource(StrainSource $strainSource): self
+    {
+        if ($this->strainSources->contains($strainSource)) {
+            $this->strainSources->removeElement($strainSource);
+            // set the owning side to null (unless already changed)
+            if ($strainSource->getCreator() === $this) {
+                $strainSource->setCreator(null);
+            }
+        }
 
         return $this;
     }

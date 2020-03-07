@@ -46,6 +46,17 @@ abstract class StrainSource
      */
     protected $alleles;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="strainSources")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $creator;
+
     public function __construct()
     {
         $this->strainsOut = new ArrayCollection();
@@ -53,11 +64,13 @@ abstract class StrainSource
     }
 
 
-    public function createStrains(Form $form,array $options = [])
-    { }
+    public function createStrains(Form $form, array $options = [])
+    {
+    }
 
     public function createAlleles(Form $form)
-    { }
+    {
+    }
 
     public function getFormClass()
     {
@@ -133,6 +146,30 @@ abstract class StrainSource
                 $allele->setStrainSource(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getCreator(): ?User
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(?User $creator): self
+    {
+        $this->creator = $creator;
 
         return $this;
     }
