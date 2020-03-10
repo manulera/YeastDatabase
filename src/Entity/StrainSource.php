@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Form\Form;
 
 
 /**
@@ -15,7 +14,6 @@ use Symfony\Component\Form\Form;
  * @ORM\DiscriminatorMap({
  *      "molbiol" = "MolBiol",
  *      "custom" = "CustomStrainSource",
- *      "deletionBahlerMethod" = "DeletionBahlerMethod",
  *      "mating" = "Mating"
  * })
  */
@@ -34,9 +32,6 @@ abstract class StrainSource
     protected $strainsOut;
 
     // The associated form class
-
-    // @var string
-    protected $formClass;
 
     // @var string
     protected $name;
@@ -61,20 +56,6 @@ abstract class StrainSource
     {
         $this->strainsOut = new ArrayCollection();
         $this->alleles = new ArrayCollection();
-    }
-
-
-    public function createStrains(Form $form, array $options = [])
-    {
-    }
-
-    public function createAlleles(Form $form)
-    {
-    }
-
-    public function getFormClass()
-    {
-        return $this->formClass;
     }
 
 

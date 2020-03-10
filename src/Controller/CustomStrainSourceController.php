@@ -40,9 +40,13 @@ class CustomStrainSourceController extends StrainSourceController
     }
 
     public function processStrains(Form $form, CustomStrainSource $strain_source)
-    {
+    {;
         $new_strain = new Strain;
+
+        $new_strain->setMType($form->get('MatingType')->getData());
         $new_strain->updateGenotype($this->genotyper);
         $strain_source->addStrainsOut($new_strain);
+
+        
     }
 }

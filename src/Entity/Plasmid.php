@@ -13,7 +13,13 @@ class Plasmid
 {
     /**
      * @ORM\Id()
-     * @ORM\Column(type="string",length=100)
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string",length=100,unique=true)
      */
     private $name;
 
@@ -21,17 +27,6 @@ class Plasmid
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $file;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\DeletionBahlerMethod", mappedBy="plasmid", orphanRemoval=true)
-     */
-    private $deletionBahlerMethods;
-
-
-    public function __construct()
-    {
-        $this->deletionBahlerMethods = new ArrayCollection();
-    }
 
     public function __toString()
     {
@@ -46,37 +41,6 @@ class Plasmid
     public function setFile(?string $file): self
     {
         $this->file = $file;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|DeletionBahlerMethod[]
-     */
-    public function getDeletionBahlerMethods(): Collection
-    {
-        return $this->deletionBahlerMethods;
-    }
-
-    public function addDeletionBahlerMethod(DeletionBahlerMethod $deletionBahlerMethod): self
-    {
-        if (!$this->deletionBahlerMethods->contains($deletionBahlerMethod)) {
-            $this->deletionBahlerMethods[] = $deletionBahlerMethod;
-            $deletionBahlerMethod->setPlasmid($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDeletionBahlerMethod(DeletionBahlerMethod $deletionBahlerMethod): self
-    {
-        if ($this->deletionBahlerMethods->contains($deletionBahlerMethod)) {
-            $this->deletionBahlerMethods->removeElement($deletionBahlerMethod);
-            // set the owning side to null (unless already changed)
-            if ($deletionBahlerMethod->getPlasmid() === $this) {
-                $deletionBahlerMethod->setPlasmid(null);
-            }
-        }
 
         return $this;
     }

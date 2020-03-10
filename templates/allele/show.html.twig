@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{allele.name}}{% endblock %}
+
+{% block body %}
+
+<h1>Allele: {{allele.name}}</h1>
+
+<p>This allele is found in the locus {% include "locus/reference.html.twig"  with {'locus': allele.locus}%}</p>
+
+<h2> Strains: </h2>
+<ul>
+{% for strain in allele.getStrains %}
+    <li>{% include "strain/reference.html.twig" %}</li>              
+{% endfor %}    
+</ul>
+
+{% endblock %}

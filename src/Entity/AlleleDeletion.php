@@ -19,11 +19,6 @@ class AlleleDeletion extends Allele
      */
     private $marker;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getMarker(): ?Marker
     {
         return $this->marker;

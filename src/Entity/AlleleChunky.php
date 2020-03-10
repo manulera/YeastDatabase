@@ -41,6 +41,7 @@ class AlleleChunky extends Allele
      */
     private $cMarker;
 
+
     public function getPromoter(): ?Promoter
     {
         return $this->promoter;

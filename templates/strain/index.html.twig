@@ -23,7 +23,7 @@
     {% for strain in strains %}
     <tr>
         <td>{{strain.id}}</td>
-        <td><a href="{{ path('strain.show', { 'id': strain.id }) }}">{{strain.genotype}}</a></td>
+        <td>{% include "strain/geno_reference.html.twig" %}</td>
         <td>{{strain.source.creator}}</td>
         <td>{{strain.source.date|date("d/m/Y")}}</td>
     </tr>

@@ -2,23 +2,39 @@
 
 namespace App\Form;
 
-use App\Entity\DeletionBahlerMethod;
+use App\Entity\Strain;
+use App\Entity\Oligo;
+use App\Entity\Plasmid;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
-class DeletionBahlerMethodType extends StrainSourceType
+class BahlerMethodType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('inputStrain')
-            ->add('primerForward')
-            ->add('primerReverse')
-            ->add('plasmid');
+            ->add('inputStrain', EntityType::class, [
+                'class' => Strain::class,
+                'mapped' => false
+            ])
+            ->add('primerForward', EntityType::class, [
+                'class' => Oligo::class,
+                'mapped' => false
+            ])
+            ->add('primerReverse', EntityType::class, [
+                'class' => Oligo::class,
+                'mapped' => false
+            ])
+            ->add('plasmid', EntityType::class, [
+                'class' => Plasmid::class,
+                'mapped' => false
+            ]);
 
         if ($options['fields2show'] == "deletion") {
             $builder->add('allele', AlleleDeletionType::class, [
@@ -43,7 +59,6 @@ class DeletionBahlerMethodType extends StrainSourceType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => DeletionBahlerMethod::class,
             'fields2show' => ''
         ]);
     }

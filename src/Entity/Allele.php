@@ -43,6 +43,10 @@ abstract class Allele
      */
     private $strainSource;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Strain", mappedBy="alleles")
+     */
+    private $strains;
 
     public function __construct()
     {
@@ -87,6 +91,7 @@ abstract class Allele
     {
     }
 
+
     public function getLocus(): ?Locus
     {
         return $this->locus;
@@ -95,6 +100,34 @@ abstract class Allele
     public function setLocus(?Locus $locus): self
     {
         $this->locus = $locus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Strain[]
+     */
+    public function getStrains(): Collection
+    {
+        return $this->strains;
+    }
+
+    public function addStrain(Strain $strain): self
+    {
+        if (!$this->strains->contains($strain)) {
+            $this->strains[] = $strain;
+            $strain->addAllele($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStrain(Strain $strain): self
+    {
+        if ($this->strains->contains($strain)) {
+            $this->strains->removeElement($strain);
+            $strain->removeAllele($this);
+        }
 
         return $this;
     }

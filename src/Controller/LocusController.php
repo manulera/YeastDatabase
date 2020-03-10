@@ -13,7 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 /**
  * @Route("/locus", name="locus.")
  */
-
 class LocusController extends AbstractController
 {
     /**

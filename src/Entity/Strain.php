@@ -45,15 +45,20 @@ class Strain
     private $matings;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Allele")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Allele", inversedBy="strains")
      */
-    private $allele;
+    private $alleles;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $mType;
 
     public function __construct()
     {
-        $this->allele = new ArrayCollection();
         $this->molBiolInput = new ArrayCollection();
         $this->matings = new ArrayCollection();
+        $this->alleles = new ArrayCollection();
     }
 
     public function __toString()
@@ -65,32 +70,6 @@ class Strain
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|Allele[]
-     */
-    public function getAllele(): Collection
-    {
-        return $this->allele;
-    }
-
-    public function addAllele(Allele $allele): self
-    {
-        if (!$this->allele->contains($allele)) {
-            $this->allele[] = $allele;
-        }
-
-        return $this;
-    }
-
-    public function removeAllele(Allele $allele): self
-    {
-        if ($this->allele->contains($allele)) {
-            $this->allele->removeElement($allele);
-        }
-
-        return $this;
     }
 
     /**
@@ -143,14 +122,14 @@ class Strain
 
     public function setGenotype(?string $genotype): self
     {
-        $this->genotype = $genotype;
+        $this->genotype = $this->getMType() . " " . $genotype;
 
         return $this;
     }
 
     public function updateGenotype(Genotyper $genotyper): void
     {
-        $this->setGenotype($genotyper->getGenotype($this->getAllele()));
+        $this->setGenotype($genotyper->getGenotype($this->getAlleles()));
     }
 
 
@@ -185,5 +164,43 @@ class Strain
 
     public function matingPossibilities(Strain $strain2)
     {
+    }
+
+    /**
+     * @return Collection|Allele[]
+     */
+    public function getAlleles(): Collection
+    {
+        return $this->alleles;
+    }
+
+    public function addAllele(Allele $allele): self
+    {
+        if (!$this->alleles->contains($allele)) {
+            $this->alleles[] = $allele;
+        }
+
+        return $this;
+    }
+
+    public function removeAllele(Allele $allele): self
+    {
+        if ($this->alleles->contains($allele)) {
+            $this->alleles->removeElement($allele);
+        }
+
+        return $this;
+    }
+
+    public function getMType(): ?string
+    {
+        return $this->mType;
+    }
+
+    public function setMType(string $mType): self
+    {
+        $this->mType = $mType;
+
+        return $this;
     }
 }

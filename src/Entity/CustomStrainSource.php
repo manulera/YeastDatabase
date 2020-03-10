@@ -15,7 +15,5 @@ class CustomStrainSource extends StrainSource
     public function __construct()
     {
         StrainSource::__construct();
-        $this->formClass = CustomStrainSourceType::class;
-        $this->name = "Custom strain creation";
     }
 }

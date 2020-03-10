@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Allele;
-use App\Entity\Locus;
-use App\Entity\Promoter;
-use App\Entity\Tag;
-use App\Form\MolBiolType;
+use App\Entity\MolBiol;
+use App\Entity\Strain;
 use App\Service\Genotyper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,49 +45,42 @@ class MolBiolController extends StrainSourceController
         return parent::indexAction($request);
     }
 
-    /**
-     * @Route("/possibilities", name="possibilities")
-     */
-    public function getPossibilities(Request $request)
+    public function persistMolBiol(Strain $parent_strain, Allele $allele, int $nb_clones = 1, array $plasmids = [], array $oligos = [])
     {
-        $choice = $request->query->get("choice");
 
-        $form = $this->createForm(MolBiolType::class, null, ['choice' => $choice]);
-
-        $allele = new Allele;
-        $repository = $this->getDoctrine()->getRepository(Locus::class);
-        $locus = $repository->find($request->query->get("locus"));
-        $allele->setLocus($locus);
-
-        if ($form->has('inputPromoter')) {
-            $repository = $this->getDoctrine()->getRepository(Promoter::class);
-            $promoter = $repository->find($form->get('inputPromoter')->getData());
-            $allele->setPromoter($promoter);
-        }
-        if ($form->has('inputNtermTag')) {
-            $repository = $this->getDoctrine()->getRepository(Tag::class);
-            $tag = $form->get('inputNtermTag')->getData();
-            //dd($tag);
-            if ($tag) {
-                $tag = $repository->find($tag);
-                $allele->setTag($tag);
-            }
-        }
-        if ($form->has('inputCtermTag')) {
-            $repository = $this->getDoctrine()->getRepository(Tag::class);
-            $tag = $repository->find($form->get('inputCtermTag')->getData());
-            $allele->setTag($tag);
-        }
-
+        $strain_source = new MolBiol;
+        $strain_source->setInputStrain($parent_strain);
         $allele->updateName();
 
-        return $this->render(
-            'strain/source/molbiol.html.twig',
-            [
-                'form' => $form->createView(),
-                'allele' => $allele
-            ]
+        // Add the resources
+        foreach ($plasmids as $plasmid) {
+            $strain_source->addPlasmid($plasmid);
+        }
+        foreach ($oligos as $oligo) {
+            $strain_source->addOligo($oligo);
+        }
 
-        );
+        // Create the strains
+        for ($i = 0; $i < $nb_clones; $i++) {
+
+            $new_allele = clone $allele;
+            $strain_source->addAllele($new_allele);
+
+            $new_strain = new Strain;
+            $old_strain = $strain_source->getInputStrain();
+            $new_strain->setMType($old_strain->getMType());
+            // TODO check if allele is in the same locus
+            $new_strain->addAllele($new_allele);
+
+            foreach ($old_strain->getAlleles() as $old_allele) {
+                if ($old_allele->getLocus() != $new_allele->getLocus()) {
+                    $new_strain->addAllele($old_allele);
+                }
+            }
+            $new_strain->updateGenotype($this->genotyper);
+            $strain_source->addStrainsOut($new_strain);
+        }
+
+        return $this->persistStrainSource($strain_source);
     }
 }

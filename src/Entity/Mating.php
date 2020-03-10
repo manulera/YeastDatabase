@@ -35,7 +35,6 @@ class Mating extends StrainSource
     public function __construct()
     {
         StrainSource::__construct();
-        $this->formClass = MatingType::class;
         $this->name = "Mating Strains";
         $this->strains = new ArrayCollection();
     }
@@ -88,36 +87,5 @@ class Mating extends StrainSource
         $this->strain2 = $strain2;
 
         return $this;
-    }
-
-    public function createStrains(Form $form, array $options = [])
-    {
-
-        // dd($form->get("strain_choice")->getData());
-
-
-        //     $nb_clones = $form->get("number_of_clones")->getData();
-        //     $marker = $form->get("marker")->getData();
-        //     for ($i = 0; $i < $nb_clones; $i++) {
-
-        //         $new_allele = new Allele;
-        //         $new_allele->setLocus($locus);
-        //         $new_allele->setMarker($marker);
-        //         $new_allele->setName($this->nameAllele($new_allele));
-        //         $this->addAllele($new_allele);
-
-        //         $new_strain = new Strain;
-        //         $old_strain = $this->inputStrain;
-
-        //         $new_strain->addAllele($new_allele);
-
-        //         foreach ($old_strain->getAllele() as $old_allele) {
-        //             if ($old_allele->getLocus() != $new_allele->getLocus()) {
-        //                 $new_strain->addAllele($old_allele);
-        //             }
-        //         }
-        //         $new_strain->updateGenotype();
-        //         $this->addStrainsOut($new_strain);
-        //     }
     }
 }

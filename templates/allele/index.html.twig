@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Alleles{% endblock %}
+
+{% block body %}
+
+<h1>Alleles</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+    <td class="">Allele name</td>
+    <td class="">Created by</td>
+    <td class="">Creation date</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for allele in alleles %}
+    <tr>
+        <td>{% include "allele/reference.html.twig" %}</td>
+        <td>{{allele.strainSource.creator}}</td>
+        <td>{{allele.strainSource.date|date("d/m/Y")}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

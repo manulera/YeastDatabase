@@ -10,10 +10,18 @@
 <ul>
 {% for allele in locus.getAllele%}
     <li>
-    <strong>{{allele.name}}.</strong> Found in:
+    <strong>
+    <a href="{{ path('allele.show', { 'id': allele.id }) }}">
+    {{allele.name}}
+    </a>
+    </strong>. Found in:
     <ul>
     {% for strain in allele.getStrains %}
-        <li>{{strain.id}} - {{strain.genotype}}</li>                
+        <li>
+        <a href="{{ path('strain.show', { 'id': strain.id }) }}">
+        {{strain.id}} - {{strain.genotype}}
+        </a>
+        </li>
     {% endfor %}
     </ul>
     </li>
