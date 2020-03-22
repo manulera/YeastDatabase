@@ -24,9 +24,17 @@ svg circle {
     stroke-width: 2px;
   }
 
-  .mylabel
+#my_dataviz {
+  border: 1px solid gray;
+  position: relative;
+}
+
+  div.tooltip
   {
+     position: absolute;           
     text-align: center;
+    opacity: 0;
+    visibility: hidden;
     width: 80px;                  
     height: 28px;                 
     padding: 2px;             
