@@ -9,7 +9,13 @@
         {{message}}
     </div>
 {% endfor %}
-<h1>Strains</h1>
+<h1>Strains</h1> 
+
+{% form_theme form 'form/spanfields.html.twig' %}
+
+{{form(form)}}
+
+<div><a href="{{ path('strain.source.index') }}">Create strain</a></div>
 <table class="table table-striped">
     <thead>
     <tr>

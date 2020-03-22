@@ -24,11 +24,6 @@ class Strain
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MolBiol", mappedBy="inputStrain", orphanRemoval=true)
-     */
-    private $molBiolInput;
-
-    /**
      * @ORM\Column(type="string",nullable=true)
      */
     private $genotype;
@@ -39,10 +34,6 @@ class Strain
      */
     private $source;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Mating", mappedBy="strains")
-     */
-    private $matings;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Allele", inversedBy="strains")
@@ -54,11 +45,15 @@ class Strain
      */
     private $mType;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\StrainSource", mappedBy="strainsIn")
+     */
+    private $strainSourcesIn;
+
     public function __construct()
     {
-        $this->molBiolInput = new ArrayCollection();
-        $this->matings = new ArrayCollection();
         $this->alleles = new ArrayCollection();
+        $this->strainSourcesIn = new ArrayCollection();
     }
 
     public function __toString()
@@ -70,37 +65,6 @@ class Strain
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|MolBiol[]
-     */
-    public function getMolBiolInput(): Collection
-    {
-        return $this->molBiolInput;
-    }
-
-    public function addMolBiolInput(MolBiol $molBiolInput): self
-    {
-        if (!$this->molBiolInput->contains($molBiolInput)) {
-            $this->molBiolInput[] = $molBiolInput;
-            $molBiolInput->setInputStrain($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMolBiolInput(MolBiol $molBiolInput): self
-    {
-        if ($this->molBiolInput->contains($molBiolInput)) {
-            $this->molBiolInput->removeElement($molBiolInput);
-            // set the owning side to null (unless already changed)
-            if ($molBiolInput->getInputStrain() === $this) {
-                $molBiolInput->setInputStrain(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getSource(): ?StrainSource
@@ -130,40 +94,6 @@ class Strain
     public function updateGenotype(Genotyper $genotyper): void
     {
         $this->setGenotype($genotyper->getGenotype($this->getAlleles()));
-    }
-
-
-
-    /**
-     * @return Collection|Mating[]
-     */
-    public function getMatings(): Collection
-    {
-        return $this->matings;
-    }
-
-    public function addMating(Mating $mating): self
-    {
-        if (!$this->matings->contains($mating)) {
-            $this->matings[] = $mating;
-            $mating->addStrain($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMating(Mating $mating): self
-    {
-        if ($this->matings->contains($mating)) {
-            $this->matings->removeElement($mating);
-            $mating->removeStrain($this);
-        }
-
-        return $this;
-    }
-
-    public function matingPossibilities(Strain $strain2)
-    {
     }
 
     /**
@@ -200,6 +130,34 @@ class Strain
     public function setMType(string $mType): self
     {
         $this->mType = $mType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|StrainSource[]
+     */
+    public function getStrainSourcesIn(): Collection
+    {
+        return $this->strainSourcesIn;
+    }
+
+    public function addStrainSourcesIn(StrainSource $strainSourcesIn): self
+    {
+        if (!$this->strainSourcesIn->contains($strainSourcesIn)) {
+            $this->strainSourcesIn[] = $strainSourcesIn;
+            $strainSourcesIn->addStrainsIn($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStrainSourcesIn(StrainSource $strainSourcesIn): self
+    {
+        if ($this->strainSourcesIn->contains($strainSourcesIn)) {
+            $this->strainSourcesIn->removeElement($strainSourcesIn);
+            $strainSourcesIn->removeStrainsIn($this);
+        }
 
         return $this;
     }

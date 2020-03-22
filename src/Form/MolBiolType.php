@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Locus;
 use App\Entity\Marker;
-use App\Entity\MolBiol;
 use App\Entity\Promoter;
 use App\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

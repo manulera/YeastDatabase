@@ -19,6 +19,19 @@ class StrainRepository extends ServiceEntityRepository
         parent::__construct($registry, Strain::class);
     }
 
+    public function findAllQueryBuilder($filter = '')
+    {
+        $qb = $this->createQueryBuilder('strain');
+        $filter_terms = explode(' ', $filter);
+        $i = 0;
+        foreach ($filter_terms as $filter_term) {
+            $i++;
+            $qb->andWhere("strain.genotype LIKE :filter$i")
+                ->setParameter("filter$i", '%' . $filter_term . '%');
+        }
+
+        return $qb;
+    }
     // /**
     //  * @return Strain[] Returns an array of Strain objects
     //  */

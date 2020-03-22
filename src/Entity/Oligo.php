@@ -28,6 +28,16 @@ class Oligo
      */
     private $sequence;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\StrainSource", mappedBy="oligos")
+     */
+    private $strainSources;
+
+    public function __construct()
+    {
+        $this->strainSources = new ArrayCollection();
+    }
+
     public function __toString()
     {
         return $this->name;
@@ -60,5 +70,33 @@ class Oligo
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection|StrainSource[]
+     */
+    public function getStrainSources(): Collection
+    {
+        return $this->strainSources;
+    }
+
+    public function addStrainSource(StrainSource $strainSource): self
+    {
+        if (!$this->strainSources->contains($strainSource)) {
+            $this->strainSources[] = $strainSource;
+            $strainSource->addOligo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStrainSource(StrainSource $strainSource): self
+    {
+        if ($this->strainSources->contains($strainSource)) {
+            $this->strainSources->removeElement($strainSource);
+            $strainSource->removeOligo($this);
+        }
+
+        return $this;
     }
 }

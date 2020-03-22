@@ -13,13 +13,21 @@ var ajaxRequestFunction = function() {
     $.ajax({
         url: "/strain/new/mating/combinations",
         data: {
-            strain1: $("#mating_strain1").val(),
-            strain2: $("#mating_strain2").val()
+            strain1: $("#form_strain1").val(),
+            strain2: $("#form_strain2").val()
         },
         success: function (html) {
 
-            $("#mating_strain_choice").replaceWith($(html).find("#mating_strain_choice"));
-            $("#submission_button").replaceWith($(html).find("#mating_save"));
+            $("#form_strain_choice").replaceWith($(html).find("#form_strain_choice"));
+            if ($(html).find("#form_save").length)
+            {
+                $("#submission_button").html($(html).find("#form_save"));
+            }
+            else
+            {
+                
+                $("#submission_button").html("");
+            }
         },
         error: function()
         {
@@ -31,7 +39,7 @@ var ajaxRequestFunction = function() {
 
 $(document).ready( function() {
     
-    $('#mating_strain1').change(ajaxRequestFunction);
-    $('#mating_strain2').change(ajaxRequestFunction);
+    $('#form_strain1').change(ajaxRequestFunction);
+    $('#form_strain2').change(ajaxRequestFunction);
 
 });

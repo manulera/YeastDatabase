@@ -9,15 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\StrainSourceRepository")
- * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({
- *      "molbiol" = "MolBiol",
- *      "custom" = "CustomStrainSource",
- *      "mating" = "Mating"
- * })
  */
-abstract class StrainSource
+class StrainSource
 {
     /**
      * @ORM\Id()
@@ -30,8 +23,6 @@ abstract class StrainSource
      * @ORM\OneToMany(targetEntity="App\Entity\Strain", mappedBy="source", orphanRemoval=true)
      */
     protected $strainsOut;
-
-    // The associated form class
 
     // @var string
     protected $name;
@@ -52,12 +43,35 @@ abstract class StrainSource
      */
     private $creator;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Plasmid", inversedBy="strainSources")
+     */
+    private $plasmids;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Oligo", inversedBy="strainSources")
+     */
+    private $oligos;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Strain", inversedBy="strainSourcesIn")
+     */
+    private $strainsIn;
+
     public function __construct()
     {
         $this->strainsOut = new ArrayCollection();
         $this->alleles = new ArrayCollection();
+        $this->plasmids = new ArrayCollection();
+        $this->oligos = new ArrayCollection();
+        $this->strainsIn = new ArrayCollection();
     }
 
+    public function getInput()
+    {
+        return [];
+    }
 
     public function getName()
     {
@@ -151,6 +165,84 @@ abstract class StrainSource
     public function setCreator(?User $creator): self
     {
         $this->creator = $creator;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Plasmid[]
+     */
+    public function getPlasmids(): Collection
+    {
+        return $this->plasmids;
+    }
+
+    public function addPlasmid(Plasmid $plasmid): self
+    {
+        if (!$this->plasmids->contains($plasmid)) {
+            $this->plasmids[] = $plasmid;
+        }
+
+        return $this;
+    }
+
+    public function removePlasmid(Plasmid $plasmid): self
+    {
+        if ($this->plasmids->contains($plasmid)) {
+            $this->plasmids->removeElement($plasmid);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Oligo[]
+     */
+    public function getOligos(): Collection
+    {
+        return $this->oligos;
+    }
+
+    public function addOligo(Oligo $oligo): self
+    {
+        if (!$this->oligos->contains($oligo)) {
+            $this->oligos[] = $oligo;
+        }
+
+        return $this;
+    }
+
+    public function removeOligo(Oligo $oligo): self
+    {
+        if ($this->oligos->contains($oligo)) {
+            $this->oligos->removeElement($oligo);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Strain[]
+     */
+    public function getStrainsIn(): Collection
+    {
+        return $this->strainsIn;
+    }
+
+    public function addStrainsIn(Strain $strainsIn): self
+    {
+        if (!$this->strainsIn->contains($strainsIn)) {
+            $this->strainsIn[] = $strainsIn;
+        }
+
+        return $this;
+    }
+
+    public function removeStrainsIn(Strain $strainsIn): self
+    {
+        if ($this->strainsIn->contains($strainsIn)) {
+            $this->strainsIn->removeElement($strainsIn);
+        }
 
         return $this;
     }

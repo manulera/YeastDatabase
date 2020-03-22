@@ -84,6 +84,9 @@
     "knplabs/knp-menu-bundle": {
         "version": "v3.0.0"
     },
+    "mbostock/d3": {
+        "version": "v3.5.17"
+    },
     "nikic/php-parser": {
         "version": "v4.3.0"
     },

@@ -1,0 +1,38 @@
+svg circle {
+    
+    stroke-width: 1.5px;
+  }
+  g .strain circle
+ {
+  fill: #3b5998;
+  stroke: #1b3978;
+ }
+ 
+ g .source circle
+ {
+  fill:#FF8000;
+  stroke:#B45F04;
+ }
+ svg circle .source
+ {
+  fill: #3b5998;
+  stroke: #1b3978;
+ }
+  svg line {
+    stroke: #222;
+    stroke-opacity: .6;
+    stroke-width: 2px;
+  }
+
+  .mylabel
+  {
+    text-align: center;
+    width: 80px;                  
+    height: 28px;                 
+    padding: 2px;             
+    font: 12px sans-serif;        
+    background: #8fb3de;   
+    border: 0px;      
+    border-radius: 8px;           
+    pointer-events: none;     
+  }

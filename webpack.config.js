@@ -25,6 +25,7 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('strain/source/mating', './assets/js/strain/source/mating.js')
+    .addEntry('strain/network', './assets/js/strain/network.js')
     .addEntry('strain/source/molbiol', './assets/js/strain/source/molbiol.js')
     .addEntry('custom-file-label', './assets/js/custom-file-label.js')
     //.addEntry('page1', './assets/js/page1.js')

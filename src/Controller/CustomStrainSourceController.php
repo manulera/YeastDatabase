@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\CustomStrainSource;
+use App\Entity\StrainSource;
 use App\Entity\Strain;
 use App\Form\CustomStrainSourceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\StrainSourceController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Form;
 
 /**
@@ -21,8 +23,8 @@ class CustomStrainSourceController extends StrainSourceController
      */
     public function indexAction(Request $request)
     {
-        $strain_source = new CustomStrainSource;
-        $form = $this->createForm(CustomStrainSourceType::class, $strain_source);
+        $strain_source = new StrainSource;
+        $form = $this->makeForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -39,14 +41,32 @@ class CustomStrainSourceController extends StrainSourceController
         );
     }
 
-    public function processStrains(Form $form, CustomStrainSource $strain_source)
+    public function processStrains(Form $form, StrainSource $strain_source)
     {;
         $new_strain = new Strain;
 
         $new_strain->setMType($form->get('MatingType')->getData());
         $new_strain->updateGenotype($this->genotyper);
         $strain_source->addStrainsOut($new_strain);
+    }
 
-        
+    public function makeForm($options = [])
+    {
+
+        $builder = $this->createFormBuilder();
+        $builder
+            ->add('MatingType', ChoiceType::class, [
+                'choices' => ['h+', 'h-', 'h90'],
+                'choice_label' => function ($choice, $key, $value) {
+                    return $value;
+                },
+                'mapped' => false
+            ])
+            ->add('Save', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary float-right',
+                ],
+            ]);
+        return $builder->getForm();
     }
 }

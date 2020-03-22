@@ -7,14 +7,10 @@ use App\Entity\Plasmid;
 use App\Entity\Strain;
 use App\Form\AlleleChunkyType;
 use App\Form\AlleleDeletionType;
-use App\Form\BahlerMethodType;
-use App\Repository\OligoRepository;
-use App\Repository\PlasmidRepository;
 use App\Service\Genotyper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,12 +20,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BahlerMethodController extends MolBiolController
 {
-    public function __construct(Genotyper $genotyper, OligoRepository $oligoRepository, PlasmidRepository $plasmidRepository)
+    public function __construct(Genotyper $genotyper)
     {
         parent::__construct($genotyper);
         //TODO move this to strain_source
-        $this->oligoRepository = $oligoRepository;
-        $this->plasmidRepository = $plasmidRepository;
     }
 
     /**
@@ -62,6 +56,8 @@ class BahlerMethodController extends MolBiolController
 
     public function makeForm($options)
     {
+        $oligoRepository = $this->getDoctrine()->getRepository(Oligo::class);
+        $plasmidRepository = $this->getDoctrine()->getRepository(Plasmid::class);
 
         $builder = $this->createFormBuilder();
         $builder
@@ -72,17 +68,17 @@ class BahlerMethodController extends MolBiolController
             ->add('primerForward', EntityType::class, [
                 'class' => Oligo::class,
                 'mapped' => false,
-                'choices' => $this->oligoRepository->findAll()
+                'choices' => $oligoRepository->findAll()
             ])
             ->add('primerReverse', EntityType::class, [
                 'class' => Oligo::class,
                 'mapped' => false,
-                'choices' => $this->oligoRepository->findAll()
+                'choices' => $oligoRepository->findAll()
             ])
             ->add('plasmid', EntityType::class, [
                 'class' => Plasmid::class,
                 'mapped' => false,
-                'choices' => $this->plasmidRepository->findAll()
+                'choices' => $plasmidRepository->findAll()
             ]);
 
         if ($options['fields2show'] == "deletion") {

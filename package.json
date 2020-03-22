@@ -17,6 +17,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "d3": "^5.15.0",
         "jquery": "^3.4.1"
     }
 }

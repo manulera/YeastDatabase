@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Allele;
-use App\Entity\MolBiol;
+use App\Entity\StrainSource;
 use App\Entity\Strain;
 use App\Service\Genotyper;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,8 +48,9 @@ class MolBiolController extends StrainSourceController
     public function persistMolBiol(Strain $parent_strain, Allele $allele, int $nb_clones = 1, array $plasmids = [], array $oligos = [])
     {
 
-        $strain_source = new MolBiol;
-        $strain_source->setInputStrain($parent_strain);
+        $strain_source = new StrainSource;
+        $strain_source->addStrainsIn($parent_strain);
+
         $allele->updateName();
 
         // Add the resources
@@ -67,7 +68,7 @@ class MolBiolController extends StrainSourceController
             $strain_source->addAllele($new_allele);
 
             $new_strain = new Strain;
-            $old_strain = $strain_source->getInputStrain();
+            $old_strain = $parent_strain;
             $new_strain->setMType($old_strain->getMType());
             // TODO check if allele is in the same locus
             $new_strain->addAllele($new_allele);

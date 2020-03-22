@@ -6,10 +6,11 @@
 {{ form_row(form.strain1) }}
 {{ form_row(form.strain2) }}
 {{ form_row(form.strain_choice) }}
-<div id="submission_button"></div>
+<div id="submission_button">
 {% if form.save is defined %}
     {{ form_row(form.save) }}
 {% endif %}
+</div>
 {{ form_end(form) }}
 
 

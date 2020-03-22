@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<h2>Hello</h2>
+<div id="my_dataviz"></div>
+<div class="tooltip"></div>
+<div id='network_json' hidden>{{network_json}}</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('strain/network') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('strain/network') }}
+{% endblock %}
+
