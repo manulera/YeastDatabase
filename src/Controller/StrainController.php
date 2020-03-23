@@ -119,20 +119,30 @@ class StrainController extends AbstractController
         $sources = $this->getDoctrine()->getRepository(StrainSource::class)->findAll();
         $nodes = [];
         $links = [];
+        $info = [];
         $id_count = 1;
         $strain_ids = [];
 
         foreach ($strains as $strain) {
             $strain_ids[$strain->getId()] = $id_count;
-            $nodes[] = ['id' => $id_count, 'name' => 'strain_' . strval($id_count),'class'=>'strain'];
+            $nodes[] = ['id' => $id_count, 'name' => 'strain_' . strval($id_count), 'class' => 'strain'];
+            $info[] = [
+                'main' => 'Strain ' . strval($strain->getId()),
+                'rest' => $strain->getGenotype(),
+            ];
             $id_count++;
         }
 
         foreach ($sources as $source) {
             $source_id = $id_count;
-
-            $nodes[] = ['id' => $source_id, 'name' => 'source_' . strval($source->getId())];
-
+            $tags = $source->getStrainSourceTags()->toArray();
+            $tags = array_map('strval', $tags);
+            $source_name = 'source_' . implode('_', $tags) . '_' . strval($source->getId());
+            $nodes[] = ['id' => $source_id, 'name' => $source_name];
+            $info[] = [
+                'main' => 'Source ' . strval($source->getId()),
+                'rest' => 'The rest',
+            ];
             foreach ($source->getStrainsIn() as $strain_in) {
                 $strain_in_id = $strain_ids[$strain_in->getId()];
                 $links[] = ['source' => $strain_in_id, 'target' => $source_id];
@@ -145,6 +155,6 @@ class StrainController extends AbstractController
             $id_count++;
         }
 
-        return json_encode(['nodes' => $nodes, "links" => $links]);
+        return json_encode(['nodes' => $nodes, "links" => $links, 'info' => $info]);
     }
 }

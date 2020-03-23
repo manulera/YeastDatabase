@@ -1,46 +1,60 @@
 svg circle {
-    
     stroke-width: 1.5px;
   }
   g .strain circle
  {
-  fill: #3b5998;
-  stroke: #1b3978;
- }
- 
- g .source circle
- {
   fill:#FF8000;
   stroke:#B45F04;
- }
- svg circle .source
+  r:8 ;
+}
+ g .MolBiol circle
  {
   fill: #3b5998;
   stroke: #1b3978;
+  r:5;
  }
-  svg line {
-    stroke: #222;
-    stroke-opacity: .6;
-    stroke-width: 2px;
-  }
+ 
+ g .Custom circle
+ {
+  fill: #72EB29;
+  stroke: #51A61E;
+  r:5;
+ }
+ g .Mating circle
+ {
+  fill: #F983F2;
+  stroke: #B866B3;
+  r:5;
+ }
+
+
+svg line {
+  stroke: #222;
+  stroke-opacity: .6;
+  stroke-width: 2px;
+}
 
 #my_dataviz {
   border: 1px solid gray;
   position: relative;
 }
 
-  div.tooltip
+  .tooltip
   {
      position: absolute;           
     text-align: center;
     opacity: 0;
     visibility: hidden;
-    width: 80px;                  
-    height: 28px;                 
-    padding: 2px;             
-    font: 12px sans-serif;        
-    background: #8fb3de;   
+    padding: 2px;                     
+    background: #656565;   
+    color: white;
     border: 0px;      
     border-radius: 8px;           
     pointer-events: none;     
+    background-size: auto;
+  }
+
+  .tooltip_main
+  {
+    font-size: 16px; 
   }

@@ -19,5 +19,8 @@ values ('mCherry','red'),
 ('GFP','green'),
 ('eGFP','green'),
 ('ENVY','green'),
-('GST','')
-;
+('GST','');
+insert into strain_source_tag (name)
+values ('Custom'),
+('Mating'),
+('MolBiol');

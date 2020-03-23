@@ -2,7 +2,14 @@
 {% block body %}
 
 <h2>Hello</h2>
-<div id="my_dataviz"></div>
+<div id="my_dataviz">
+<div class="tooltip">
+<div class="tooltip_main">
+</div>
+<div class="tooltip_rest">
+</div>
+</div>
+</div>
 <div id='network_json' hidden>{{network_json}}</div>
 {% endblock %}
 {% block javascripts %}

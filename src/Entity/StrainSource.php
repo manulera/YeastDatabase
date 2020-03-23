@@ -59,6 +59,11 @@ class StrainSource
      */
     private $strainsIn;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\StrainSourceTag", mappedBy="strainSources")
+     */
+    private $strainSourceTags;
+
     public function __construct()
     {
         $this->strainsOut = new ArrayCollection();
@@ -66,6 +71,7 @@ class StrainSource
         $this->plasmids = new ArrayCollection();
         $this->oligos = new ArrayCollection();
         $this->strainsIn = new ArrayCollection();
+        $this->strainSourceTags = new ArrayCollection();
     }
 
     public function getInput()
@@ -242,6 +248,34 @@ class StrainSource
     {
         if ($this->strainsIn->contains($strainsIn)) {
             $this->strainsIn->removeElement($strainsIn);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|StrainSourceTag[]
+     */
+    public function getStrainSourceTags(): Collection
+    {
+        return $this->strainSourceTags;
+    }
+
+    public function addStrainSourceTag(StrainSourceTag $strainSourceTag): self
+    {
+        if (!$this->strainSourceTags->contains($strainSourceTag)) {
+            $this->strainSourceTags[] = $strainSourceTag;
+            $strainSourceTag->addStrainSource($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStrainSourceTag(StrainSourceTag $strainSourceTag): self
+    {
+        if ($this->strainSourceTags->contains($strainSourceTag)) {
+            $this->strainSourceTags->removeElement($strainSourceTag);
+            $strainSourceTag->removeStrainSource($this);
         }
 
         return $this;

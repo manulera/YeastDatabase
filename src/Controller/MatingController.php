@@ -7,13 +7,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\StrainSourceController;
 use App\Entity\StrainSource;
 use App\Entity\Strain;
-use App\Form\MatingType;
+use App\Entity\StrainSourceTag;
 use App\Service\Genotyper;
 use App\Service\MatingForm;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormEvents;
 
 
 /**
@@ -74,6 +72,8 @@ class MatingController extends StrainSourceController
             $strain->updateGenotype($this->genotyper);
             $strain_source->addStrainsOut($strain);
         }
+        $tag = $this->getDoctrine()->getRepository(StrainSourceTag::class)->findOneBy(['name' => 'Mating']);
+        $strain_source->addStrainSourceTag($tag);
     }
 
 

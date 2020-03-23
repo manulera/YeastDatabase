@@ -8,6 +8,7 @@ use App\Form\CustomStrainSourceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\StrainSourceController;
+use App\Entity\StrainSourceTag;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Form;
@@ -48,6 +49,8 @@ class CustomStrainSourceController extends StrainSourceController
         $new_strain->setMType($form->get('MatingType')->getData());
         $new_strain->updateGenotype($this->genotyper);
         $strain_source->addStrainsOut($new_strain);
+        $tag = $this->getDoctrine()->getRepository(StrainSourceTag::class)->findOneBy(['name' => 'Custom']);
+        $strain_source->addStrainSourceTag($tag);
     }
 
     public function makeForm($options = [])

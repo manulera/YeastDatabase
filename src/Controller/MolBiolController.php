@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Allele;
 use App\Entity\StrainSource;
 use App\Entity\Strain;
+use App\Entity\StrainSourceTag;
 use App\Service\Genotyper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -82,6 +83,8 @@ class MolBiolController extends StrainSourceController
             $strain_source->addStrainsOut($new_strain);
         }
 
+        $tag = $this->getDoctrine()->getRepository(StrainSourceTag::class)->findOneBy(['name' => 'MolBiol']);
+        $strain_source->addStrainSourceTag($tag);
         return $this->persistStrainSource($strain_source);
     }
 }

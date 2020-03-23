@@ -49,31 +49,42 @@ $(document).ready(function () {
         .data(data.nodes)
         .enter()
         .append("g")
-        .attr("class", "node");
+        .attr("class", "node")
+        .on("click", click);
     
     node.append("circle")
-        .call(d3.drag()
-            .on("start", dragstarted)
-            .on("drag", dragged)
-            .on("end", dragended));
+        .attr("r","5");
+    
+    function click(d) {
+        
+        if (!d3.event.defaultPrevented) {
+            if (d.children) {
+            d._children = d.children;
+            d.children = null;
+            } else {
+            d.children = d._children;
+            d._children = null;
+            }
+            console.log('drag');
+            simulation.drag();
+        }
+        } 
 
     // The div used for the labels
-    var div = d3.select(".tooltip");
-    var div_main = d3.select(".tooltip .tooltip_main");
-    var div_rest = d3.select(".tooltip .tooltip_rest");
-    d3.selectAll("circle").on("mouseover", function (d, i) {
+    var div = d3.select("#my_dataviz").append('div').attr("class", "tooltip")
+    .style("opacity", 0);
+    
+    d3.selectAll(".node").on("mouseover", function (d, i) {
         div.style("visibility", "visible")
             .transition()
             .duration(200)
             .style("opacity", .9);
+        var html;
+        html = d.name;
         
-        div_main.html(data.info[i]['main']);
-        var spl_rest = data.info[i]['rest'].split(' ');
-        div_rest.html(spl_rest.join('<br>'));
-
-        div.style("left", (d.x ) + "px")
+        div.html(html)
+            .style("left", (d.x ) + "px")
             .style("top", (d.y) + "px");
-            
 
     }).on("mouseout", function (d, i) {
         div.transition()
@@ -90,12 +101,11 @@ $(document).ready(function () {
         var name_components=d.name.split('_');
         
         for (let i = 0; i < name_components.length-1; i++) {
-            console.log(name_components[i]);
             this.classList.add(name_components[i]);
         }
     }
     )
-    var circle_node = svg.selectAll('circle');
+    
     
     // Let's list the force we wanna apply on the network
     var simulation = d3.forceSimulation(data.nodes)                 // Force algorithm is applied to data.nodes
@@ -107,37 +117,65 @@ $(document).ready(function () {
         .force("center", d3.forceCenter(width / 2, height / 2))     // This force attracts nodes to the center of the svg area
         ;
 
-    
+
     simulation.on("tick", function (e) {
-        
-        circle_node
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
-        
+    
         link.attr("x1", function (d) { return d.source.x; })
             .attr("y1", function (d) { return d.source.y; })
             .attr("x2", function (d) { return d.target.x; })
             .attr("y2", function (d) { return d.target.y; });
-    });
     
-    // Fix the position of the dragged node to the pointer
+            node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+    });
 
-    function dragstarted(d) {
+    d3.select(svg)
+    .call(d3.drag().subject(dragsubject).on("start", dragstarted).on("drag", dragged).on("end",dragended))
+
+
+    function dragsubject() {
+        var i,
+        x = transform.invertX(d3.event.x),
+        y = transform.invertY(d3.event.y),
+        dx,
+        dy;
+        for (i = tempData.nodes.length - 1; i >= 0; --i) {
+          node = tempData.nodes[i];
+          dx = x - node.x;
+          dy = y - node.y;
+    
+          if (dx * dx + dy * dy < radius * radius) {
+    
+            node.x =  transform.applyX(node.x);
+            node.y = transform.applyY(node.y);
+    
+            return node;
+          }
+        }
+      }
+    
+    
+      function dragstarted() {
         if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-        d.fx = d.x;
-        d.fy = d.y;
+        d3.event.subject.fx = transform.invertX(d3.event.x);
+        d3.event.subject.fy = transform.invertY(d3.event.y);
       }
-      
-      function dragged(d) {
-        d.fx = d3.event.x;
-        d.fy = d3.event.y;
+    
+      function dragged() {
+        d3.event.subject.fx = transform.invertX(d3.event.x);
+        d3.event.subject.fy = transform.invertY(d3.event.y);
+    
       }
-      
-      function dragended(d) {
+    
+      function dragended() {
         if (!d3.event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
+        d3.event.subject.fx = null;
+        d3.event.subject.fy = null;
       }
+
+    // d3.selectAll('.node').on('click', function (d, i) {
+    //     d3.event.stopPropagation();
+    // });
+
 
 
 });
