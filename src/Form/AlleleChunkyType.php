@@ -4,6 +4,9 @@ namespace App\Form;
 
 use App\Entity\AlleleChunky;
 
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,6 +31,14 @@ class AlleleChunkyType extends AlleleType
                 break;
             case "cTag":
                 $builder
+                    ->add('cTag')
+                    ->add('cMarker');
+                break;
+            case "all":
+                $builder
+                    ->add('nMarker')
+                    ->add('promoter')
+                    ->add('nTag')
                     ->add('cTag')
                     ->add('cMarker');
                 break;

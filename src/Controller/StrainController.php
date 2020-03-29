@@ -91,9 +91,69 @@ class StrainController extends AbstractController
      */
     public function showAction(Strain $strain)
     {
+        $delete_form = $this->createDeleteForm($strain);
         return $this->render('strain/show.html.twig', array(
-            'strain' => $strain
+            'strain' => $strain,
+            'delete_form' => $delete_form->createView()
+
         ));
+    }
+
+    /**
+     * Deletes a strain entity.
+     *
+     * @Route("/delete/{id}", name="delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Strain $strain)
+    {
+        $form = $this->createDeleteForm($strain);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // The only instance where you should not be allowed to delete the entry is
+            // if it has children. Otherwise it should give a warning if you will lose alleles,
+            // plasmids,
+
+            if (count($strain->getStrainSourcesIn())) {
+                $this->addFlash('error', 'You cannot delete this strain because it has children!');
+                return $this->redirectToRoute('strain.show', ['id' => $strain->getId()]);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+
+
+            $source = $strain->getSource();
+
+            // If you orphan an allele, it should be deleted (you are sure the allele only 
+            // exist in this strain because you already checked this strain has no children)
+            $alleles = $source->getAlleles();
+            foreach ($alleles as $allele) {
+                $em->remove($allele);
+            }
+            // If you orphan the StrainSource, it should be deleted
+            if (count($source->getStrainsOut()) == 1) {
+                $em->remove($source);
+            }
+            // Finally remove the strain
+            $em->remove($strain);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('strain.index');
+    }
+
+    private function createDeleteForm(Strain $strain)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('strain.delete', array('id' => $strain->getId())))
+            ->setMethod('DELETE')
+            ->add('Delete', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-danger',
+                ],
+            ])
+            ->getForm();
     }
 
 
@@ -134,6 +194,7 @@ class StrainController extends AbstractController
         }
 
         foreach ($sources as $source) {
+
             $source_id = $id_count;
             $tags = $source->getStrainSourceTags()->toArray();
             $tags = array_map('strval', $tags);
@@ -141,7 +202,7 @@ class StrainController extends AbstractController
             $nodes[] = ['id' => $source_id, 'name' => $source_name];
             $info[] = [
                 'main' => 'Source ' . strval($source->getId()),
-                'rest' => 'The rest',
+                'rest' => strval($source),
             ];
             foreach ($source->getStrainsIn() as $strain_in) {
                 $strain_in_id = $strain_ids[$strain_in->getId()];

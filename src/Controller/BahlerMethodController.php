@@ -27,7 +27,7 @@ class BahlerMethodController extends MolBiolController
     }
 
     /**
-     * @Route("/{option}", name="new")
+     * @Route("/{option}", name="index")
      */
     public function newAction(string $option, Request $request)
     {
@@ -35,7 +35,7 @@ class BahlerMethodController extends MolBiolController
         $form = $this->makeForm(['fields2show' => $option]);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $parentStrain = $form->get("inputStrain")->getData();
             $allele = $form->get("allele")->getData();
             $nb_clones = $form->get("number_of_clones")->getData();

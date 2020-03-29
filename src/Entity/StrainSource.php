@@ -74,6 +74,27 @@ class StrainSource
         $this->strainSourceTags = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        $tag = $this->getStrainSourceTags()[0];
+        $strains_in = $this->getStrainsIn();
+        switch ($tag) {
+            case "Custom":
+                return "Imported externally";
+            case "Mating":
+                $id1 = $strains_in[0]->getId();
+                $id2 = $strains_in[1]->getId();
+                return $id1 . "x$id2 mating";
+            case "MolBiol":
+                $id1 = $strains_in[0]->getId();
+                return "$id1 modified";
+            case "Plasmid":
+                $id1 = $strains_in[0]->getId();
+                $plasmid = $this->getPlasmids()[0];
+                return "Plasmid $plasmid into $id1";
+        }
+    }
+
     public function getInput()
     {
         return [];

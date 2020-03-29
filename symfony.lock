@@ -87,6 +87,9 @@
     "mbostock/d3": {
         "version": "v3.5.17"
     },
+    "myclabs/deep-copy": {
+        "version": "1.9.5"
+    },
     "nikic/php-parser": {
         "version": "v4.3.0"
     },

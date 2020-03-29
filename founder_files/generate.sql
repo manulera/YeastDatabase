@@ -23,4 +23,5 @@ values ('mCherry','red'),
 insert into strain_source_tag (name)
 values ('Custom'),
 ('Mating'),
-('MolBiol');
+('MolBiol')
+('Plasmid');

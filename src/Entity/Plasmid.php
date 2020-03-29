@@ -33,9 +33,15 @@ class Plasmid
      */
     private $strainSources;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Strain", mappedBy="plasmids")
+     */
+    private $strains;
+
     public function __construct()
     {
         $this->strainSources = new ArrayCollection();
+        $this->strains = new ArrayCollection();
     }
 
     public function __toString()
@@ -90,6 +96,34 @@ class Plasmid
         if ($this->strainSources->contains($strainSource)) {
             $this->strainSources->removeElement($strainSource);
             $strainSource->removePlasmid($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Strain[]
+     */
+    public function getStrains(): Collection
+    {
+        return $this->strains;
+    }
+
+    public function addStrain(Strain $strain): self
+    {
+        if (!$this->strains->contains($strain)) {
+            $this->strains[] = $strain;
+            $strain->addPlasmid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStrain(Strain $strain): self
+    {
+        if ($this->strains->contains($strain)) {
+            $this->strains->removeElement($strain);
+            $strain->removePlasmid($this);
         }
 
         return $this;

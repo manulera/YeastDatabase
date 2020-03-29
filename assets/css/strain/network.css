@@ -13,7 +13,13 @@ svg circle {
   stroke: #1b3978;
   r:5;
  }
- 
+ g .Plasmid circle
+ {
+  fill: #858585;
+  stroke: #636363;
+  r:5;
+ }
+
  g .Custom circle
  {
   fill: #72EB29;
@@ -52,6 +58,7 @@ svg line {
     border-radius: 8px;           
     pointer-events: none;     
     background-size: auto;
+    font-size: 10px; 
   }
 
   .tooltip_main

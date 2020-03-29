@@ -50,16 +50,32 @@ class Strain
      */
     private $strainSourcesIn;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Plasmid", inversedBy="strains")
+     */
+    private $plasmids;
+
     public function __construct()
     {
         $this->alleles = new ArrayCollection();
         $this->strainSourcesIn = new ArrayCollection();
+        $this->plasmids = new ArrayCollection();
     }
 
     public function __toString()
     {
         // TODO understand why this is necessary
         return strval($this->id) . " - " . $this->getGenotype();
+    }
+
+    public function __clone()
+    {
+        // We have to deep copy the lists of references, otherwise it will pass them as reference
+        // (The cloned strain will point to the same ArrayCollection of alleles, so if they are changed in one,
+        // they will also be changed in the other)
+        $this->alleles = clone $this->alleles;
+        $this->strainSourcesIn = clone $this->strainSourcesIn;
+        $this->plasmids = clone $this->plasmids;
     }
 
     public function getId(): ?int
@@ -93,7 +109,7 @@ class Strain
 
     public function updateGenotype(Genotyper $genotyper): void
     {
-        $this->setGenotype($genotyper->getGenotype($this->getAlleles()));
+        $this->setGenotype($genotyper->getGenotype($this->getAlleles(), $this->getPlasmids()));
     }
 
     /**
@@ -157,6 +173,32 @@ class Strain
         if ($this->strainSourcesIn->contains($strainSourcesIn)) {
             $this->strainSourcesIn->removeElement($strainSourcesIn);
             $strainSourcesIn->removeStrainsIn($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Plasmid[]
+     */
+    public function getPlasmids(): Collection
+    {
+        return $this->plasmids;
+    }
+
+    public function addPlasmid(Plasmid $plasmid): self
+    {
+        if (!$this->plasmids->contains($plasmid)) {
+            $this->plasmids[] = $plasmid;
+        }
+
+        return $this;
+    }
+
+    public function removePlasmid(Plasmid $plasmid): self
+    {
+        if ($this->plasmids->contains($plasmid)) {
+            $this->plasmids->removeElement($plasmid);
         }
 
         return $this;

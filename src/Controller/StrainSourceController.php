@@ -33,7 +33,8 @@ class StrainSourceController extends AbstractController
         $this->controllerPossibilities = [
             'Custom' => 'custom',
             'Gene editing' => 'molbiol',
-            'Mating' => 'mating'
+            'Mating' => 'mating',
+            'Add plasmid' => 'plasmid'
         ];
         $this->genotyper = $genotyper;
     }
@@ -61,7 +62,7 @@ class StrainSourceController extends AbstractController
         $form = $formBuilder->getForm();
 
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             // TODO: Maybe there is a better way of doing this?
             return $this->redirect2Child($data["Method"]);

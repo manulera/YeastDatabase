@@ -36,7 +36,7 @@ class MatingController extends StrainSourceController
         $strain_source = new StrainSource;
         $form = $this->formBuilder->createForm();
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->processStrains($form, $strain_source);
             return $this->persistStrainSource($strain_source);
         }

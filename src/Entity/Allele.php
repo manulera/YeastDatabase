@@ -48,9 +48,15 @@ abstract class Allele
      */
     private $strains;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Truncation", mappedBy="allele")
+     */
+    private $truncations;
+
     public function __construct()
     {
         $this->strains = new ArrayCollection();
+        $this->truncations = new ArrayCollection();
     }
 
     public function __toString()
@@ -127,6 +133,37 @@ abstract class Allele
         if ($this->strains->contains($strain)) {
             $this->strains->removeElement($strain);
             $strain->removeAllele($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Truncation[]
+     */
+    public function getTruncations(): Collection
+    {
+        return $this->truncations;
+    }
+
+    public function addTruncation(Truncation $truncation): self
+    {
+        if (!$this->truncations->contains($truncation)) {
+            $this->truncations[] = $truncation;
+            $truncation->setAllele($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTruncation(Truncation $truncation): self
+    {
+        if ($this->truncations->contains($truncation)) {
+            $this->truncations->removeElement($truncation);
+            // set the owning side to null (unless already changed)
+            if ($truncation->getAllele() === $this) {
+                $truncation->setAllele(null);
+            }
         }
 
         return $this;

@@ -3,8 +3,14 @@
 {% block title %}{{strain.id}}{% endblock %}
 
 {% block body %}
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{message}}
+    </div>
+{% endfor %}
 
 <h1>Strain {{strain.id}}</h1>
 <h3>{{strain.genotype}}</h3>
+{{form(delete_form)}}
 
 {% endblock %}

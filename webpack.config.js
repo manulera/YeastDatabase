@@ -8,12 +8,11 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     // directory where compiled assets will be stored
-    .setOutputPath('public/build/')
+    .setOutputPath('public/build/') 
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
-
     /*
      * ENTRY CONFIG
      *
@@ -24,13 +23,16 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
+    .addEntry('collection_type_add', './assets/js/collection_type_add.js')
     .addEntry('strain/source/mating', './assets/js/strain/source/mating.js')
+    .addEntry('strain/source/custom_allele', './assets/js/strain/source/custom_allele.js')
     .addEntry('strain/network', './assets/js/strain/network.js')
     .addEntry('strain/source/molbiol', './assets/js/strain/source/molbiol.js')
     .addEntry('custom-file-label', './assets/js/custom-file-label.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
-
+    //TODO: Is this ok?
+    .addAliases({'jquery' : require.resolve('jquery'),'knockout' : require.resolve('knockout')})
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
@@ -68,7 +70,12 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    // .autoProvidejQuery()
+    .autoProvideVariables({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+    })
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()

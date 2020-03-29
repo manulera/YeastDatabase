@@ -24,6 +24,7 @@ class MolBiolController extends StrainSourceController
             'Bahler Method: Promoter Change' => 'bahler.promoter',
             'Bahler Method: Promoter Change + N-term tag' => 'bahler.promoter_nTag',
             'Bahler Method: C-term tag' => 'bahler.cTag',
+            'Custom Allele' => 'custom_allele',
             'Custom' => 'custom',
         ];
     }
@@ -32,9 +33,9 @@ class MolBiolController extends StrainSourceController
     {
         $arr = explode(".", $choice);
         if (count($arr) == 2) {
-            return $this->redirectToRoute('strain.source.molbiol.' . $arr[0] . '.new', ["option" => $arr[1]]);
+            return $this->redirectToRoute('strain.source.molbiol.' . $arr[0] . '.index', ["option" => $arr[1]]);
         } else {
-            return $this->redirectToRoute('strain.source.molbiol.' . $choice . '.new');
+            return $this->redirectToRoute('strain.source.molbiol.' . $choice . '.index');
         }
     }
 
@@ -79,6 +80,10 @@ class MolBiolController extends StrainSourceController
                     $new_strain->addAllele($old_allele);
                 }
             }
+            foreach ($old_strain->getPlasmids() as $plasmid) {
+                $new_strain->addPlasmid($plasmid);
+            }
+
             $new_strain->updateGenotype($this->genotyper);
             $strain_source->addStrainsOut($new_strain);
         }

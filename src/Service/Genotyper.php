@@ -13,24 +13,37 @@ class Genotyper
      * @param array|Allele[] $alleles
      * @return string
      */
-    public function getGenotype($alleles)
+    public function getGenotype($alleles, $plasmids = []): string
     {
 
-        $genotype_array = [];
+        $allele_array = [];
 
         foreach ($alleles as $allele) {
             // Here some times you will pass the wt possibility which is null
             if ($allele) {
-                $genotype_array[] = $allele->getName();
+                $allele_array[] = $allele->getName();
             } else {
-                $genotype_array[] = "";
+                $allele_array[] = "";
             }
         }
 
         // Some sorting function
-        $genotype_array = $this->sortGenotype($genotype_array);
+        $allele_array = $this->sortAlleles($allele_array);
 
-        return implode(' ', $genotype_array);
+        $plasmid_array = [];
+
+
+        $genotype_string = '';
+        if (count($allele_array)) {
+            $genotype_string .= implode(' ', $allele_array);
+        }
+
+
+        foreach ($plasmids as $plasmid) {
+            $genotype_string .= ' + ' . $plasmid->getName();
+        }
+
+        return $genotype_string;
     }
 
     /**
@@ -39,7 +52,7 @@ class Genotyper
      * @param array|string
      * @return array|string
      */
-    public function sortGenotype($genotype_in)
+    public function sortAlleles($genotype_in)
     {
         return $genotype_in;
     }

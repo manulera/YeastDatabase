@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 
+
 class MatingForm
 {
 
@@ -176,6 +177,43 @@ class MatingForm
             return $out;
         }
     }
+    // Combinations of an array elements
+    // from https://www.oreilly.com/library/view/php-cookbook/1565926811/ch04s25.html
+
+    function combinationsOneArray($array)
+    {
+        // initialize by adding the empty set
+        $results = array(array());
+
+        foreach ($array as $element)
+            foreach ($results as $combination)
+                array_push($results, array_merge(array($element), $combination));
+
+        return $results;
+    }
+
+    private function combinePlasmids(array $strain_possibilities, array $plasmids)
+    {
+        if (!count($plasmids)) {
+            return $strain_possibilities;
+        }
+
+        $plasmid_combinations = $this->combinationsOneArray($plasmids);
+
+        $out = [];
+
+        foreach ($plasmid_combinations as $plasmid_combination) {
+            foreach ($strain_possibilities as $strain) {
+                $out[] = clone $strain;
+
+                foreach ($plasmid_combination as $plasmid) {
+                    end($out)->addPlasmid($plasmid);
+                }
+            }
+        }
+
+        return $out;
+    }
 
     private function strainCombinations(Strain $strain1, Strain $strain2)
     {
@@ -190,10 +228,13 @@ class MatingForm
 
         $strain_possibilities = array();
         $this->recursiveStrainCombination($locus_alleles, $strain_possibilities, 0, array());
+
+        $plasmids = array_unique(array_merge($strain1->getPlasmids()->toArray(), $strain2->getPlasmids()->toArray()));
+
+        $strain_possibilities = $this->combinePlasmids($strain_possibilities, $plasmids);
         $strain_possibilities = $this->combineMatingTypes($strain_possibilities, $strain1->getMType(), $strain2->getMType());
         // We make an array where the keys are the genotypes and the values are the lists
         // array ids
-
         $options = array();
 
         foreach ($strain_possibilities as $strain) {
@@ -207,34 +248,6 @@ class MatingForm
         return $options;
     }
 
-    // public function strainCombinations(Strain $strain1, Strain $strain2)
-    // {
-    //     if ($strain1 == $strain2) {
-    //         return [];
-    //     }
-
-    //     $locus_alleles = $this->getLocusAllele($strain1->getAlleles(), $strain2->getAlleles());
-
-    //     $allele_combinations = array();
-    //     $this->recursiveCombination($locus_alleles, $allele_combinations, 0, array());
-
-    //     // We make an array where the keys are the genotypes and the values are the lists
-    //     // array ids
-
-    //     $genotype_alleleids = array();
-
-    //     foreach ($allele_combinations as $allele_combo) {
-    //         $genotype = $this->genotyper->getGenotype($allele_combo);
-    //         $genotype_alleleids[$genotype] = array();
-    //         foreach ($allele_combo as $allele) {
-    //             // Wt allele is a null, and should not be added
-    //             if ($allele) {
-    //                 $genotype_alleleids[$genotype][] = $allele->getId();
-    //             }
-    //         }
-    //     }
-    //     return $genotype_alleleids;
-    // }
     private  function recursiveStrainCombination($in_list, &$result_list, $depth, $current)
     {
         if ($depth == count($in_list)) {

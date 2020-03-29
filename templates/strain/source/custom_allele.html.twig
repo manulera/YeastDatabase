@@ -1,0 +1,48 @@
+{% extends 'strain/source/new.html.twig' %}
+{% block create_body %}
+
+<h2>Create a custom allele</h2>
+
+<p class="">Create your custom allele and document the resources used</p>
+
+{{ form_start(form) }}
+<h3>Input strain</h3>
+{{ form_row(form.inputStrain) }}
+<h3>Allele modifications</h3>
+{{ form_row(form.allele) }}
+
+<h4>Point mutations</h4>
+<ul class="entityType_list" data-prototype="{{ form_widget(form.pointMutations.vars.prototype)|e('html_attr') }}">
+        {% for pm in form.pointMutations %}
+            <li>{{ form_widget(pm) }}</li>
+        {% endfor %}
+</ul>
+
+<h4>Truncations</h4>
+<ul class="entityType_list" data-prototype="{{ form_widget(form.truncations.vars.prototype)|e('html_attr') }}">
+        {% for trunc in form.truncations %}
+            <li>{{ form_widget(trunc) }}</li>
+        {% endfor %}
+</ul>
+
+<h3>Resources used</h3>
+{{ form_row(form.inputPlasmids) }}
+{{ form_row(form.inputOligos) }}
+
+<h3>Number of clones</h3>
+{{ form_row(form.number_of_clones) }}
+
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('strain/source/custom_allele') }}
+    {{ encore_entry_script_tags('collection_type_add') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('collection_type_add') }}
+{% endblock %}

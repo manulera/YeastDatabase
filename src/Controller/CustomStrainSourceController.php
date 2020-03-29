@@ -28,7 +28,7 @@ class CustomStrainSourceController extends StrainSourceController
         $form = $this->makeForm();
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $this->processStrains($form, $strain_source);
             return $this->persistStrainSource($strain_source);

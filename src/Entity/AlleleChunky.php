@@ -4,12 +4,19 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AlleleChunkyRepository")
  */
 class AlleleChunky extends Allele
 {
+
+    public function __construct()
+    {
+        $this->pointMutations = new ArrayCollection();
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Promoter")
@@ -41,6 +48,10 @@ class AlleleChunky extends Allele
      */
     private $cMarker;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PointMutation", mappedBy="allele")
+     */
+    private $pointMutations;
 
     public function getPromoter(): ?Promoter
     {
@@ -120,6 +131,37 @@ class AlleleChunky extends Allele
     public function setCMarker(?Marker $cMarker): self
     {
         $this->cMarker = $cMarker;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PointMutation[]
+     */
+    public function getPointMutations(): Collection
+    {
+        return $this->pointMutations;
+    }
+
+    public function addPointMutation(PointMutation $pointMutation): self
+    {
+        if (!$this->pointMutations->contains($pointMutation)) {
+            $this->pointMutations[] = $pointMutation;
+            $pointMutation->setAllele($this);
+        }
+
+        return $this;
+    }
+
+    public function removePointMutation(PointMutation $pointMutation): self
+    {
+        if ($this->pointMutations->contains($pointMutation)) {
+            $this->pointMutations->removeElement($pointMutation);
+            // set the owning side to null (unless already changed)
+            if ($pointMutation->getAllele() === $this) {
+                $pointMutation->setAllele(null);
+            }
+        }
 
         return $this;
     }

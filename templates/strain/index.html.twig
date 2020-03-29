@@ -9,18 +9,35 @@
         {{message}}
     </div>
 {% endfor %}
+{% for message in app.flashes('error') %}
+    <div class="alert alert-error">
+        {{message}}
+    </div>
+{% endfor %}
+
 <h1>Strains</h1> 
 
-{% form_theme form 'form/spanfields.html.twig' %}
+<ul class="nav nav-pills mb-2">
+  <li class="nav-item pr-md-5">
+  <a class="nav-link" href="{{ path('strain.source.index') }}">Create strain</a>    
+  </li>
+  <li class="nav-item pr-md-5">
+  <a class="nav-link" href="{{ path('strain.network') }}">Network view</a>
+  </li>
+</ul>
+
+
+
+{% form_theme form 'form_themes/spanfields.html.twig' %}
 
 {{form(form)}}
 
-<div><a href="{{ path('strain.source.index') }}">Create strain</a></div>
 <table class="table table-striped">
-    <thead>
+    <thead class=>
     <tr>
     <td class="">ID</td>
     <td class="">Genotype</td>
+    <td class="">Source</td>
     <td class="">Created by</td>
     <td class="">Creation date</td>
     </tr>
@@ -30,6 +47,7 @@
     <tr>
         <td>{{strain.id}}</td>
         <td>{% include "strain/geno_reference.html.twig" %}</td>
+        <td>{{strain.source}}</td>
         <td>{{strain.source.creator}}</td>
         <td>{{strain.source.date|date("d/m/Y")}}</td>
     </tr>
