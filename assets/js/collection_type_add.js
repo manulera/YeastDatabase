@@ -1,15 +1,13 @@
 
 import '../css/collection_type_add.css';
 
-var $collectionHolder;
 
-var $addEntityTypeButton = $('<button type="button" class="btn-info add_EntityType_link">Add</button>');
-var $newLinkButt = $('<div></div>').append($addEntityTypeButton);
+var entityTypeButton = '<button type="button" class="btn-info add_EntityType_link">Add</button>';
+
 
 function addEntityTypeForm($collectionHolder, $newLinkButt) {
     // Get the data-prototype explained earlier
     var prototype = $collectionHolder.data('prototype');
-
     // get the new index
     var index = $collectionHolder.data('index');
 
@@ -38,19 +36,32 @@ function addEntityTypeForm($collectionHolder, $newLinkButt) {
 
 $(document).ready(function () {
 
-    $collectionHolder = $('ul.entityType_list');
+    var $collectionHolder = $('ul.entityType_list');
 
     // add the "add a EntityType" anchor and li to the EntityTypes ul
-    $collectionHolder.append($newLinkButt);
+    // $collectionHolder.append($newLinkButt);
 
-    // count the current form inputs we have (e.g. 2), use that as the new
-    // index when inserting a new item (e.g. 2)
+    for (let index = 0; index < $collectionHolder.length; index++) {
+        
+        
+        let $ch = $($collectionHolder[index]);
+        let $newLinkButt = $('<div></div>').append(entityTypeButton);
+
+        $ch.append($newLinkButt);
+        $ch.data('index', $ch.find(':input').length);
+        $newLinkButt.on('click', function(e) {
+            // add a new EntityType form (see next code block)
+            
+            addEntityTypeForm($ch, $newLinkButt);
+        });
+        
+    }
+
     
-    $collectionHolder.data('index', $collectionHolder.find(':input').length);
-    $addEntityTypeButton.on('click', function(e) {
-        // add a new EntityType form (see next code block)
-        addEntityTypeForm($collectionHolder, $newLinkButt);
-    });
+    // $addEntityTypeButton.on('click', function(e) {
+    //     // add a new EntityType form (see next code block)
+    //     addEntityTypeForm($collectionHolder, $newLinkButt);
+    // });
 
 
 });
