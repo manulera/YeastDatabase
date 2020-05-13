@@ -5,26 +5,43 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LocusRepository")
  */
 class Locus
 {
-    // TODO: At some point, one should also check that the locus exist,
+    // TODO: At some point, one should also check that the locus exists,
     // and refer to it by the appropiate notation, also handle genes that
     // can have two names.
 
     /**
      * @ORM\Id()
-     * @ORM\Column(type="string",length=100)
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $name;
+    private $id;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Allele", mappedBy="locus")
      */
     private $allele;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\PombaseId", inversedBy="locus", cascade={"persist", "remove"})
+     * @JoinColumn(name="pombase_id", referencedColumnName="pombase_id")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $pombase_id;
+
+    /**
+     * @Groups("allele")
+     * @ORM\OneToOne(targetEntity="App\Entity\LocusName", inversedBy="locus", cascade={"persist", "remove"})
+     * @JoinColumn(name="name", referencedColumnName="name")
+     */
+    private $name;
 
     public function __construct()
     {
@@ -33,19 +50,12 @@ class Locus
 
     public function __toString()
     {
-        return $this->name;
+        return strval($this->getName()) . " / " . strval($this->getPombaseId());
     }
 
-    public function getName(): ?string
+    public function getId(): ?int
     {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
+        return $this->id;
     }
 
     /**
@@ -75,6 +85,30 @@ class Locus
                 $allele->setLocus(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPombaseId(): ?PombaseId
+    {
+        return $this->pombase_id;
+    }
+
+    public function setPombaseId(PombaseId $pombase_id): self
+    {
+        $this->pombase_id = $pombase_id;
+
+        return $this;
+    }
+
+    public function getName(): ?LocusName
+    {
+        return $this->name;
+    }
+
+    public function setName(?LocusName $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

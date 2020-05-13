@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AlleleChunkyRepository")
@@ -13,45 +15,59 @@ use Doctrine\Common\Collections\Collection;
 class AlleleChunky extends Allele
 {
 
-    public function __construct()
-    {
-        $this->pointMutations = new ArrayCollection();
-    }
-
     /**
+     * @Groups("allele")
      * @ORM\ManyToOne(targetEntity="App\Entity\Promoter")
      * @JoinColumn(name="promoter_name", referencedColumnName="name")
      */
     private $promoter;
 
     /**
+     * @Groups("allele")
      * @ORM\ManyToOne(targetEntity="App\Entity\Tag")
      * @JoinColumn(name="nTag_name", referencedColumnName="name")
      */
     private $nTag;
 
     /**
+     * @Groups("allele")
      * @ORM\ManyToOne(targetEntity="App\Entity\Tag")
      * @JoinColumn(name="cTag_name", referencedColumnName="name")
      */
     private $cTag;
 
     /**
+     * @Groups("allele")
      * @ORM\ManyToOne(targetEntity="App\Entity\Marker")
      * @JoinColumn(name="nMarker_name", referencedColumnName="name")
      */
     private $nMarker;
 
     /**
+     * @Groups("allele")
      * @ORM\ManyToOne(targetEntity="App\Entity\Marker")
      * @JoinColumn(name="cMarker_name", referencedColumnName="name")
      */
     private $cMarker;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PointMutation", mappedBy="allele")
+     * @Groups("allele")
+     * @ORM\ManyToMany(targetEntity="App\Entity\PointMutation", inversedBy="alleleChunkies")
      */
     private $pointMutations;
+
+    /**
+     * @Groups("allele")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Truncation", inversedBy="alleleChunkies")
+     */
+    private $truncations;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->pointMutations = new ArrayCollection();
+        $this->truncations = new ArrayCollection();
+    }
 
     public function getPromoter(): ?Promoter
     {
@@ -147,7 +163,6 @@ class AlleleChunky extends Allele
     {
         if (!$this->pointMutations->contains($pointMutation)) {
             $this->pointMutations[] = $pointMutation;
-            $pointMutation->setAllele($this);
         }
 
         return $this;
@@ -157,10 +172,32 @@ class AlleleChunky extends Allele
     {
         if ($this->pointMutations->contains($pointMutation)) {
             $this->pointMutations->removeElement($pointMutation);
-            // set the owning side to null (unless already changed)
-            if ($pointMutation->getAllele() === $this) {
-                $pointMutation->setAllele(null);
-            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Truncation[]
+     */
+    public function getTruncations(): Collection
+    {
+        return $this->truncations;
+    }
+
+    public function addTruncation(Truncation $truncation): self
+    {
+        if (!$this->truncations->contains($truncation)) {
+            $this->truncations[] = $truncation;
+        }
+
+        return $this;
+    }
+
+    public function removeTruncation(Truncation $truncation): self
+    {
+        if ($this->truncations->contains($truncation)) {
+            $this->truncations->removeElement($truncation);
         }
 
         return $this;

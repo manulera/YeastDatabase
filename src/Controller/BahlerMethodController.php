@@ -27,9 +27,9 @@ class BahlerMethodController extends MolBiolController
     }
 
     /**
-     * @Route("/{option}", name="index")
+     * @Route("/{option}", name="submethod")
      */
-    public function newAction(string $option, Request $request)
+    public function subMethod(Request $request, string $option)
     {
 
         $form = $this->makeForm(['fields2show' => $option]);
@@ -53,6 +53,7 @@ class BahlerMethodController extends MolBiolController
             ]
         );
     }
+
 
     public function makeForm($options)
     {

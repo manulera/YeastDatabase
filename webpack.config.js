@@ -24,6 +24,7 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('collection_type_add', './assets/js/collection_type_add.js')
+    .addEntry('allele/allele_viewer', './assets/js/allele/allele_viewer.js')
     .addEntry('strain/source/mating', './assets/js/strain/source/mating.js')
     .addEntry('strain/source/custom_allele', './assets/js/strain/source/custom_allele.js')
     .addEntry('strain/network', './assets/js/strain/network.js')

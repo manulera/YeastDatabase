@@ -10,6 +10,9 @@
     </div>
 {% endfor %}
 <h1>Loci</h1>
+{{form(updateForm)}}
+{% form_theme filterForm 'form_themes/spanfields.html.twig' %}
+{{form(filterForm)}}
 <table class="table table-striped">
     <thead>
     <tr>
@@ -17,12 +20,13 @@
     </tr>
     </thead>
     <tbody>
-    {% for locus in loci %}
+    {% for locus in pagination %}
     <tr>
         <td>{% include "locus/reference.html.twig" %}</td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+{{ knp_pagination_render(pagination) }}
 
 {% endblock %}

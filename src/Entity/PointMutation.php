@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PointMutationRepository")
@@ -17,26 +20,40 @@ class PointMutation
     private $id;
 
     /**
+     * @Groups("allele")
      * @ORM\Column(type="string", length=1)
      */
     private $originalAminoAcid;
 
     /**
+     * @Groups("allele")
      * @ORM\Column(type="string", length=1)
      */
     private $newAminoAcid;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\AlleleChunky", inversedBy="pointMutations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $allele;
-
-    /**
+     * @Groups("allele")
      * @ORM\Column(type="integer")
      */
     private $sequencePosition;
-    
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\AlleleChunky", mappedBy="pointMutations")
+     */
+    private $alleleChunkies;
+
+    public function __construct()
+    {
+        $this->alleleChunkies = new ArrayCollection();
+    }
+    public function __toString(): string
+    {
+        $a = $this->getOriginalAminoAcid();
+        $b = $this->getNewAminoAcid();
+        $i = $this->getSequencePosition();
+        return "$a$i$b";
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -66,18 +83,6 @@ class PointMutation
         return $this;
     }
 
-    public function getAllele(): ?Allele
-    {
-        return $this->allele;
-    }
-
-    public function setAllele(?Allele $allele): self
-    {
-        $this->allele = $allele;
-
-        return $this;
-    }
-
     public function getSequencePosition(): ?int
     {
         return $this->sequencePosition;
@@ -86,6 +91,34 @@ class PointMutation
     public function setSequencePosition(int $sequencePosition): self
     {
         $this->sequencePosition = $sequencePosition;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AlleleChunky[]
+     */
+    public function getAlleleChunkies(): Collection
+    {
+        return $this->alleleChunkies;
+    }
+
+    public function addAlleleChunky(AlleleChunky $alleleChunky): self
+    {
+        if (!$this->alleleChunkies->contains($alleleChunky)) {
+            $this->alleleChunkies[] = $alleleChunky;
+            $alleleChunky->addPointMutation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlleleChunky(AlleleChunky $alleleChunky): self
+    {
+        if ($this->alleleChunkies->contains($alleleChunky)) {
+            $this->alleleChunkies->removeElement($alleleChunky);
+            $alleleChunky->removePointMutation($this);
+        }
 
         return $this;
     }

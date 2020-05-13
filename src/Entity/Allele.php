@@ -5,8 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AlleleRepository")
@@ -20,6 +19,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 abstract class Allele
 {
     /**
+     * @Groups("allele")
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -27,13 +27,14 @@ abstract class Allele
     private $id;
 
     /**
+     * @Groups("allele")
      * @ORM\Column(type="string")
      */
     private $name;
 
     /**
+     * @Groups("allele")
      * @ORM\ManyToOne(targetEntity="App\Entity\Locus", inversedBy="allele")
-     * @JoinColumn(name="locus_name", referencedColumnName="name")
      */
     private $locus;
 
@@ -48,15 +49,9 @@ abstract class Allele
      */
     private $strains;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Truncation", mappedBy="allele")
-     */
-    private $truncations;
-
     public function __construct()
     {
         $this->strains = new ArrayCollection();
-        $this->truncations = new ArrayCollection();
     }
 
     public function __toString()
@@ -133,37 +128,6 @@ abstract class Allele
         if ($this->strains->contains($strain)) {
             $this->strains->removeElement($strain);
             $strain->removeAllele($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Truncation[]
-     */
-    public function getTruncations(): Collection
-    {
-        return $this->truncations;
-    }
-
-    public function addTruncation(Truncation $truncation): self
-    {
-        if (!$this->truncations->contains($truncation)) {
-            $this->truncations[] = $truncation;
-            $truncation->setAllele($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTruncation(Truncation $truncation): self
-    {
-        if ($this->truncations->contains($truncation)) {
-            $this->truncations->removeElement($truncation);
-            // set the owning side to null (unless already changed)
-            if ($truncation->getAllele() === $this) {
-                $truncation->setAllele(null);
-            }
         }
 
         return $this;

@@ -44,7 +44,7 @@ class StrainController extends AbstractController
     public function indexAction(Request $request, StrainRepository $strainRepository)
     {
         // Filter the data
-        $filter = $request->query->get('filter');
+        $filter = $request->query->get('filter', null, FILTER_SANITIZE_STRING);
         $qb = $strainRepository->findAllQueryBuilder($filter);
         $strains = $qb->getQuery()->execute();
 

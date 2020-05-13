@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TruncationRepository")
@@ -17,20 +21,33 @@ class Truncation
     private $id;
 
     /**
+     * @Groups("allele")
      * @ORM\Column(type="integer")
      */
     private $start;
 
     /**
+     * @Groups("allele")
      * @ORM\Column(type="integer")
      */
     private $finish;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Allele", inversedBy="truncations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity="App\Entity\AlleleChunky", mappedBy="truncations")
      */
-    private $allele;
+    private $alleleChunkies;
+
+    public function __toString(): string
+    {
+        $a = $this->getStart();
+        $b = $this->getFinish();
+        return  "Δ$a-$b";
+    }
+
+    public function __construct()
+    {
+        $this->alleleChunkies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,14 +78,30 @@ class Truncation
         return $this;
     }
 
-    public function getAllele(): ?Allele
+    /**
+     * @return Collection|AlleleChunky[]
+     */
+    public function getAlleleChunkies(): Collection
     {
-        return $this->allele;
+        return $this->alleleChunkies;
     }
 
-    public function setAllele(?Allele $allele): self
+    public function addAlleleChunky(AlleleChunky $alleleChunky): self
     {
-        $this->allele = $allele;
+        if (!$this->alleleChunkies->contains($alleleChunky)) {
+            $this->alleleChunkies[] = $alleleChunky;
+            $alleleChunky->addTruncation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlleleChunky(AlleleChunky $alleleChunky): self
+    {
+        if ($this->alleleChunkies->contains($alleleChunky)) {
+            $this->alleleChunkies->removeElement($alleleChunky);
+            $alleleChunky->removeTruncation($this);
+        }
 
         return $this;
     }

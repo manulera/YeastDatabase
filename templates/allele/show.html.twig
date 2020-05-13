@@ -8,11 +8,24 @@
 
 <p>This allele is found in the locus {% include "locus/reference.html.twig"  with {'locus': allele.locus}%}</p>
 
+<div id="my_dataviz">
+</div>
+
 <h2> Strains: </h2>
 <ul>
 {% for strain in allele.getStrains %}
     <li>{% include "strain/reference.html.twig" %}</li>              
 {% endfor %}    
 </ul>
+<div id="allele_jsonBottom" data-jsonarray="{{serialized_allele}}"></div>
+{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('allele/allele_viewer') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('allele/allele_viewer') }}
 {% endblock %}

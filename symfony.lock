@@ -78,11 +78,17 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "knplabs/knp-components": {
+        "version": "v2.3.4"
+    },
     "knplabs/knp-menu": {
         "version": "v3.1.0"
     },
     "knplabs/knp-menu-bundle": {
         "version": "v3.0.0"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.2.0"
     },
     "mbostock/d3": {
         "version": "v3.5.17"
@@ -98,6 +104,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
+    },
+    "php": {
+        "version": "7.2"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -294,6 +303,9 @@
     "symfony/security-http": {
         "version": "v5.0.0"
     },
+    "symfony/serializer": {
+        "version": "v5.0.7"
+    },
     "symfony/service-contracts": {
         "version": "v2.0.0"
     },
@@ -302,6 +314,19 @@
     },
     "symfony/templating": {
         "version": "v5.0.5"
+    },
+    "symfony/translation": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "2ad9d2545bce8ca1a863e50e92141f0b9d87ffcd"
+        },
+        "files": [
+            "config/packages/translation.yaml",
+            "translations/.gitignore"
+        ]
     },
     "symfony/translation-contracts": {
         "version": "v2.0.0"

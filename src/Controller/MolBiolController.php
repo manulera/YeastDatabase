@@ -33,7 +33,7 @@ class MolBiolController extends StrainSourceController
     {
         $arr = explode(".", $choice);
         if (count($arr) == 2) {
-            return $this->redirectToRoute('strain.source.molbiol.' . $arr[0] . '.index', ["option" => $arr[1]]);
+            return $this->redirectToRoute('strain.source.molbiol.' . $arr[0] . '.submethod', ["option" => $arr[1]]);
         } else {
             return $this->redirectToRoute('strain.source.molbiol.' . $choice . '.index');
         }

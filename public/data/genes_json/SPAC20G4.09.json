@@ -1,0 +1,1 @@
+{"other_ids": [], "mRNA_sequence": [{"index": 0, "type": "CDS", "sequence": "ATGACCCTTATTAAATATAAGCGAAAAAACATACAGTTCTACAAAAAAATAATAGCAAATGGTTATGC"}, {"index": 1, "type": "intron", "sequence": "GTATGCACTACCGCCTAAATATTCCACACTAATTTATATATCTAG"}, {"index": 2, "type": "CDS", "sequence": "CAAGTGA"}], "other_names": [], "id": "SPAC20G4.09", "name": ""}

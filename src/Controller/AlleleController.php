@@ -7,12 +7,18 @@ use App\Repository\AlleleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/allele", name="allele.")
  */
 class AlleleController extends AbstractController
 {
+    public function __construct(SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
+    }
+
     /**
      * @Route("/", name="index")
      */
@@ -33,8 +39,14 @@ class AlleleController extends AbstractController
      */
     public function showAction(Allele $allele)
     {
-        return $this->render('allele/show.html.twig', array(
-            'allele' => $allele
-        ));
+        $serialized = $this->serializer->serialize($allele, 'json', ['groups' => ['allele']]);
+
+        return $this->render(
+            'allele/show.html.twig',
+            [
+                'allele' => $allele,
+                'serialized_allele' => $serialized
+            ]
+        );
     }
 }

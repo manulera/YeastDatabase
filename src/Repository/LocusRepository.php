@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Locus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Locus|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,6 +36,21 @@ class LocusRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+     * @param string|null $term
+     */
+    public function getWithSearchQueryBuilder($filter = ''): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('locus');
+        $filter_terms = explode(' ', $filter);
+        $i = 0;
+        foreach ($filter_terms as $filter_term) {
+            $i++;
+            $qb->andWhere("IDENTITY(locus.name) LIKE :filter$i")
+                ->setParameter("filter$i", '%' . $filter_term . '%');
+        }
+        return $qb;
+    }
 
     /*
     public function findOneBySomeField($value): ?Locus
