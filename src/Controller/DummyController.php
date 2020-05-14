@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Locus;
+use App\Form\AlleleType;
+use App\Repository\LocusRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,15 +14,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DummyController extends AbstractController
 {
+    public function __construct(LocusRepository $locusRepository)
+    {
+        $this->locusRepository = $locusRepository;
+    }
     /**
      * @Route("/dummy", name="dummy")
      */
     public function index()
     {
-        $data_passed = "No Ajax request";
+
+        $form = $this->createForm(AlleleType::class);
 
         return $this->render('dummy/index.html.twig', [
-            'data_passed' => $data_passed,
+            'form' => $form->createView(),
         ]);
     }
     /**
@@ -30,5 +39,33 @@ class DummyController extends AbstractController
             return new JsonResponse(array('data_passed' => 'this is a json response'));
         }
         return new Response('This is not ajax!', 400);
+    }
+
+    public function createDummyForm(string $filter = '')
+    {
+        $builder = $this->createFormBuilder();
+        if ($filter == '') {
+            $builder->add(
+                'Strain',
+                EntityType::class,
+                [
+                    'required' => true,
+                    'class' => Locus::class,
+                    'choices' => [],
+
+                ]
+            );
+        } else {
+            $builder->add(
+                'Strain',
+                EntityType::class,
+                [
+                    'required' => true,
+                    'class' => Locus::class,
+                    'query_builder' => $this->locusRepository->getWithSearchQueryBuilder($filter)
+                ]
+            );
+        }
+        return $builder->getForm();
     }
 }

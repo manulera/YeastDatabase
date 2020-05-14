@@ -46,7 +46,7 @@ class LocusRepository extends ServiceEntityRepository
         $i = 0;
         foreach ($filter_terms as $filter_term) {
             $i++;
-            $qb->andWhere("IDENTITY(locus.name) LIKE :filter$i")
+            $qb->andWhere("IDENTITY(locus.name) LIKE :filter$i OR IDENTITY(locus.pombase_id) LIKE :filter$i")
                 ->setParameter("filter$i", '%' . $filter_term . '%');
         }
         return $qb;

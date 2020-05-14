@@ -63,7 +63,7 @@ class MatingForm
                 ]);
             }
         };
-
+        
         $this->builder->addEventListener(
             FormEvents::POST_SET_DATA,
             // TODO: What is this syntax???

@@ -6,6 +6,7 @@ use App\Entity\Oligo;
 use App\Entity\Plasmid;
 use App\Entity\Strain;
 use App\Form\AlleleChunkyType;
+use App\Form\AlleleType;
 use App\Form\PointMutationType;
 use App\Form\TruncationType;
 use App\Service\Genotyper;
@@ -38,8 +39,6 @@ class CustomAlleleController extends MolBiolController
         // dd($form);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            dump($form->get('inputPlasmids')->getData());
-
             // return $this->render('strain/source/custom_allele.html.twig', [
             //     'form' => $form->createView(),
             // ]);
@@ -51,13 +50,24 @@ class CustomAlleleController extends MolBiolController
     }
 
     /**
-     * @Route("/change_form", name="change_form")
+     * @Route("/ajax", name="ajax")
      */
-    public function changeForm(Request $request)
+    public function ajaxAction(Request $request)
     {
-        $button_id = $request->query->get('button_id');
-        dd($button_id);
+        $filter_locus_name = $request->query->get('filter_locus_name');
+        $filter_pombase_id = $request->query->get('filter_pombase_id');
+
+        $options = [
+            'filter_locus_name' => $filter_locus_name,
+            'filter_pombase_id' => $filter_pombase_id
+        ];
+        $form = $this->createForm(AlleleType::class, null, $options);
+
+        return $this->render('forms/alleletype.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
+
 
     public function makeForm($options = [])
     {

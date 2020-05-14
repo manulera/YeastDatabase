@@ -30,6 +30,7 @@ Encore
     .addEntry('strain/network', './assets/js/strain/network.js')
     .addEntry('strain/source/molbiol', './assets/js/strain/source/molbiol.js')
     .addEntry('custom-file-label', './assets/js/custom-file-label.js')
+    .addEntry('allele/form/allele_type', './assets/js/allele/form/allele_type.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
     //TODO: Is this ok?

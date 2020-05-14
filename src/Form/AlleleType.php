@@ -8,7 +8,10 @@ use App\Repository\LocusRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AlleleType extends AbstractType
@@ -28,19 +31,67 @@ class AlleleType extends AbstractType
             ->add('locus', EntityType::class, [
                 'required' => true,
                 'class' => Locus::class,
-                'query_builder' => function () {
-                    return $this->locusRepository->getWithSearchQueryBuilder()->setMaxResults(10);
-                },
+                'choices' => [],
                 'row_attr' => ['style' => 'display:inline-block;']
-
             ])
-            ->add('filterLoci', TextType::class, ['mapped' => false, 'row_attr' => ['style' => 'display:inline-block;']]);
+            ->add(
+                'filterByLocusName',
+                TextType::class,
+                [
+                    'data' => $options['filter_locus_name'],
+                    'mapped' => false,
+                    'row_attr' => ['style' => 'display:inline-block;', 'class' => 'filter-locus locus_name']
+                ]
+            )
+            ->add(
+                'filterByPombaseId',
+                TextType::class,
+                [
+                    'data' => $options['filter_pombase_id'],
+                    'mapped' => false,
+                    'row_attr' => ['style' => 'display:inline-block;', 'class' => 'filter-locus pombase_id']
+                ]
+            );
+
+        $formModifier = function (Form $form) {
+
+            $filter_locus_name = $form->get('filterByLocusName')->getData();
+            $filter_pombase_id = $form->get('filterByPombaseId')->getData();
+            // We only filter in any of these criteria are met
+            if (strlen($filter_pombase_id) || strlen($filter_locus_name)) {
+                $filter = "$filter_locus_name $filter_pombase_id";
+                $form->add('locus', EntityType::class, [
+                    'required' => true,
+                    'class' => Locus::class,
+                    'query_builder' => $this->locusRepository->getWithSearchQueryBuilder($filter),
+                    'row_attr' => ['style' => 'display:inline-block;']
+                ]);
+            }
+        };
+        $builder->addEventListener(
+            FormEvents::POST_SET_DATA,
+            function (FormEvent $event) use ($formModifier) {
+                $form = $event->getForm();
+                $formModifier($form);
+            }
+
+        );
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function (FormEvent $event) use ($formModifier) {
+                $form = $event->getForm();
+                $formModifier($form);
+            }
+
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Allele::class,
+            'filter_locus_name' => '',
+            'filter_pombase_id' => ''
         ]);
     }
 }
