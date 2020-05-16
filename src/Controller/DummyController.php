@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Locus;
 use App\Form\AlleleType;
+use App\Form\LocusPickerType;
 use App\Repository\LocusRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +25,7 @@ class DummyController extends AbstractController
     public function index()
     {
 
-        $form = $this->createForm(AlleleType::class);
+        $form = $this->createForm(LocusPickerType::class);
 
         return $this->render('dummy/index.html.twig', [
             'form' => $form->createView(),

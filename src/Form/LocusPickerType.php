@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Allele;
 use App\Entity\Locus;
 use App\Repository\LocusRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -14,7 +13,12 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AlleleType extends AbstractType
+class dummyClass
+{
+}
+
+
+class LocusPickerType extends AbstractType
 {
 
     /** @var LocusRepository */
@@ -28,17 +32,13 @@ class AlleleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('locus', EntityType::class, [
-                'required' => true,
-                'class' => Locus::class,
-                'choices' => [],
-            ])
             ->add(
                 'filterByLocusName',
                 TextType::class,
                 [
                     'data' => $options['filter_locus_name'],
                     'mapped' => false,
+                    'row_attr' => ['class' => 'filter-locus locus_name']
                 ]
             )
             ->add(
@@ -47,8 +47,15 @@ class AlleleType extends AbstractType
                 [
                     'data' => $options['filter_pombase_id'],
                     'mapped' => false,
+                    'row_attr' => ['class' => 'filter-locus pombase_id']
                 ]
-            );
+            )
+            ->add('locus', EntityType::class, [
+                'required' => true,
+                'class' => Locus::class,
+                'choices' => [],
+
+            ]);
 
         $formModifier = function (Form $form) {
 
@@ -61,7 +68,6 @@ class AlleleType extends AbstractType
                     'required' => true,
                     'class' => Locus::class,
                     'query_builder' => $this->locusRepository->getWithSearchQueryBuilder($filter),
-                    'row_attr' => ['style' => 'display:inline-block;']
                 ]);
             }
         };
@@ -86,7 +92,6 @@ class AlleleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Allele::class,
             'filter_locus_name' => '',
             'filter_pombase_id' => ''
         ]);

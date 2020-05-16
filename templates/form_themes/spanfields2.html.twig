@@ -1,0 +1,15 @@
+{% block form_row -%}
+    {%- if compound is defined and compound -%}
+        {%- set element = 'fieldset' -%}
+    {%- endif -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    <{{ element|default('span') }}{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' form-group')|trim})} %}{{ block('attributes') }}{% endwith %}>
+        <span class='pr-3'>
+        <div class='float-left'>{{form_label(form)}}</div>
+        <div>{{form_widget(form)}}</div>
+        </span>
+    </{{ element|default('span') }}>
+{%- endblock form_row %}

@@ -5,7 +5,7 @@
 {% block body %}
 
 <h1>Hello </h1>
-<p>{{ form(form) }}</p>
+{% include "forms/locusPicker.html.twig"  with {'form': form}%}
 <button id = "my_button" class = 'btn btn-primary'>Click me</button>
 
 {% endblock %}

@@ -1,0 +1,11 @@
+{% form_theme form 'form_themes/spanfields2.html.twig' %}
+
+{{form_start(form,{ 'attr' : { 'class': 'form-inline' }})}}
+{{form_row(form.filterByLocusName,{ 'row_attr' : { 'class': 'filter-locus' }})}}
+{{form_row(form.filterByPombaseId,{ 'row_attr' : { 'class': 'filter-locus' }})}}
+{{form_row(form.locus)}}
+{{form_end(form)}}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('form_type/locus_picker') }}
+{% endblock %}

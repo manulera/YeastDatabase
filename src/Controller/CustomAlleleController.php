@@ -6,7 +6,7 @@ use App\Entity\Oligo;
 use App\Entity\Plasmid;
 use App\Entity\Strain;
 use App\Form\AlleleChunkyType;
-use App\Form\AlleleType;
+use App\Form\LocusPickerType;
 use App\Form\PointMutationType;
 use App\Form\TruncationType;
 use App\Service\Genotyper;
@@ -14,6 +14,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -61,9 +62,9 @@ class CustomAlleleController extends MolBiolController
             'filter_locus_name' => $filter_locus_name,
             'filter_pombase_id' => $filter_pombase_id
         ];
-        $form = $this->createForm(AlleleType::class, null, $options);
+        $form = $this->createForm(LocusPickerType::class, null, $options);
 
-        return $this->render('forms/alleletype.html.twig', [
+        return $this->render('forms/locusPicker.html.twig', [
             'form' => $form->createView()
         ]);
     }
