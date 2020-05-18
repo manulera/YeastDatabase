@@ -34,7 +34,7 @@ class AddPlasmidController extends StrainSourceController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $parent_strain = $form->get("inputStrain")->getData();
-            $nb_clones = $form->get("number_of_clones")->getData();
+            $nb_clones = $form->get("numberOfClones")->getData();
             $plasmid = $form->get("plasmid")->getData();
             return $this->persistAddPlasmid($parent_strain, $plasmid, $nb_clones);
         }
@@ -86,7 +86,7 @@ class AddPlasmidController extends StrainSourceController
                 'mapped' => false,
                 'choices' => $plasmidRepository->findAll()
             ])
-            ->add('number_of_clones', IntegerType::class, [
+            ->add('numberOfClones', IntegerType::class, [
                 'mapped' => false,
             ])
             ->add('Save', SubmitType::class, [

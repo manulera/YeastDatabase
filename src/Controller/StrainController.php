@@ -35,6 +35,28 @@ class StrainController extends AbstractController
         return $out;
     }
 
+    private function getFilterFromUrl(Request $request): array
+    {
+        $filters = ['genotype', 'id', 'creator'];
+        $out = [];
+        foreach ($filters as $filter) {
+            $out[$filter] = $request->query->get($filter, null, FILTER_SANITIZE_STRING);
+        }
+        return $out;
+    }
+
+    private function makeUrlFilter(array $filters): string
+    {
+        $out_url = $this->generateUrl('strain.index');
+        foreach ($filters as $filter => $value) {
+            if (strlen($value)) {
+                $f = urlencode($filter);
+                $out_url .= "?$f=" . urlencode($value);
+            }
+        }
+        return $out_url;
+    }
+
     /**
      * Lists all strain entities.
      *
@@ -44,36 +66,23 @@ class StrainController extends AbstractController
     public function indexAction(Request $request, StrainRepository $strainRepository)
     {
         // Filter the data
-        $filter = $request->query->get('filter', null, FILTER_SANITIZE_STRING);
-        $qb = $strainRepository->findAllQueryBuilder($filter);
+
+        $qb = $strainRepository->findAllQueryBuilder($this->getFilterFromUrl($request));
         $strains = $qb->getQuery()->execute();
 
         // Create the filter form
 
         $formBuilder = $this->createFormBuilder()
-            ->add(
-                'filter',
-                TextType::class,
-                [
-                    'label' => false,
-                    'attr' => [
-                        'class' => 'my-2 my-sm-0',
-                        'placeholder' => 'Search...',
-                    ]
-                ]
-            )
-            ->add('Search', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-outline-success my-2 my-sm-0 btn-sm',
-
-                ],
-            ]);
+            ->add('id', TextType::class, ['required' => false])
+            ->add('genotype', TextType::class, ['required' => false])
+            ->add('creator', TextType::class, ['required' => false])
+            ->add('filter', SubmitType::class);
 
         $filterForm = $formBuilder->getForm();
         $filterForm->handleRequest($request);
         if ($filterForm->isSubmitted() && $filterForm->isValid()) {
             //TODO this is probably not great
-            $url = $this->generateUrl('strain.index') . '?filter=' . urlencode($filterForm->get('filter')->getData());
+            $url = $this->makeUrlFilter($filterForm->getData());
             return $this->redirect($url);
         } else {
             return $this->render('strain/index.html.twig', [

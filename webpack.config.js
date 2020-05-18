@@ -31,6 +31,7 @@ Encore
     .addEntry('strain/source/molbiol', './assets/js/strain/source/molbiol.js')
     .addEntry('custom-file-label', './assets/js/custom-file-label.js')
     .addEntry('form_type/locus_picker', './assets/js/form_type/locus_picker.js')
+    .addEntry('form_type/strain_picker', './assets/js/form_type/strain_picker.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
     //TODO: Is this ok?

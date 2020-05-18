@@ -93,7 +93,15 @@ class AlleleChunky extends Allele
         if ($this->getNTag()) {
             $name .= $this->getNTag() . "-";
         }
-        $name .= $this->getLocus();
+
+        $locus = $this->getLocus();
+
+        if ($locus->getName()) {
+            $name .= $locus->getName();
+        } else {
+            $name .= $locus->getPombaseId();
+        }
+
         if ($this->getCTag()) {
             $name .= "-" . $this->getCTag();
         }

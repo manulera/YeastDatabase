@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Locus;
-use App\Repository\LocusRepository;
+use App\Entity\Strain;
+use App\Repository\StrainRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
@@ -14,59 +14,56 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LocusPickerType extends AbstractType implements DataMapperInterface
+class StrainPickerType extends AbstractType implements DataMapperInterface
 {
 
-    /** @var LocusRepository */
-    private $locusRepository;
+    /** @var strainRepository */
+    private $strainRepository;
 
-    public function __construct(LocusRepository $locusRepository)
+    public function __construct(StrainRepository $strainRepository)
     {
-        $this->locusRepository = $locusRepository;
+        $this->strainRepository = $strainRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add(
-                'filterByLocusName',
+                'filterById',
                 TextType::class,
                 [
-                    'row_attr' => ['class' => 'filter-locus locus_name'],
                     'required' => false,
                     'mapped' => false,
-                    'data' => $options['filterByLocusName']
+                    'data' => $options['filterById']
                 ]
             )
             ->add(
-                'filterByPombaseId',
+                'filterByGenotype',
                 TextType::class,
                 [
-                    'row_attr' => ['class' => 'filter-locus pombase_id'],
                     'required' => false,
                     'mapped' => false,
-                    'data' => $options['filterByPombaseId']
+                    'data' => $options['filterByGenotype']
                 ]
             )
-            ->add('locus', EntityType::class, [
+            ->add('strain', EntityType::class, [
                 'required' => true,
-                'class' => Locus::class,
+                'class' => Strain::class,
                 'choices' => [],
 
             ])
-            ->setDataMapper($this);;
+            ->setDataMapper($this);
 
         $formModifier = function (Form $form, array $filter_array) {
-
-            $filter_locus_name = $filter_array['filterByLocusName'];
-            $filter_pombase_id = $filter_array['filterByPombaseId'];
+            $id = $filter_array['filterById'];
+            $genotype = $filter_array['filterByGenotype'];
             // We only filter in any of these criteria are met
-            if (strlen($filter_pombase_id) || strlen($filter_locus_name)) {
-                $filter = "$filter_locus_name $filter_pombase_id";
-                $form->add('locus', EntityType::class, [
+            if (strlen($id) || strlen($genotype)) {
+                $filterArray = ['genotype' => $genotype, 'id' => $id, 'creator' => null];
+                $form->add('strain', EntityType::class, [
                     'required' => true,
-                    'class' => Locus::class,
-                    'query_builder' => $this->locusRepository->getWithSearchQueryBuilder($filter),
+                    'class' => Strain::class,
+                    'query_builder' => $this->strainRepository->findAllQueryBuilder($filterArray)
                 ]);
             }
         };
@@ -75,8 +72,8 @@ class LocusPickerType extends AbstractType implements DataMapperInterface
             function (FormEvent $event) use ($formModifier) {
                 $form = $event->getForm();
                 $arr = [
-                    'filterByLocusName' => $form->get('filterByLocusName')->getData(),
-                    'filterByPombaseId' => $form->get('filterByPombaseId')->getData(),
+                    'filterById' => $form->get('filterById')->getData(),
+                    'filterByGenotype' => $form->get('filterByGenotype')->getData(),
                 ];
                 $formModifier($form, $arr);
             }
@@ -95,9 +92,9 @@ class LocusPickerType extends AbstractType implements DataMapperInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'filterByLocusName' => '',
-            'filterByPombaseId' => '',
-            'data_class' => Locus::class,
+            'filterById' => '',
+            'filterByGenotype' => '',
+            'data_class' => Strain::class,
         ]);
     }
 
@@ -105,7 +102,7 @@ class LocusPickerType extends AbstractType implements DataMapperInterface
     {
         /** @var FormInterface[] $forms */
         $forms = iterator_to_array($forms);
-        $viewData = $forms['locus']->getData();
+        $viewData = $forms['strain']->getData();
     }
 
     public function mapDataToForms($viewData, $forms)

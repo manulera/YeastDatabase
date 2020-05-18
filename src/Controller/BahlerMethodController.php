@@ -7,6 +7,7 @@ use App\Entity\Plasmid;
 use App\Entity\Strain;
 use App\Form\AlleleChunkyType;
 use App\Form\AlleleDeletionType;
+use App\Form\StrainPickerType;
 use App\Service\Genotyper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -38,7 +39,7 @@ class BahlerMethodController extends MolBiolController
         if ($form->isSubmitted() && $form->isValid()) {
             $parentStrain = $form->get("inputStrain")->getData();
             $allele = $form->get("allele")->getData();
-            $nb_clones = $form->get("number_of_clones")->getData();
+            $nb_clones = $form->get("numberOfClones")->getData();
             $primers = [];
             $primers[] = $form->get("primerForward")->getData();
             $primers[] = $form->get("primerReverse")->getData();
@@ -46,10 +47,17 @@ class BahlerMethodController extends MolBiolController
             $plasmids[] = $form->get("plasmid")->getData();
             return $this->persistMolBiol($parentStrain, $allele, $nb_clones, $plasmids, $primers);
         }
+        if ($option == 'deletion') {
+            $template_file = 'strain/source/bahler_deletion.html.twig';
+        } else {
+            $template_file = 'strain/source/bahler_chunky.html.twig';
+        }
+        // $template_file = fields2show
+
         return $this->render(
-            'strain/source/bahler.html.twig',
+            $template_file,
             [
-                'form' => $form->createView()
+                'form' => $form->createView(),
             ]
         );
     }
@@ -62,8 +70,7 @@ class BahlerMethodController extends MolBiolController
 
         $builder = $this->createFormBuilder();
         $builder
-            ->add('inputStrain', EntityType::class, [
-                'class' => Strain::class,
+            ->add('inputStrain', StrainPickerType::class, [
                 'mapped' => false
             ])
             ->add('primerForward', EntityType::class, [
@@ -92,7 +99,7 @@ class BahlerMethodController extends MolBiolController
                 'fields2show' => $options['fields2show']
             ]);
         }
-        $builder->add('number_of_clones', IntegerType::class, [
+        $builder->add('numberOfClones', IntegerType::class, [
             'mapped' => false,
         ])
             ->add('Save', SubmitType::class, [

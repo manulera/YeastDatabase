@@ -5,9 +5,12 @@
 {% block body %}
 
 <h1>Hello </h1>
-{% include "forms/locusPicker.html.twig"  with {'form': form}%}
-<button id = "my_button" class = 'btn btn-primary'>Click me</button>
-
+{{form_start(form)}}
+<div class='form-inline'>
+{% include "forms/strain_picker.html.twig"  with {'form': form.strain}%}
+</div>
+{{form_row(form.submit)}}
+{{form_end(form)}}
 {% endblock %}
 
 {% block javascripts %}

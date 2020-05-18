@@ -63,7 +63,7 @@ class MatingForm
                 ]);
             }
         };
-        
+
         $this->builder->addEventListener(
             FormEvents::POST_SET_DATA,
             // TODO: What is this syntax???
@@ -127,24 +127,24 @@ class MatingForm
         foreach ($alleles1 as $alle1) {
 
             /* @var $alle Allele */
-            $loci1[$alle1->getLocus()->getName()] = $alle1;
+            $loci1[$alle1->getLocus()->getId()] = $alle1;
         }
 
         foreach ($alleles2 as $alle2) {
             /* @var $alle Allele */
-            $locus2_name = $alle2->getLocus()->getName();
+            $locus2_id = $alle2->getLocus()->getId();
 
-            if (array_key_exists($locus2_name, $loci1)) {
+            if (array_key_exists($locus2_id, $loci1)) {
                 // We only include them if the alleles are different. In principle there would be no way to tell
                 // the difference between the alleles!
                 // TODO handle the case in which the allele names are the same but not the id
-                if ($loci1[$locus2_name] != $alle2) {
-                    $alleles[] = [$loci1[$locus2_name], $alle2];
+                if ($loci1[$locus2_id] != $alle2) {
+                    $alleles[] = [$loci1[$locus2_id], $alle2];
                 } else {
                     $alleles[] = [$alle2];
                 }
                 // We pop the value
-                unset($loci1[$locus2_name]);
+                unset($loci1[$locus2_id]);
             } else {
                 $alleles[] = [null, $alle2];
             }

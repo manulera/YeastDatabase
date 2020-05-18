@@ -36,6 +36,14 @@ class AlleleDeletion extends Allele
 
     public function updateName()
     {
-        $this->setName($this->getLocus() . "Δ::" . $this->marker);
+        $locus = $this->getLocus();
+
+        if ($locus->getName()) {
+            $name = $locus->getName();
+        } else {
+            $name = $locus->getPombaseId();
+        }
+
+        $this->setName($name . "Δ::" . $this->marker);
     }
 }

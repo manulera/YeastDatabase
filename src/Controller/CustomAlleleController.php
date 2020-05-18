@@ -14,7 +14,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -50,25 +49,6 @@ class CustomAlleleController extends MolBiolController
         ]);
     }
 
-    /**
-     * @Route("/ajax", name="ajax")
-     */
-    public function ajaxAction(Request $request)
-    {
-        $filter_locus_name = $request->query->get('filter_locus_name');
-        $filter_pombase_id = $request->query->get('filter_pombase_id');
-
-        $options = [
-            'filter_locus_name' => $filter_locus_name,
-            'filter_pombase_id' => $filter_pombase_id
-        ];
-        $form = $this->createForm(LocusPickerType::class, null, $options);
-
-        return $this->render('forms/locusPicker.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
 
     public function makeForm($options = [])
     {
@@ -81,7 +61,7 @@ class CustomAlleleController extends MolBiolController
                 'class' => Strain::class,
                 'mapped' => false
             ])
-            ->add('number_of_clones', IntegerType::class, [
+            ->add('numberOfClones', IntegerType::class, [
                 'mapped' => false,
             ])
             ->add('allele', AlleleChunkyType::class, [

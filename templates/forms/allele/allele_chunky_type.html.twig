@@ -1,0 +1,19 @@
+{% extends 'forms/allele/allele_type.html.twig' %}
+{% block body %}
+{{ parent() }}
+{% if form.nMarker is defined %}
+{{form_row(form.nMarker)}}
+{% endif %}
+{% if form.promoter is defined %}
+{{form_row(form.promoter)}}
+{% endif %}
+{% if form.nTag is defined %}
+{{form_row(form.nTag)}}
+{% endif %}
+{% if form.cTag is defined %}
+{{form_row(form.cTag)}}
+{% endif %}
+{% if form.cMarker is defined %}
+{{form_row(form.cMarker)}}
+{% endif %}
+{% endblock body %}

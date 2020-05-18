@@ -1,0 +1,15 @@
+{% extends 'strain/source/new.html.twig' %}
+{% block create_body %}
+<h2>Deletion Bahler method</h2>
+<p class="">This method deletes a gene from the strain</p>
+{{form_start(form)}}
+<div class="form-inline">
+{% include "forms/strain_picker.html.twig"  with {'form': form.inputStrain}%}
+</div>
+{% include "forms/allele/allele_chunky_type.html.twig"  with {'form': form.allele}%}
+{{form_row(form.primerForward)}}
+{{form_row(form.primerReverse)}}
+{{form_row(form.plasmid)}}
+{{form_row(form.numberOfClones)}}
+{{form_end(form)}}
+{% endblock %}

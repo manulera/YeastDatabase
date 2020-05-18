@@ -8,9 +8,10 @@
 {{ form_start(form) }}
 <h3>Input strain</h3>
 {{ form_row(form.inputStrain) }}
-<h3>Allele modifications</h3>
-{{ form_row(form.allele.filterByLocusName) }}{{ form_row(form.allele.filterByPombaseId) }}{{ form_row(form.allele.locus) }}
-
+<h3>Target locus</h3>
+<div class='form-inline'>
+{% include "forms/locus_picker.html.twig"  with {'form': form.allele.locus}%}
+</div>
 <h4>Point mutations</h4>
 <ul class="entityType_list" data-prototype="{{ form_widget(form.pointMutations.vars.prototype)|e('html_attr') }}">
         {% for pm in form.pointMutations %}
@@ -30,7 +31,7 @@
 {{ form_row(form.inputOligos) }}
 
 <h3>Number of clones</h3>
-{{ form_row(form.number_of_clones) }}
+{{ form_row(form.numberOfClones) }}
 
 {{ form_end(form) }}
 
@@ -40,7 +41,6 @@
     {{ parent() }}
     {{ encore_entry_script_tags('strain/source/custom_allele') }}
     {{ encore_entry_script_tags('collection_type_add') }}
-    {{ encore_entry_script_tags('allele/form/allele_type') }}
 {% endblock %}
 
 {% block stylesheets %}

@@ -1,0 +1,9 @@
+{% form_theme form 'form_themes/spanfields2.html.twig' %}
+
+{{form_row(form.strain,{ 'row_attr' : { 'class': 'filter-strain strain-select'}})}}
+{{form_row(form.filterById,{ 'row_attr' : { 'class': 'filter-strain strain-id' }})}}
+{{form_row(form.filterByGenotype,{ 'row_attr' : { 'class': 'filter-strain strain-genotype' }})}}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('form_type/strain_picker') }}
+{% endblock %}

@@ -17,8 +17,6 @@
 
 <h1>Strains</h1> 
 
-<div class="d-flex bd-highlight mb-3">
-<span>
 <ul class="nav nav-pills mb-2">
   <li class="nav-item pr-md-5">
   <a class="nav-link" href="{{ path('strain.source.index') }}">Create strain</a>    
@@ -27,29 +25,35 @@
   <a class="nav-link" href="{{ path('strain.network') }}">Network view</a>
   </li>
 </ul>
-</span>
-<span class='form-inline'>
-    {% form_theme form 'form_themes/spanfields2.html.twig' %}
-    {{form_start(form)}}
-    {{form_widget(form.id, { 'attr': {'placeholder':'Filter id'}})}}
-    {{form_widget(form.genotype, { 'attr': {'placeholder':'Filter genotype'}})}}
-    {{form_widget(form.creator, { 'attr': {'placeholder':'Filter creator'}})}}
-    {{form_widget(form.filter)}}
-    {{form_end(form)}}
-</span>
-</div>
 
-
+{{form_start(form)}}
 <table class="table table-striped">
     <thead class=>
     <tr>
-    <td class="">ID</td>
-    <td class="">Genotype</td>
-    <td class="">Created by</td>
+    <td class="">
+    <span class='form-inline'>
+    <span>ID</span>
+    <span class='pl-3'>{{form_widget(form.id, { 'attr': {'placeholder':'Filter ID','style':'max-width: 100px'}})}}</span>
+    </span>
+    </td>
+    <td class="">
+    <span class='form-inline'>
+    <span>Genotype</span>
+    <span class='pl-3'>{{form_widget(form.genotype, { 'attr': {'placeholder':'Filter genotype','style':'max-width: 140px'}})}}</span>
+    </span>
+    </td>
+    <td class="">
+    <span class='form-inline'>
+    <span>Creator</span>
+    <span class='pl-3'>{{form_widget(form.creator, { 'attr': {'placeholder':'Filter creator','style':'max-width: 120px'}})}}</span>
+    </span>
+    </td>
     <td class="">Source</td>
     <td class="">Creation date</td>
+    <td class="">{{form_widget(form.filter)}}</td>
     </tr>
     </thead>
+{{form_end(form)}}
     <tbody>
     {% for strain in strains %}
     <tr>
