@@ -10,11 +10,12 @@
 var $ = require('jquery');
 
 var ajaxRequestFunction = function() {
+    console.log("called");
     $.ajax({
         url: "/strain/new/mating/combinations",
         data: {
-            strain1: $("#form_strain1").val(),
-            strain2: $("#form_strain2").val()
+            strain1: $("#form_strain1_strain").val(),
+            strain2: $("#form_strain2_strain").val()
         },
         success: function (html) {
 
@@ -39,7 +40,9 @@ var ajaxRequestFunction = function() {
 
 $(document).ready( function() {
     
-    $('#form_strain1').change(ajaxRequestFunction);
-    $('#form_strain2').change(ajaxRequestFunction);
+    $('#form_strain1_strain').change(ajaxRequestFunction);
+    $('#form_strain1_strain').on('DOMNodeInserted',ajaxRequestFunction);
+    $('#form_strain2_strain').change(ajaxRequestFunction);
+    $('#form_strain2_strain').on('DOMNodeInserted',ajaxRequestFunction);
 
 });

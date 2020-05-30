@@ -3,7 +3,7 @@
 <h2>Deletion Bahler method</h2>
 <p class="">This method deletes a gene from the strain</p>
 {{form_start(form)}}
-<div class="form-inline">
+<div class="form-inline picker-form">
 {% include "forms/strain_picker.html.twig"  with {'form': form.inputStrain}%}
 </div>
 {% include "forms/allele/allele_chunky_type.html.twig"  with {'form': form.allele}%}

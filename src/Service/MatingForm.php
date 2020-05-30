@@ -3,9 +3,9 @@
 namespace App\Service;
 
 use App\Entity\Strain;
+use App\Form\StrainPickerType;
 use App\Service\Genotyper;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Form;
@@ -31,19 +31,24 @@ class MatingForm
         $strainRepository = $this->doctrine->getRepository(Strain::class);
 
         $this->builder
-            ->add('strain1', EntityType::class, [
-                'class' => Strain::class,
+            // ->add('strain1', EntityType::class, [
+            //     'class' => Strain::class,
+            //     'mapped' => false,
+            //     'data' => $options['strain1'],
+            // ])
+            // ->add('strain2', EntityType::class, [
+            //     'class' => Strain::class,
+            //     'mapped' => false,
+            //     'data' => $options['strain2'],
+
+            // ])
+            ->add('strain1', StrainPickerType::class, [
                 'mapped' => false,
                 'data' => $options['strain1'],
-
-
             ])
-
-            ->add('strain2', EntityType::class, [
-                'class' => Strain::class,
+            ->add('strain2', StrainPickerType::class, [
                 'mapped' => false,
                 'data' => $options['strain2'],
-
             ]);
 
 
@@ -89,8 +94,8 @@ class MatingForm
                 $strain1 = $data['strain1'];
                 $strain2 = $data['strain2'];
                 $strain_repository = $this->doctrine->getRepository(Strain::class);
-                $strain1 = $strain_repository->find($strain1);
-                $strain2 = $strain_repository->find($strain2);
+                $strain1 = $strain_repository->find($strain1['strain']);
+                $strain2 = $strain_repository->find($strain2['strain']);
                 if ($strain1 && $strain2) {
                     $modifier_options = $this->strainCombinations($strain1, $strain2);
                 }

@@ -1,0 +1,20 @@
+#sequence-viewer
+{
+    position: relative;
+}
+
+.sequenceHeader h4
+{    
+    /* margin-right: 200px; */
+}
+.sequenceHeader input
+{
+    position: absolute;
+    right: 5px;
+    width:100px;
+}
+
+.coverageLegend div
+{
+    border: 1px solid black;
+}

@@ -7,9 +7,8 @@
         {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
     {%- endif -%}
     <{{ element|default('span') }}{% with {attr: row_attr|merge({class: (row_attr.class|default('') ~ ' form-group')|trim})} %}{{ block('attributes') }}{% endwith %}>
-        <span class='pr-3'>
-        <div class='float-left'>{{form_label(form)}}</div>
+        <div class='pr-3'>
         <div>{{form_widget(form,{ 'attr' : { 'style': 'min-width:200px;' }})}}</div>
-        </span>
+        </div>
     </{{ element|default('span') }}>
 {%- endblock form_row %}

@@ -1,4 +1,8 @@
-require('bootstrap-multiselect');
+var $ = require('jquery');
+window.$ = $;
+window.jQuery = $;
+require('bootstrap');
+
 
 import '../../../css/strain/source/custom_allele.css';
 
@@ -58,14 +62,7 @@ function addTagForm($collectionHolder, $newLinkButt) {
 
 
 $(document).ready(function () {
-    $('.bootstrap-multiple-target').multiselect(
-        {
-            buttonContainer: '<div class="multiselect-div-container"></div>',
-            enableFiltering: true,
-            // enableFullValueFiltering: true,
-        }
-    );
-    $('.bootstrap-multiple-target').hide();
+
     
     // Get the ul that holds the collection of tags
     $collectionHolder = $('ul.point_mutations');

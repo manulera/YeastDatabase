@@ -3,8 +3,12 @@
 <h2>Mating</h2>
 
 {{form_start(form)}}
-{{ form_row(form.strain1) }}
-{{ form_row(form.strain2) }}
+<div class="form-inline picker-form">
+{% include "forms/strain_picker.html.twig"  with {'form': form.strain1}%}
+</div>
+<div class="form-inline picker-form">
+{% include "forms/strain_picker.html.twig"  with {'form': form.strain2}%}
+</div>
 {{ form_row(form.strain_choice) }}
 <div id="submission_button">
 {% if form.save is defined %}

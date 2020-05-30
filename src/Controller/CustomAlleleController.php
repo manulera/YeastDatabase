@@ -8,6 +8,7 @@ use App\Entity\Strain;
 use App\Form\AlleleChunkyType;
 use App\Form\LocusPickerType;
 use App\Form\PointMutationType;
+use App\Form\StrainPickerType;
 use App\Form\TruncationType;
 use App\Service\Genotyper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -57,8 +58,7 @@ class CustomAlleleController extends MolBiolController
 
         $builder = $this->createFormBuilder();
         $builder
-            ->add('inputStrain', EntityType::class, [
-                'class' => Strain::class,
+            ->add('inputStrain', StrainPickerType::class, [
                 'mapped' => false
             ])
             ->add('numberOfClones', IntegerType::class, [
@@ -86,18 +86,16 @@ class CustomAlleleController extends MolBiolController
                     'allow_add' => true
                 ]
             )
-            ->add('inputPlasmids', EntityType::class, [
+            ->add('plasmidsUsed', EntityType::class, [
                 'class' => Plasmid::class,
                 'mapped' => false,
                 'multiple' => true,
-                'attr' => ['class' => 'bootstrap-multiple-target'],
                 'choices' => $plasmidRepository->findAll()
             ])
-            ->add('inputOligos', EntityType::class, [
+            ->add('oligosUsed', EntityType::class, [
                 'class' => Oligo::class,
                 'mapped' => false,
                 'multiple' => true,
-                'attr' => ['class' => 'bootstrap-multiple-target'],
                 'choices' => $oligoRepository->findAll()
             ])
             ->add('Save', SubmitType::class, [

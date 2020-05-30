@@ -23,13 +23,13 @@ class PointMutationType extends AbstractType
     {
         // TODO take allele as possible input
         $builder
+            ->add('sequencePosition')
             ->add('originalAminoAcid', ChoiceType::class, [
                 'choices' => $this->sequence->getAminoAcids(),
                 'choice_label' => function ($choice, $key, $value) {
                     return $value;
                 }
             ])
-            ->add('sequencePosition')
             ->add('newAminoAcid', ChoiceType::class, [
                 'choices' => $this->sequence->getAminoAcids(),
                 'choice_label' => function ($choice, $key, $value) {
