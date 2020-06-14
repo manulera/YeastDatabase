@@ -25,7 +25,6 @@ class MolBiolController extends StrainSourceController
             'Bahler Method: Promoter Change + N-term tag' => 'bahler.promoter_nTag',
             'Bahler Method: C-term tag' => 'bahler.cTag',
             'Custom Allele' => 'custom_allele',
-            'Custom' => 'custom',
         ];
     }
 

@@ -55,7 +55,7 @@ function makeAjaxRequest() {
     return $.ajax({
         url: "/sequencejson",
         data: {
-            locus_id: document.getElementById('form_allele_locus_locus').value,
+            locus_id: document.getElementById('mol_biol_allele_chunky_alleles_0_locus_locus').value,
         },
         dataType: 'json',
         async: false,
@@ -70,6 +70,24 @@ function makeAjaxRequest() {
     });
 }
 
+function updatePointMutation()
+{
+    var table = $(this).closest('table');
+    var value = $(this).val();
+    var select_original_aa=$(table).find('input')[1];
+    var select_original_codon=$(table).find('input')[2];
+    if (value>0 && value< thismRNA.protein_sequence.length)
+    {
+        var codon = getCodon(value);
+        $(select_original_aa).val(codon.aa);
+        $(select_original_codon).val(codon.codon);
+    }
+    else
+    {
+        $(select_original_aa).val(null);
+        $(select_original_codon).val(null);
+    }
+}
 
 function addEntityTypeForm(collectionHolder, newLinkButt) {
     // Get the data-prototype explained earlier
@@ -86,26 +104,22 @@ function addEntityTypeForm(collectionHolder, newLinkButt) {
     // Replace '__name__' in the prototype's HTML to
     // instead be a number based on how many items we have
     newForm = newForm.replace(/__name__/g, index);
-    newForm = $(newForm).css('display', 'inline-block');
-    newForm = $(newForm).css('padding-right', 20);
-    newForm = $(newForm).find('div').css('display', 'inline-block');
-    newForm = $(newForm).css('padding-right', 20);
-    
+    newForm=$(newForm);
     // increase the index with one for the next item
     collectionHolder.data('index', index + 1);
-
     // Display the form in the page in an li, before the "Add a EntityType" link li
-    var $newFormLi = $('<li></li>').append(newForm);
-    newLinkButt.before($newFormLi);
+    var newFormLi = $('<li></li>').append(newForm);
+    newLinkButt.before(newFormLi);
+    
+    return newForm;
 }
 var sequence_displayed=false;
 var mRNA_json = null;
 var thismRNA = null;
 
 $(document).ready(function () {
-    
     var collectionHolder = $('ul.entityType_list');
-    var locus_selector = document.getElementById('form_allele_locus_locus');
+    var locus_selector = document.getElementById('mol_biol_allele_chunky_alleles_0_locus_locus');
     // add the "add a EntityType" anchor and li to the EntityTypes ul
     // collectionHolder.append(newLinkButt);
 
@@ -119,9 +133,12 @@ $(document).ready(function () {
         let button = $(ch.find('.add_EntityType_link'));
         button.on('click', function(e) {
             // add a new EntityType form (see next code block)
-            if (document.getElementById('form_allele_locus_locus').value!='')
+            if (document.getElementById('mol_biol_allele_chunky_alleles_0_locus_locus').value!='')
             {
-                addEntityTypeForm(ch, newLinkButt);
+                let newForm = addEntityTypeForm(ch, newLinkButt);
+                let input_ind=$(newForm).find(':input')[0];
+                $(input_ind).on("keyup",updatePointMutation);
+                $(input_ind).on("change",updatePointMutation);
                 if (!sequence_displayed)
                 {
                     mRNA_json= makeAjaxRequest().responseJSON;
@@ -150,28 +167,28 @@ $(document).ready(function () {
             );
         }
     });
-    $('.entityType_list').on('DOMNodeInserted',function()
-    {
-        console.log(this);
-        var a = $(this).find("#form_pointMutations_1_sequencePosition")
-        a.on("change",function()
-        {
-            if (this.value>0 && this.value< thismRNA.protein_sequence.length)
-            {
-                console.log(getCodon(this.value));
-            }
-        });
-        a.on("keyup",function()
-        {
-            if (this.value>0 && this.value< thismRNA.protein_sequence.length)
-            {
-                console.log(getCodon(this.value));
-            }
-        });
+    // $('.entityType_list').on('DOMNodeInserted',function()
+    // {
+    //     console.log(this);
+    //     var a = $(this).find("#form_pointMutations_1_sequencePosition")
+    //     a.on("change",function()
+    //     {
+    //         if (this.value>0 && this.value< thismRNA.protein_sequence.length)
+    //         {
+    //             console.log(getCodon(this.value));
+    //         }
+    //     });
+    //     a.on("keyup",function()
+    //     {
+    //         if (this.value>0 && this.value< thismRNA.protein_sequence.length)
+    //         {
+    //             console.log(getCodon(this.value));
+    //         }
+    //     });
         
         
-    }
-    );
+    // }
+    // );
     
     
 

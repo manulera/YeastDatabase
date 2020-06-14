@@ -45,7 +45,23 @@ class AlleleChunkyType extends AlleleType
                     ->add('promoter')
                     ->add('nTag')
                     ->add('cTag')
-                    ->add('cMarker');
+                    ->add('cMarker')
+                    ->add(
+                        'pointMutations',
+                        CollectionType::class,
+                        [
+                            'entry_type' => PointMutationType::class,
+                            'allow_add' => true
+                        ]
+                    )
+                    ->add(
+                        'truncations',
+                        CollectionType::class,
+                        [
+                            'entry_type' => TruncationType::class,
+                            'allow_add' => true
+                        ]
+                    );
                 break;
         }
     }

@@ -42,6 +42,16 @@ class PointMutation
      */
     private $alleleChunkies;
 
+    /**
+     * @ORM\Column(type="string", length=3, nullable=true)
+     */
+    private $originalCodon;
+
+    /**
+     * @ORM\Column(type="string", length=3, nullable=true)
+     */
+    private $newCodon;
+
     public function __construct()
     {
         $this->alleleChunkies = new ArrayCollection();
@@ -119,6 +129,30 @@ class PointMutation
             $this->alleleChunkies->removeElement($alleleChunky);
             $alleleChunky->removePointMutation($this);
         }
+
+        return $this;
+    }
+
+    public function getOriginalCodon(): ?string
+    {
+        return $this->originalCodon;
+    }
+
+    public function setOriginalCodon(?string $originalCodon): self
+    {
+        $this->originalCodon = $originalCodon;
+
+        return $this;
+    }
+
+    public function getNewCodon(): ?string
+    {
+        return $this->newCodon;
+    }
+
+    public function setNewCodon(?string $newCodon): self
+    {
+        $this->newCodon = $newCodon;
 
         return $this;
     }

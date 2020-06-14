@@ -1,0 +1,24 @@
+{% extends "forms/strain_source/strain_source_type.html.twig" %}
+
+{% block body %}
+{{ parent() }}
+<div>Strain</div>
+{% for strainPicker in form.strainsIn %}
+    <div class="form-inline picker-form flex">
+    {% include "forms/strain_picker.html.twig"  with {'form': strainPicker}%}
+    </div>    
+{% endfor %}
+{% block allele_section %}
+{% endblock %}
+{{form_row(form.plasmids,{attr:{class:'chosen-select'}})  }}
+{{form_row(form.oligos,{attr:{class:'chosen-select'}})  }}
+{{form_row(form.numberOfClones)  }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}    
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}

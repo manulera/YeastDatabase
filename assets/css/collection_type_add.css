@@ -7,6 +7,11 @@ ul.entityType_list li {
     margin-bottom: 30px;
 }
 
+table.pointmutation-table {
+    border-spacing: 10px 0;
+    border-collapse: separate;
+}
+
 #tooltip {
     background-color: #333;
     color: white;

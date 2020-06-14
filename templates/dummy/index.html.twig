@@ -1,27 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="mt-5 d-flex flex-row align-items-center">
-<div class="h4">DNA sequence</div>
-{# <button class="btn btn-primary ml-5 btn-sequence-viewer" id="btn-truncate-dna" style="display:none;">Truncate DNA sequence</button>
-<button class="btn btn-primary ml-5 btn-sequence-viewer" id="btn-mutate-bp" style="display:none;">Mutate DNA base</button> #}
-</div>
-<div id="dna-sequence-viewer"></div>
-
-<div class="mt-5 d-flex flex-row align-items-center">
-<div class="h4">Protein sequence</div>
-<button class="btn btn-primary ml-5 btn-sequence-viewer" id="btn-truncate-protein" style="display:none;">Truncate protein sequence</button>
-<button class="btn btn-primary ml-5 btn-sequence-viewer" id="btn-mutate-aa" style="display:none;">Mutate aminoacid</button>
-</div>
-<div id="protein-sequence-viewer"></div>
+{{form_start(form)}}
+{% include "forms/strain_source/molbiol_allele_chunky_type.html.twig" %}
+{{form_end(form)}}
 {% endblock %}
 
-
 {% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('dummy') }}
+    {{ parent() }}    
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('dummy') }}
 {% endblock %}

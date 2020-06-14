@@ -1,53 +1,19 @@
 {% extends 'strain/source/new.html.twig' %}
+
+
 {% block create_body %}
 
 <h2>Create a custom allele</h2>
-
 <p class="">Create your custom allele and document the resources used</p>
-
-<div>Strain</div>
-<div class="form-inline picker-form flex">
-{% include "forms/strain_picker.html.twig"  with {'form': form.inputStrain}%}
-</div>
-{% include "forms/allele/allele_chunky_type.html.twig"  with {'form': form.allele}%}
-<div>Point mutations</div>
-<ul class="entityType_list" data-prototype="{{ form_widget(form.pointMutations.vars.prototype)|e('html_attr') }}">
-        {% for pm in form.pointMutations %}
-            <li>{{ form_widget(pm) }}</li>
-        {% endfor %}
-</ul>
-
-<div>Truncations</div>
-
-<ul class="entityType_list" data-prototype="{{ form_widget(form.truncations.vars.prototype)|e('html_attr') }}">
-        {% for trunc in form.truncations %}
-            <li>{{ form_row(trunc)}}</li>
-        {% endfor %}
-</ul>
-
-<div id="dna-sequence-viewer"></div>
-<div id="protein-sequence-viewer"></div>
-
-<h3>Resources used</h3>
-{{ form_row(form.plasmidsUsed,{attr:{class:'chosen-select', 'data-placeholder':'Select plasmids'}}) }}
-{{ form_row(form.oligosUsed,{attr:{class:'chosen-select', 'data-placeholder':'Select oligos'}}) }}
-
-<h3>Number of clones</h3>
-{{ form_row(form.numberOfClones) }}
-<div id="tooltip" role="tooltip" >You have to select a locus before!<div id="arrow" data-popper-arrow></div></div>
-
-
+{{form_start(form)}}
+{% include "forms/strain_source/molbiol_allele_chunky_type.html.twig" %}
+{{form_end(form)}}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('strain/source/custom_allele') }}
-    {{ encore_entry_script_tags('collection_type_add') }}
-    {{ encore_entry_script_tags('external_imports/chosen') }}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('collection_type_add') }}
-    {{ encore_entry_link_tags('external_imports/chosen') }}
 {% endblock %}

@@ -1,4 +1,30 @@
 {% extends 'forms/allele/allele_type.html.twig' %}
+
+{% import _self as formMacros %}
+{% macro printPointMutationRow(pointMutationForm) %}
+    {{ form_errors(pointMutationForm) }}
+    <table class="pointmutation-table">
+    <tr>
+    <td>{{ form_row(pointMutationForm.sequencePosition)}}</td>
+    <td>{{ form_row(pointMutationForm.originalAminoAcid)}}</td>
+    <td>{{ form_row(pointMutationForm.newAminoAcid)}}</td>
+    </tr>
+    <tr>
+    <td></td>
+    <td>{{ form_row(pointMutationForm.originalCodon)}}</td>
+    <td>{{ form_row(pointMutationForm.newCodon)}}</td>
+    </tr>
+    </table>
+{% endmacro %}
+{% macro printTruncationRow(truncationForm) %}
+<table class="truncation-table">
+<tr>
+<td>{{ form_row(truncationForm.start)}}</td>
+<td>{{ form_row(truncationForm.finish)}}</td>
+</tr>
+</table>
+{% endmacro %}
+
 {% block body %}
 {{ parent() }}
 {% if form.nMarker is defined %}
@@ -16,4 +42,43 @@
 {% if form.cMarker is defined %}
 {{form_row(form.cMarker,{attr:{class:'chosen-select', 'data-placeholder':'Select marker'}})}}
 {% endif %}
+{% if form.pointMutations is defined %}
+<div>Point mutations</div>
+<ul class="entityType_list" data-prototype="{{ formMacros.printPointMutationRow(form.pointMutations.vars.prototype)|e('html_attr') }}">
+        {% for pm in form.pointMutations %}
+            <li>{{ formMacros.printPointMutationRow(pm) }}</li>
+        {% endfor %}
+        {# prevents weird label from showing up in new #}
+        {% if form.pointMutations|length==0 %}
+            {{ form_widget(form.pointMutations) }}
+        {% endif %}
+</ul>
+{% endif %}
+{% if form.truncations is defined %}
+<div>Truncations</div>
+<ul class="entityType_list" data-prototype="{{ formMacros.printTruncationRow(form.truncations.vars.prototype)|e('html_attr') }}">
+        {% for trunc in form.truncations %}
+            <li>{{ formMacros.printTruncationRow(trunc) }}</li>
+        {% endfor %}
+        {# prevents weird label from showing up in new #}
+        {% if form.truncations|length==0 %}
+            {{ form_widget(form.truncations) }}
+        {% endif %}
+</ul>
+{% endif %}
+
+<div id="dna-sequence-viewer"></div>
+<div id="protein-sequence-viewer"></div>
+
+<div id="tooltip" role="tooltip" >You have to select a locus before!<div id="arrow" data-popper-arrow></div></div>
 {% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('collection_type_add') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('collection_type_add') }}
+{% endblock %}

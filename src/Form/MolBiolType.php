@@ -2,105 +2,71 @@
 
 namespace App\Form;
 
-use App\Entity\Locus;
-use App\Entity\Marker;
-use App\Entity\Promoter;
-use App\Entity\Tag;
+use App\Entity\Plasmid;
+use App\Entity\Oligo;
+use App\Repository\OligoRepository;
+use App\Repository\PlasmidRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MolBiolType extends AbstractType
+class MolBiolType extends StrainSourceType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $formModifier = function (FormEvent $event) {
-            $form = $event->getForm();
-            $data = $form->get('choice')->getData();
-            if (!$data) {
-                return;
-            }
-            foreach ($data as $keyword) {
-                switch ($keyword) {
-                    case "Promoter change":
-                        $form->add('inputPromoter', EntityType::class, [
-                            'class' => Promoter::class,
-                            'mapped' => false
-                        ]);
-                        break;
-                    case "N-terminal tagging":
-                        $form->add('inputNtermTag', EntityType::class, [
-                            'class' => Tag::class,
-                            'mapped' => false
-                        ]);
-                        break;
-                    case "C-terminal tagging":
-                        $form->add('inputCtermTag', EntityType::class, [
-                            'class' => Tag::class,
-                            'mapped' => false
-                        ]);
-                        break;
-                }
-            }
-            $form->add('submit', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary float-right',
-                ],
-            ]);
-        };
 
+        parent::buildForm($builder, $options);
         $builder
-            ->add('inputStrain')
-            ->add('targetLocus', EntityType::class, [
-                'class' => Locus::class,
-                'mapped' => false
+            ->add('strainsIn', CollectionType::class, [
+                'entry_type' => StrainPickerType::class,
+                'allow_add' => false,
+                'required' => true,
             ])
-            ->add('choice', ChoiceType::class, [
-                'mapped' => false,
-                'expanded' => true,
+            ->add('plasmids', EntityType::class, [
+                'class' => Plasmid::class,
                 'multiple' => true,
-                'choices' => [
-                    'Deletion',
-                    'Promoter change',
-                    'N-terminal tagging',
-                    'C-terminal tagging',
-                ],
-                'choice_label' => function ($choice, $key, $value) {
-                    return $choice;
+                'query_builder' => function (PlasmidRepository $plasmidRepository) {
+                    return $plasmidRepository->createQueryBuilder('plasmid');
                 }
-
             ])
-            ->add('marker', EntityType::class, [
-                'class' => Marker::class,
-                'mapped' => false
+            ->add('oligos', EntityType::class, [
+                'class' => Oligo::class,
+                'multiple' => true,
+                'query_builder' => function (OligoRepository $oligoRepository) {
+                    return $oligoRepository->createQueryBuilder('oligo');;
+                }
+            ])
+            ->add('numberOfClones', IntegerType::class, [
+                'mapped' => false,
             ]);
 
+        // The form will accept data, but if one of the collection fields is left empty,
+        // it will create an empty field inside the collection.
         $builder->addEventListener(
             FormEvents::POST_SET_DATA,
-            function (FormEvent $event) use ($formModifier) {
-
+            function (FormEvent $event) {
                 $form = $event->getForm();
-                $options = $form->getConfig()->getOptions();
-                // TODO maybe there is another way to trigger the post_set_data event
-                // I just dont see how with unmapped fields
-                $form->get('choice')->setData($options["choice"]);
-
-                $formModifier($event);
+                if ($form->get('strainsIn')->getData() === null) {
+                    $form->get('strainsIn')->setData([null]);
+                }
             }
+
         );
     }
 
+
+
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => MolBiol::class,
-            'choice' => []
-        ]);
+        parent::configureOptions($resolver);
     }
 }

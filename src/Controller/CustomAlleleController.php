@@ -5,8 +5,8 @@ namespace App\Controller;
 use App\Entity\Oligo;
 use App\Entity\Plasmid;
 use App\Entity\Strain;
-use App\Form\AlleleChunkyType;
-use App\Form\LocusPickerType;
+
+use App\Form\MolBiolAlleleChunkyType;
 use App\Form\PointMutationType;
 use App\Form\StrainPickerType;
 use App\Form\TruncationType;
@@ -35,11 +35,12 @@ class CustomAlleleController extends MolBiolController
      */
     public function indexAction(Request $request)
     {
-        $form = $this->makeForm();
-        $form->handleRequest($request);
-        // dd($form);
-        if ($form->isSubmitted() && $form->isValid()) {
 
+        $form = $this->createForm(MolBiolAlleleChunkyType::class, null, ['allele_options' => ['fields2show' => 'all']]);
+        $form->handleRequest($request);
+        // dump($form);
+        if ($form->isSubmitted() && $form->isValid()) {
+            dump($form->getData());
             // return $this->render('strain/source/custom_allele.html.twig', [
             //     'form' => $form->createView(),
             // ]);
@@ -48,62 +49,5 @@ class CustomAlleleController extends MolBiolController
         return $this->render('strain/source/custom_allele.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
-
-
-    public function makeForm($options = [])
-    {
-        $oligoRepository = $this->getDoctrine()->getRepository(Oligo::class);
-        $plasmidRepository = $this->getDoctrine()->getRepository(Plasmid::class);
-
-        $builder = $this->createFormBuilder();
-        $builder
-            ->add('inputStrain', StrainPickerType::class, [
-                'mapped' => false
-            ])
-            ->add('numberOfClones', IntegerType::class, [
-                'mapped' => false,
-            ])
-            ->add('allele', AlleleChunkyType::class, [
-                'mapped' => false,
-                'fields2show' => 'all'
-            ])
-            ->add(
-                'pointMutations',
-                CollectionType::class,
-                [
-                    'entry_type' => PointMutationType::class,
-                    'mapped' => false,
-                    'allow_add' => true
-                ]
-            )
-            ->add(
-                'truncations',
-                CollectionType::class,
-                [
-                    'entry_type' => TruncationType::class,
-                    'mapped' => false,
-                    'allow_add' => true
-                ]
-            )
-            ->add('plasmidsUsed', EntityType::class, [
-                'class' => Plasmid::class,
-                'mapped' => false,
-                'multiple' => true,
-                'choices' => $plasmidRepository->findAll()
-            ])
-            ->add('oligosUsed', EntityType::class, [
-                'class' => Oligo::class,
-                'mapped' => false,
-                'multiple' => true,
-                'choices' => $oligoRepository->findAll()
-            ])
-            ->add('Save', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary float-right',
-                ],
-            ]);
-
-        return $builder->getForm();
     }
 }
