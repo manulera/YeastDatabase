@@ -1,0 +1,15 @@
+{% extends "forms/strain_source/molbiol_type.html.twig" %}
+
+{% block allele_section %}
+{{ parent() }}
+{% for alleleChunky in form.alleles %}
+{% include "forms/allele/allele_deletion.html.twig"  with {'form': allele_deletion}%}    
+{% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}    
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}

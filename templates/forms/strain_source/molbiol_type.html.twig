@@ -8,8 +8,10 @@
     {% include "forms/strain_picker.html.twig"  with {'form': strainPicker}%}
     </div>    
 {% endfor %}
-{% block allele_section %}
-{% endblock %}
+{% for allele in form.alleles %}
+{% include allele_form_template  with {'form': allele}%}    
+{% endfor %}
+
 {{form_row(form.plasmids,{attr:{class:'chosen-select'}})  }}
 {{form_row(form.oligos,{attr:{class:'chosen-select'}})  }}
 {{form_row(form.numberOfClones)  }}

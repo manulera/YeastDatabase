@@ -6,6 +6,9 @@ use App\Entity\Allele;
 use App\Entity\StrainSource;
 use App\Entity\Strain;
 use App\Entity\StrainSourceTag;
+use App\Form\AlleleDeletionType;
+use App\Form\MolBiolAlleleChunkyType;
+use App\Form\MolBiolAlleleDeletionType;
 use App\Service\Genotyper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,7 +27,7 @@ class MolBiolController extends StrainSourceController
             'Bahler Method: Promoter Change' => 'bahler.promoter',
             'Bahler Method: Promoter Change + N-term tag' => 'bahler.promoter_nTag',
             'Bahler Method: C-term tag' => 'bahler.cTag',
-            'Custom Allele' => 'custom_allele',
+            'Custom Transformation' => 'transformation',
         ];
     }
 
@@ -32,9 +35,9 @@ class MolBiolController extends StrainSourceController
     {
         $arr = explode(".", $choice);
         if (count($arr) == 2) {
-            return $this->redirectToRoute('strain.source.molbiol.' . $arr[0] . '.submethod', ["option" => $arr[1]]);
+            return $this->redirectToRoute('strain.source.molbiol.' . $arr[0], ["option" => $arr[1]]);
         } else {
-            return $this->redirectToRoute('strain.source.molbiol.' . $choice . '.index');
+            return $this->redirectToRoute('strain.source.molbiol.' . $choice);
         }
     }
 
@@ -45,6 +48,53 @@ class MolBiolController extends StrainSourceController
     {
         return parent::indexAction($request);
     }
+
+    /**
+     * @Route("/bahler/{option}", name="bahler")
+     */
+    public function bahlerMethodAction(Request $request, string $option)
+    {
+
+        if ($option == 'deletion') {
+            $allele_form_template = "forms/allele/allele_deletion_type.html.twig";
+            $form = $this->createForm(MolBiolAlleleDeletionType::class);
+        } else {
+            $allele_form_template = "forms/allele/allele_chunky_type.html.twig";
+            $form = $this->createForm(MolBiolAlleleChunkyType::class, null, ['allele_options' => ['fields2show' => $option]]);
+        }
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            dump($form->getData());
+        }
+        return $this->render(
+            'strain/source/molbiol.html.twig',
+            [
+                'form' => $form->createView(),
+                'allele_form_template' => $allele_form_template
+            ]
+        );
+    }
+
+    /**
+     * @Route("/transformation", name="transformation")
+     */
+    public function transformationAction(Request $request)
+    {
+        $allele_form_template = "forms/allele/allele_chunky_type.html.twig";
+        $form = $this->createForm(MolBiolAlleleChunkyType::class, null, ['allele_options' => ['fields2show' => "all"]]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            dump($form->getData());
+        }
+        return $this->render(
+            'strain/source/molbiol.html.twig',
+            [
+                'form' => $form->createView(),
+                'allele_form_template' => $allele_form_template
+            ]
+        );
+    }
+
 
     public function persistMolBiol(Strain $parent_strain, Allele $allele, int $nb_clones = 1, array $plasmids = [], array $oligos = [])
     {

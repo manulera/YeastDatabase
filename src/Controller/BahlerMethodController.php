@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/strain/new/molbiol/bahler", name="strain.source.molbiol.bahler.")
+ * @Route("/old", name="old")
  */
 class BahlerMethodController extends MolBiolController
 {
