@@ -12,4 +12,4 @@ $('select').on('chosen:ready', function () {
         })
         .show();
 });
-$(".chosen-select").chosen({ allow_single_deselect:true });
+$(".chosen-select").chosen({ allow_single_deselect:true, enable_split_word_search: true});

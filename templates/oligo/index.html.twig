@@ -10,10 +10,14 @@
     </div>
 {% endfor %}
 <h1>Oligos</h1>
+<a href="{{ path('oligo.import') }}">
+   <button class="btn btn-primary">Import from .csv file</button>
+</a>
 <table class="table table-striped">
     <thead>
     <tr>
-    <td class="">Oligo name</td>
+    <td class="">Name</td>
+    <td class="">Details</td>
     <td class="">Sequence</td>
     </tr>
     </thead>
@@ -21,6 +25,7 @@
     {% for oligo in oligos %}
     <tr>
         <td>{{oligo.name}}</td>
+        <td>{{oligo.details}}</td>
         <td>{{oligo.sequence}}</td>
     </tr>
     {% endfor %}

@@ -9,10 +9,11 @@ use App\Entity\StrainSourceTag;
 use App\Form\AlleleDeletionType;
 use App\Form\MolBiolAlleleChunkyType;
 use App\Form\MolBiolAlleleDeletionType;
+use App\Form\StrainSourceType;
 use App\Service\Genotyper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Security\Core\Authentication\RememberMe\PersistentToken;
 
 /**
  * @Route("/strain/new/molbiol", name="strain.source.molbiol.")
@@ -64,7 +65,7 @@ class MolBiolController extends StrainSourceController
         }
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
+            return $this->persistMolBiol($form->getData(), $form->get("numberOfClones")->getData());
         }
         return $this->render(
             'strain/source/molbiol.html.twig',
@@ -84,7 +85,8 @@ class MolBiolController extends StrainSourceController
         $form = $this->createForm(MolBiolAlleleChunkyType::class, null, ['allele_options' => ['fields2show' => "all"]]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
+            // dump($form->getData());
+            return $this->persistMolBiol($form->getData(), $form->get("numberOfClones")->getData());
         }
         return $this->render(
             'strain/source/molbiol.html.twig',
@@ -95,50 +97,91 @@ class MolBiolController extends StrainSourceController
         );
     }
 
-
-    public function persistMolBiol(Strain $parent_strain, Allele $allele, int $nb_clones = 1, array $plasmids = [], array $oligos = [])
+    public function persistMolBiol(StrainSource $strain_source, int $nb_clones)
     {
-
-        $strain_source = new StrainSource;
-        $strain_source->addStrainsIn($parent_strain);
-
-        $allele->updateName();
-
-        // Add the resources
-        foreach ($plasmids as $plasmid) {
-            $strain_source->addPlasmid($plasmid);
+        // A few checks:
+        if (count($strain_source->getStrainsIn()) != 1) {
+            return "Input strains should be 1";
         }
-        foreach ($oligos as $oligo) {
-            $strain_source->addOligo($oligo);
+        if (count($strain_source->getAlleles()) != 1) {
+            return "Input alleles should be 1";
+        }
+        if (count($strain_source->getStrainsOut()) != 0) {
+            return "Output strains should be empty";
+        }
+        if ($nb_clones === null || $nb_clones < 0) {
+            return "Number of clones should be bigger than zero";
         }
 
-        // Create the strains
+        // If more than one clone has been generated, the alleles are different even though
+        // their genotype is the same
+
+        $strain_source->getAlleles()[0]->updateName();
+
+        if ($nb_clones > 1) {
+            for ($i = 1; $i < $nb_clones; $i++) {
+                $strain_source->addAllele(clone $strain_source->getAlleles()[0]);
+            }
+        }
+
         for ($i = 0; $i < $nb_clones; $i++) {
-
-            $new_allele = clone $allele;
-            $strain_source->addAllele($new_allele);
-
-            $new_strain = new Strain;
-            $old_strain = $parent_strain;
-            $new_strain->setMType($old_strain->getMType());
-            // TODO check if allele is in the same locus
-            $new_strain->addAllele($new_allele);
-
-            foreach ($old_strain->getAlleles() as $old_allele) {
-                if ($old_allele->getLocus() != $new_allele->getLocus()) {
-                    $new_strain->addAllele($old_allele);
-                }
-            }
-            foreach ($old_strain->getPlasmids() as $plasmid) {
-                $new_strain->addPlasmid($plasmid);
-            }
-
-            $new_strain->updateGenotype($this->genotyper);
-            $strain_source->addStrainsOut($new_strain);
+            $this_allele = $strain_source->getAlleles()[$i];
+            $this_strain = clone $strain_source->getStrainsIn()[0];
+            $this_strain->addAllele($this_allele);
+            $this_strain->updateGenotype($this->genotyper);
+            $strain_source->addStrainsOut($this_strain);
         }
 
         $tag = $this->getDoctrine()->getRepository(StrainSourceTag::class)->findOneBy(['name' => 'MolBiol']);
         $strain_source->addStrainSourceTag($tag);
         return $this->persistStrainSource($strain_source);
     }
+
+
+
+    // public function persistMolBiol(Strain $parent_strain, Allele $allele, int $nb_clones = 1, array $plasmids = [], array $oligos = [])
+    // {
+
+    //     $strain_source = new StrainSource;
+    //     $strain_source->addStrainsIn($parent_strain);
+
+    //     $allele->updateName();
+
+    //     // Add the resources
+    //     foreach ($plasmids as $plasmid) {
+    //         $strain_source->addPlasmid($plasmid);
+    //     }
+    //     foreach ($oligos as $oligo) {
+    //         $strain_source->addOligo($oligo);
+    //     }
+
+    //     // Create the strains
+    //     for ($i = 0; $i < $nb_clones; $i++) {
+
+    //         $new_allele = clone $allele;
+    //         $strain_source->addAllele($new_allele);
+
+    //         $new_strain = new Strain;
+    //         $old_strain = $parent_strain;
+    //         $new_strain->setMType($old_strain->getMType());
+    //         // TODO check if allele is in the same locus
+    //         $new_strain->addAllele($new_allele);
+
+    //         foreach ($old_strain->getAlleles() as $old_allele) {
+    //             if ($old_allele->getLocus() != $new_allele->getLocus()) {
+    //                 $new_strain->addAllele($old_allele);
+    //             }
+    //         }
+    //         foreach ($old_strain->getPlasmids() as $plasmid) {
+    //             $new_strain->addPlasmid($plasmid);
+    //         }
+
+    //         $new_strain->updateGenotype($this->genotyper);
+    //         $strain_source->addStrainsOut($new_strain);
+    //     }
+
+    //     $tag = $this->getDoctrine()->getRepository(StrainSourceTag::class)->findOneBy(['name' => 'MolBiol']);
+    //     $strain_source->addStrainSourceTag($tag);
+    //     return $this->persistStrainSource($strain_source);
+    // }
 }

@@ -52,13 +52,14 @@ class AlleleChunky extends Allele
 
     /**
      * @Groups("allele")
-     * @ORM\ManyToMany(targetEntity="App\Entity\PointMutation", inversedBy="alleleChunkies")
+     * @ORM\ManyToMany(targetEntity="App\Entity\PointMutation", inversedBy="alleleChunkies",cascade={"persist", "remove"})
      */
     private $pointMutations;
 
+    // TODO handle properly the truncations and point mutations that can be repeated
     /**
      * @Groups("allele")
-     * @ORM\ManyToMany(targetEntity="App\Entity\Truncation", inversedBy="alleleChunkies")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Truncation", inversedBy="alleleChunkies",cascade={"persist", "remove"})
      */
     private $truncations;
 
@@ -100,6 +101,18 @@ class AlleleChunky extends Allele
             $name .= $locus->getName();
         } else {
             $name .= $locus->getPombaseId();
+        }
+        if (count($this->getPointMutations())) {
+            $pm_name = "";
+            foreach ($this->getPointMutations() as $pm) {
+                $pm_name .= strval($pm);
+            }
+            $name .= "($pm_name)";
+        }
+
+
+        foreach ($this->getTruncations() as $truncation) {
+            $name .= strval($truncation);
         }
 
         if ($this->getCTag()) {

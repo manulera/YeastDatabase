@@ -15,12 +15,12 @@ class OligoType extends AbstractType
         $builder
             ->add('name')
             ->add('sequence')
+            ->add('details')
             ->add('Save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary float-right',
                 ],
-            ]);
-        ;
+            ]);;
     }
 
     public function configureOptions(OptionsResolver $resolver)

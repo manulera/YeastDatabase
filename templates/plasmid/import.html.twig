@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Import list of plasmids{% endblock %}
+
+{% block body %}
+<h1>Import list of plasmids</h1>
+<p>Here you can import a list of plasmids from a csv in the format "code, name, details", separated by commas</p>
+{{ form(form) }}
+{% endblock %}

@@ -49,7 +49,7 @@ class CustomStrainSourceController extends StrainSourceController
         $new_strain->setMType($form->get('MatingType')->getData());
         $new_strain->updateGenotype($this->genotyper);
         $strain_source->addStrainsOut($new_strain);
-        $tag = $this->getDoctrine()->getRepository(StrainSourceTag::class)->findOneBy(['name' => 'Custom']);
+        $tag = $this->getDoctrine()->getRepository(StrainSourceTag::class)->findOneBy(['name' => 'Import']);
         $strain_source->addStrainSourceTag($tag);
     }
 

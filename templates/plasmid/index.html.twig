@@ -10,16 +10,21 @@
     </div>
 {% endfor %}
 <h1>Plasmids</h1>
+<a href="{{ path('plasmid.import') }}">
+   <button class="btn btn-primary">Import from .csv file</button>
+</a>
 <table class="table table-striped">
     <thead>
     <tr>
-    <td class="">Plasmid name</td>
+    <td class="">Code</td>
+    <td class="">Name</td>
     <td class="">File</td>
     </tr>
     </thead>
     <tbody>
     {% for plasmid in plasmids %}
     <tr>
+        <td>{{plasmid.code}}</td>
         <td>{{plasmid.name}}</td>
         <td>{{plasmid.file}}</td>
     </tr>

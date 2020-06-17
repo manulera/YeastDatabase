@@ -74,8 +74,11 @@ class Strain
         // (The cloned strain will point to the same ArrayCollection of alleles, so if they are changed in one,
         // they will also be changed in the other)
         $this->alleles = clone $this->alleles;
-        $this->strainSourcesIn = clone $this->strainSourcesIn;
         $this->plasmids = clone $this->plasmids;
+        
+        $this->strainSourcesIn = null;
+        $this->id = null;
+        $this->source = null;
     }
 
     public function getId(): ?int

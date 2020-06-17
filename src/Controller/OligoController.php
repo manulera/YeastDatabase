@@ -59,7 +59,7 @@ class OligoController extends AbstractController
     }
 
     /**
-     * Import a list of plasmids from a csv file
+     * Import a list of oligos from a csv file
      * @Route("/import", name="import")
      */
     public function importAction(Request $request)
@@ -92,6 +92,7 @@ class OligoController extends AbstractController
                 $total++;
                 $name = $oligo_i['name'];
                 $sequence = $oligo_i['sequence'];
+                $details = $oligo_i['details'];
                 $existing_oligo = $oligo_repository->findOneBy(['name' => $name]);
 
                 if ($existing_oligo) {
@@ -110,6 +111,7 @@ class OligoController extends AbstractController
                     $oligo = new Oligo();
                     $oligo->setName($name);
                     $oligo->setSequence($sequence);
+                    $oligo->setDetails($details);
                     $em->persist($oligo);
                     $new_oligos++;
                 }
@@ -135,9 +137,13 @@ class OligoController extends AbstractController
         while (!feof($input)) {
             $line = fgets($input);
             $split = explode(",", $line);
+            if (count($split) != 3) {
+                continue;
+            }
             $output[] = [
                 'name' => trim($split[0]),
-                'sequence' => trim($split[1])
+                'details' => trim($split[1]),
+                'sequence' => strtoupper(str_replace(' ', '', trim($split[2])))
             ];
         }
         return $output;

@@ -26,7 +26,7 @@ class PointMutationType extends AbstractType
         $builder
             ->add('sequencePosition')
             ->add('originalAminoAcid', TextType::class, [
-                'disabled' => true
+                'attr' => array('readonly' => true)
             ])
             ->add('newAminoAcid', ChoiceType::class, [
                 'choices' => $this->sequence->getAminoAcids(),
@@ -35,13 +35,17 @@ class PointMutationType extends AbstractType
                 },
             ])
             ->add('originalCodon', TextType::class, [
-                'disabled' => true
+                'attr' => array('readonly' => true)
             ])
-            ->add('newCodon');
+            ->add('newCodon', ChoiceType::class, [
+                'choices' => ["?"]
+            ]);
     }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        //Todo validation of codon before submission
         $resolver->setDefaults([
             'data_class' => PointMutation::class,
         ]);

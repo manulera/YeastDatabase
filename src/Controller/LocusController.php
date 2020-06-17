@@ -39,8 +39,6 @@ class LocusController extends AbstractController
         if ($updateForm->isSubmitted() && $updateForm->isValid()) {
             return $this->updateLoci();
         }
-        $loci = $locusRepository->find(1);
-        dd($loci);
         // Create the filter form
         $formBuilder = $this->createFormBuilder()
             ->add(

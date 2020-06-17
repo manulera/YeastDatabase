@@ -79,7 +79,7 @@ class StrainSource
         $tag = $this->getStrainSourceTags()[0];
         $strains_in = $this->getStrainsIn();
         switch ($tag) {
-            case "Custom":
+            case "Import":
                 return "Imported externally";
             case "Mating":
                 $id1 = $strains_in[0]->getId();

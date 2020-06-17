@@ -38,6 +38,16 @@ class Plasmid
      */
     private $strains;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $code;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $details;
+
     public function __construct()
     {
         $this->strainSources = new ArrayCollection();
@@ -46,7 +56,7 @@ class Plasmid
 
     public function __toString()
     {
-        return $this->name;
+        return $this->code . ' - ' . $this->name;
     }
 
     public function getFile(): ?string
@@ -125,6 +135,30 @@ class Plasmid
             $this->strains->removeElement($strain);
             $strain->removePlasmid($this);
         }
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getDetails(): ?string
+    {
+        return $this->details;
+    }
+
+    public function setDetails(?string $details): self
+    {
+        $this->details = $details;
 
         return $this;
     }

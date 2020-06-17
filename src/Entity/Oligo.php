@@ -33,6 +33,11 @@ class Oligo
      */
     private $strainSources;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $details;
+
     public function __construct()
     {
         $this->strainSources = new ArrayCollection();
@@ -40,7 +45,7 @@ class Oligo
 
     public function __toString()
     {
-        return $this->name;
+        return $this->name . " - " . $this->details;
     }
 
     public function getId(): ?int
@@ -96,6 +101,18 @@ class Oligo
             $this->strainSources->removeElement($strainSource);
             $strainSource->removeOligo($this);
         }
+
+        return $this;
+    }
+
+    public function getDetails(): ?string
+    {
+        return $this->details;
+    }
+
+    public function setDetails(?string $details): self
+    {
+        $this->details = $details;
 
         return $this;
     }

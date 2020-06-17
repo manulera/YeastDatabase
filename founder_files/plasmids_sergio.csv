@@ -1,0 +1,380 @@
+﻿pSR1,pSG573a - cdr2,cdr2 was amplified with oligos including XhoI-NotI sites and cloned into pSG573a in frame with the GFP
+pSR2,pJK148 - Pcdr2-cdr2-GFP-Tnmt1,"Pcdr2 was amplified with oligos including KpnI-XhoI sites, cdr2 was amplified with oligos including XhoI-NotI sites and both were cloned into pAP146 digested with KpnI-NotI"
+pSR3,KS-cdr2,cdr2 was amplified with oligos including XhoI-NotI sites and cloned into KS-
+pSR4,KS-cdr2-1875 (hlx1*),pSR3 was used as a template for mutagenesis
+pSR5,KS-cdr2-1945.A,pSR3 was used as a template for mutagenesis
+pSR6,KS-cdr2-1945.A+B (hlx2*),pSR5 was used as a template for mutagenesis
+pSR7,KS-cdr2-2160.A (hlx3*),pSR3 was used as a template for mutagenesis
+pSR8,KS-cdr2-2160.A+B,pSR8 was used as a template for mutagenesis
+pSR9,pJK148 - Pcdr2-cdr2-hlx1*-GFP-Tnmt1,"Pcdr2 was purified from pSR2 using KpnI-XhoI sites, cdr2-hlx1* was purified from pSR4 using XhoI-NotI sites and both were cloned into pAP146 digested with KpnI-NotI"
+pSR10,pJK148 - Pcdr2-cdr2-1945.A-GFP-Tnmt1,"Pcdr2 was purified from pSR2 using KpnI-XhoI sites, cdr2-1945.A was purified from pSR5 using XhoI-NotI sites and both were cloned into pAP146 digested with KpnI-NotI"
+pSR11,pJK148 - Pcdr2-cdr2-hlx2*-GFP-Tnmt1,"Pcdr2 was purified from pSR2 using KpnI-XhoI sites, cdr2-hlx2* was purified from pSR6 using XhoI-NotI sites and both were cloned into pAP146 digested with KpnI-NotI"
+pSR12,pJK148 - Pcdr2-cdr2-hlx3*-GFP-Tnmt1,"Pcdr2 was purified from pSR2 using KpnI-XhoI sites, cdr2-hlx3* was purified from pSR7 using XhoI-NotI sites and both were cloned into pAP146 digested with KpnI-NotI"
+pSR13,pJK148 - Pcdr2-cdr2-2160.A+B-GFP-Tnmt1,"Pcdr2 was purified from pSR2 using KpnI-XhoI sites, cdr2-2160.A+B* was purified from pSR8 using XhoI-NotI sites and both were cloned into pAP146 digested with KpnI-NotI"
+pSR14,pJK148 - Pcdr2-cdr2-1522bsc-GFP-Tnmt1,pSR2 was used as a template for mutagenesis
+pSR15,pJK148 - Pcdr2-cdr2-1792bsc-GFP-Tnmt1,pSR2 was used as a template for mutagenesis
+pSR16,pJK148 - Pcdr2-cdr2-1834bsc-GFP-Tnmt1,pSR2 was used as a template for mutagenesis
+pSR17,pJK148 - Pcdr2-cdr2-1792+1834bsc-GFP-Tnmt1 This is the basic mutant,pSR15 was used as a template for mutagenesis
+pSR18,pFA6a EGFP:KanMX6 Tcdr2,Tcdr2 was amplified with oligos including SacI-SpeI and cloned into pFA6a EGFP:KanMX6
+pSR19,pFA6a EGFP:KanMX6 Pcdr2+Tcdr2,Pcdr2 was amplified with oligos including SalI-BamHI sites and cloned into pSR18
+pSR20,pFA6a EGFP:KanMX6 Pcdr2+EGFP+Tcdr2,EGFP was amplified from pFA6a EGFP:KanMX6 with oligos including BamHI-PacI and cloned into pSR19
+pSR21,pFA6a EGFP:KanMX6 Pcdr2+EGFP+cdr2+Tcdr2,cdr2 was amplified with oligos including PacI-AscI and cloned into pSR20
+pSR22,pFA6a EGFP:KanMX6 Pcdr2+EGFP+(7-7)+Tcdr2,"Region 7 (591-640) of Cdr2 was amplified from pSR2 in two independent PCRs, one including sites PacI-NheI and the other including sites NheI-AscI. Both inserts were digested with the corresponding enzymes and ligated in a triple ligation into pSR20 previously digested with PacI and AscI to end up with the GFP and then domain 7 in tandem."
+pSR23,pFA6a EGFP:KanMX6 Pcdr2+EGFP+(8-8)+Tcdr2,"Region 8 (641-690) of Cdr2 was amplified from pSR2 in two independent PCRs, one including sites PacI-NheI and the other including sites NheI-AscI. Both inserts were digested with the corresponding enzymes and ligated in a triple ligation into pSR20 previously digested with PacI and AscI to end up with the GFP and then domain 8 in tandem."
+pSR24,pFA6a EGFP:KanMX6 Pcdr2+EGFP+(9-9)+Tcdr2,"Region 9 (691-747) of Cdr2 was amplified from pSR2 in two independent PCRs, one including sites PacI-NheI and the other including sites NheI-AscI. Both inserts were digested with the corresponding enzymes and ligated in a triple ligation into pSR20 previously digested with PacI and AscI to end up with the GFP and then domain 9 in tandem."
+pSR25,pFA6a EGFP:KanMX6 Pcdr2+EGFP+(7-8-9)+Tcdr2,"Region 7-8-9 (591-747) of Cdr2 was amplified from pSR2 with oligos including sites PacI-AscI, and cloned into pSR20"
+pSR26,pFA6a EGFP:KanMX6 Pcdr2+EGFP+Cdr2-CaaX+Tcdr2,Cdr2 was amplified from genomic DNA with the forward oligo including PacI site and a reverse oligo including Mod5 CaaX motif and the last 15 aminoacids plus an AscI site. PCR product was digested and cloned into pSR20
+pSR27,pFA6a EGFP:KanMX6 Pcdr2+EGFP+Cdr2-hlx1*-CaaX+Tcdr2,Cdr2-hlx1* was amplified from pSR9 with the forward oligo including PacI site and a reverse oligo including Mod5 CaaX motif and the last 15 aminoacids plus an AscI site. PCR product was digested and cloned into pSR20
+pSR28,pFA6a EGFP:KanMX6 Pcdr2+EGFP+Cdr2-hlx3*-CaaX+Tcdr2,Cdr2-hlx3* was amplified from pSR12 with the forward oligo including PacI site and a reverse oligo including Mod5 CaaX motif and the last 15 aminoacids plus an AscI site. PCR product was digested and cloned into pSR20
+pSR29,pFA6a EGFP:KanMX6 Pcdr2+EGFP-CaaX+Tcdr2,EGFP was amplified from pSR18 with the forward oligo including BamHI site and a reverse oligo including Mod5 CaaX motif and the last 15 aminoacids plus an AscI site. PCR product was digested and cloned into pSR20
+pSR30,pFA6a EGFP:KanMX6 Pcdr2+EGFP+(7-8)+Tcdr2,"Regions 7 and 8 (591-690) of Cdr2 were amplified from pSR2 with oligos including sites PacI-AscI, and cloned into pSR21"
+pSR31,pFA6a EGFP:KanMX6 Pcdr2+EGFP+(8-9)+Tcdr2,"Regions 8 and 9 (641-747) of Cdr2 were amplified from pSR2 with oligos including sites PacI-AscI, and cloned into pSR21"
+pSR32,pGEX cdr2,cdr2 was amplified with oligos including BamHI-NotI and cloned into pGEX6p-1
+pSR33,pGEX (7-8-9),Region 7-8-9 (591-747) of Cdr2 was amplified with oligos including BamHI-NotI and cloned into pGEX6p-1
+pSR34,pFA6a EGFP:KanMX6 Pcdr2+cdr2+mEGFP+Tcdr2,cdr2 was amplified from genomic DNA with oligos including BamHI and PacI (with the same linker to the GFP as James Moseley used) and cloned into pSR20
+pSR35,pFA6a EGFP:KanMX6 Pcdr2+cdr2-hlx1*+mEGFP+Tcdr2,cdr2 was amplified from pSR4 with oligos including BamHI and PacI (with the same linker to the GFP as James Moseley used) and cloned into pSR20
+pSR36,pFA6a EGFP:KanMX6 Pcdr2+cdr2-hlx2*+mEGFP+Tcdr2,cdr2 was amplified from pSR6 with oligos including BamHI and PacI (with the same linker to the GFP as James Moseley used) and cloned into pSR20
+pSR37,pFA6a EGFP:KanMX6 Pcdr2+cdr2-hlx3*+mEGFP+Tcdr2,cdr2 was amplified from pSR7 with oligos including BamHI and PacI (with the same linker to the GFP as James Moseley used) and cloned into pSR20
+pSR38,pFA6a EGFP:KanMX6 Pcdr2+cdr2-bsc*+mEGFP+Tcdr2,cdr2 was amplified from pSR17 with oligos including BamHI and PacI (with the same linker to the GFP as James Moseley used) and cloned into pSR20
+pSR39,pFA6a EGFP:KanMX6 Pcdr2+(7-7)+mEGFP+Tcdr2,Region 7 in tandem was amplified from pSR22 with oligos including BamHI and PacI and cloned into pSR20
+pSR40,pFA6a EGFP:KanMX6 Pcdr2+(7-8)+mEGFP+Tcdr2,Regions 7 and 8 (591-690) of Cdr2 were amplified from pSR30 with oligos including sites BamHI-PacI and cloned into pSR20
+pSR41,pFA6a EGFP:KanMX6 Pcdr2+(7-8-9)+mEGFP+Tcdr2,Regions 7 and 8 (591-690) of Cdr2 were amplified from pSR25 with oligos including sites BamHI-PacI and cloned into pSR20
+pSR42,pFA6a EGFP:KanMX6 Pcdr2+(8-8)+mEGFP+Tcdr2,Region 8 in tandem was amplified from pSR23 with oligos including BamHI and PacI and cloned into pSR20
+pSR43,pFA6a EGFP:KanMX6 Pcdr2+(8-9)+mEGFP+Tcdr2,Regions 8 and 9 (641-747) of Cdr2 were amplified from pSR31 with oligos including sites BamHI and PacI and cloned into pSR20
+pSR44,pFA6a EGFP:KanMX6 Pcdr2+(9-9)+mEGFP+Tcdr2,Region 9 in tandem was amplified from pSR24 with oligos including BamHI and PacI and cloned into pSR20
+pSR45,pFA6a EGFP:KanMX6 Pcdr2+(6-7-8-9-10)+mEGFP+Tcdr2,Region 6-7-8-9-10 (531-775) of Cdr2 was amplified from genomic DNA with oligos including sites BamHI-PacI and cloned into pSR20
+pSR46,pFA6a EGFP:KanMX6 Pcdr2+(5-6-7-8-9-10)+mEGFP+Tcdr2,Region 5-6-7-8-9-10 (481-775) of Cdr2 was amplified from genomic DNA with oligos including sites BamHI-PacI and cloned into pSR20
+pSR47,pFA6a EGFP:KanMX6 Pcdr2+(7)+mEGFP+Tcdr2,Region 7 was amplified from pSR22 with oligos including BamHI and PacI and cloned into pSR20
+pSR48,pSG573a - (7-7),"Region 7 (591-640) of Cdr2 was amplified from genomic DNA in two independent PCRs, one including sites XhoI-NheI and the other including sites NheI-NotI. Both inserts were digested with the corresponding enzymes and ligated in a triple ligation into pSR1 previously digested with XhoI and NotI to end up with the domain 7 in tandem and then the GFP."
+pSR49,pSG573a - (7-8),Regions 7 and 8 (591-690) of Cdr2 was amplified from genomic DNA with oligos including sites XhoI-NotI. PCR was cloned into pSR1 previously digested with XhoI and NotI to end up with the domains 7+8 and then the GFP.
+pSR50,pSG573a - (7-8-9),"Regions 7, 8 and 9 (591-747) of Cdr2 was amplified from genomic DNA with oligos including sites XhoI-NotI. PCR was cloned into pSR1 previously digested with XhoI and NotI to end up with the domains 7+8+9 and then the GFP."
+pSR51,pSG573a - (8-8),"Region 8 (641-690) of Cdr2 was amplified from genomic DNA in two independent PCRs, one including sites XhoI-NheI and the other including sites NheI-NotI. Both inserts were digested with the corresponding enzymes and ligated in a triple ligation into pSR1 previously digested with XhoI and NotI to end up with the domain 8 in tandem and then the GFP."
+pSR52,pSG573a - (8-9),Regions 8 and 9 (641-747) of Cdr2 was amplified from genomic DNA with oligos including sites XhoI-NotI. PCR was cloned into pSR1 previously digested with XhoI and NotI to end up with the domains 8+9 and then the GFP.
+pSR53,pSG573a - (9-9),"Region 9 (691-747) of Cdr2 was amplified from genomic DNA in two independent PCRs, one including sites XhoI-NheI and the other including sites NheI-NotI. Both inserts were digested with the corresponding enzymes and ligated in a triple ligation into pSR1 previously digested with XhoI and NotI to end up with the domain 9 in tandem and then the GFP."
+pSR54,pFA6a EGFP:KanMX6 Pcdr2+cdr2+(7-8-9-10)+mEGFP+Tcdr2,"Region 591-775 was amplified from genomic DNA with oligos including PacI-PacI and cloned in pSR34, resulting in Cdr2 followed by an extra KA-1 domain"
+pSR55,pFA6a EGFP:KanMX6 Pcdr2+Cdr2 Kinase Domain+(7-8-9-10)+mEGFP+Tcdr2,Two independent PCRs (with oligos 5'Delta(281-591)Cdr2-3'Cdr2PacI and  5'Cdr2BamHI-3'Delta(281-590)Cdr2) were perfomed and their products fused by a third PCR (5'Cdr2BamHI-3'Cdr2PacI) and cloned into pSR34
+pSR56,pFA6a EGFP:KanMX6 Pcdr2+mEGFP+Cdr2-hlx2*-CaaX+Tcdr2,Cdr2-hlx2* was amplified from pSR11 with the forward oligo including PacI site and a reverse oligo including Mod5 CaaX motif and the last 15 aminoacids plus an AscI site. PCR product was digested and cloned into pSR20
+pSR57,pFA6a EGFP:KanMX6 Pcdr2+mEGFP-CaaX+Tcdr2,EGFP was amplified from pFA6aEGFP:KanMX6 with a forward oligo containing PacI and a reverse oligo containing the Mod5 CaaX motif and the last 15 aminoacids plus an AscI site and cloned into pSR19
+pSR58,pFA6a EGFP:KanMX6 Pcdr2+cdr2+mEGFP-CaaX+Tcdr2,Cdr2 was digested from pSR34 and cloned into pSR57 as BamHI-PacI
+pSR59,pFA6a EGFP:KanMX6 Pcdr2+cdr2-hlx1*+mEGFP-CaaX+Tcdr2,Cdr2-hlx1* was digested from pSR35 and cloned into pSR57 as BamHI-PacI
+pSR60,pFA6a EGFP:KanMX6 Pcdr2+cdr2-hlx2*+mEGFP-CaaX+Tcdr2,Cdr2-hlx2* was digested from pSR36 and cloned into pSR57 as BamHI-PacI
+pSR61,pFA6a EGFP:KanMX6 Pcdr2+cdr2-hlx3*+mEGFP-CaaX+Tcdr2,Cdr2-hlx3* was digested from pSR37 and cloned into pSR57 as BamHI-PacI
+pSR62,pFA6a EGFP:KanMX6 Pcdr2+cdr2-bsc*+mEGFP-CaaX+Tcdr2,Cdr2-bsc* was digested from pSR38 and cloned into pSR57 as BamHI-PacI
+pSR63,pFA6a EGFP:KanMX6 Pcdr2+(7-7)+mEGFP-CaaX+Tcdr2,Cdr2 was digested from pSR39 and cloned into pSR57 as BamHI-PacI
+pSR64,pFA6a EGFP:KanMX6 Pcdr2+(7-8)+mEGFP-CaaX+Tcdr2,Cdr2 was digested from pSR40 and cloned into pSR57 as BamHI-PacI
+pSR65,pFA6a EGFP:KanMX6 Pcdr2+(8-8)+mEGFP-CaaX+Tcdr2,Cdr2 was digested from pSR42 and cloned into pSR57 as BamHI-PacI
+pSR66,pFA6a EGFP:KanMX6 Pcdr2+(8-9)+mEGFP-CaaX+Tcdr2,Cdr2 was digested from pSR43 and cloned into pSR57 as BamHI-PacI
+pSR67,pFA6a EGFP:KanMX6 Pcdr2+(9-9)+mEGFP-CaaX+Tcdr2,Cdr2 was digested from pSR44 and cloned into pSR57 as BamHI-PacI
+pSR68,pSG573a - cdr2-hlx1*,"Cdr2-hlx1* was obtained by XhoI-NotI digestion of pSR4 and cloned into pSR1, replacing wt cdr2"
+pSR69,pSG573a - cdr2-hlx2*,"Cdr2-hlx2* was obtained by XhoI-NotI digestion of pSR6 and cloned into pSR1, replacing wt cdr2"
+pSR70,pSG573a - cdr2-hlx3*,"Cdr2-hlx3* was obtained by XhoI-NotI digestion of pSR7 and cloned into pSR1, replacing wt cdr2"
+pSR71,pSG573a - cdr2-bsc*,"Cdr2-bsc* was amplified from pSR17 with the forward oligo including XhoI site and a reverse oligo including a NotII site. PCR product was digested and cloned into pSR1, replacing wt cdr2"
+pSR72,pSG573a - GFP-CaaX,mEGFP was amplified from pFA6A-mEGFP:kanMX6 with a forward oligo including a NotI site and a reverse oligo containing the Mod5 CaaX motif and the last 15 aminoacids plus an SalI site and cloned into pSG573a
+pSR73,pSG573a - (8-9)-GFP-CaaX,(8-9)Cdr2 was obtained by XhoI-NotI digestion from pSR52 and cloned into pSR72.
+pSR74,pSG573a - cdr2-GFP-CaaX,Cdr2 was obtained by XhoI-NotI digestion of pSR3 and cloned into pSR72
+pSR75,pSG573a - cdr2-bsc*-GFP-CaaX,Cdr2-bsc* was obtained by XhoI-NotI digestion of pSR17and cloned into pSR72
+pSR76,pSG573a - cdr2-hlx1*-GFP-CaaX,Cdr2-hlx1* was obtained by XhoI-NotI digestion of pSR4 and cloned into pSR72
+pSR77,pSG573a - cdr2-hlx2*-GFP-CaaX,Cdr2-hlx1* was obtained by XhoI-NotI digestion of pSR6 and cloned into pSR72
+pSR78,pSG573a - cdr2-hlx3*-GFP-CaaX,Cdr2-hlx1* was obtained by XhoI-NotI digestion of pSR7 and cloned into pSR72
+pSR79,pFA6a EGFP:KanMX6 Pcdr2+cdr2(Delta (8-9-10)+mEGFP+Tcdr2,"Cdr2-Delta(8-9-10) was amplified from pSR2 with the forward oligo including BamHI and a reverse oligo with a PacI site, which anneals from nucleotide 1920, removing from aminoacid 641, and cloned into pSR34"
+pSR80,KS-cdr2-(bsc*),pSR17 was digested XhoI-NotI and Cdr2-bsc* was cloned into pSR3
+pSR81,KS-cdr2-(F704D F705D),pSR3 was used as a template for mutagenesis
+pSR82,KS-cdr2-(R624Q R628Q),pSR3 was used as a template for mutagenesis
+pSR83,KS-cdr2-(C637A C639A),pSR3 was used as a template for mutagenesis
+pSR84,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(F704D F705D)+mEGFP+Tcdr2,"cdr2-FF was amplified from pSR81 with oligos containing BamHI-PacI sites, and cloned into pSR34"
+pSR85,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(R624Q R628Q)+mEGFP+Tcdr2,"cdr2-RR was amplified from pSR82 with oligos containing BamHI-PacI sites, and cloned into pSR34"
+pSR86,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(C637A C639A)+mEGFP+Tcdr2,"cdr2-CC was amplified from pSR83 with oligos containing BamHI-PacI sites, and cloned into pSR34"
+pSR87,KS-cdr2-(R682Q K684N),pSR3 was used as a template for mutagenesis
+pSR88,KS-cdr2-(R682Q K684N R695Q),pSR87 was used as a template for mutagenesis
+pSR89,KS-cdr2-(R685Q),pSR3 was used as a template for mutagenesis
+pSR90,KS-cdr2-(R685Q K692N),pSR89 was used as a template for mutagenesis
+pSR91,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(R682Q K684N R695Q)+mEGFP+Tcdr2,"cdr2-RKR was amplified with oligos containing BamHI and PacI using pSR88 as a template, digested and cloned into pSR34"
+pSR92,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(R685Q K692N)+mEGFP+Tcdr2,"cdr2-RK was amplified with oligos containing BamHI and PacI using pSR90 as a template, digested and cloned into pSR34"
+pSR93,pREP42HA-(7-8-9)-Cdr2,"Cdr2-(591-747) was amplified with oligos containing SalI-BamHI sites and cloned into pREP42-N-HA, sent from Pilar Perez lab"
+pSR94,KS Cdr2-Kcc4,"First PCR amplified Cdr2 (1-619), second PCR amplified Kcc4 (917-1037). Third PCR fused both products, with oligos including the sites XhoI-NotI, and cloned into pSR3"
+pSR95,KS Kcc4,"Kcc4 ORF was amplified from S. cerevisiae genomic DNA, with oligos including the sites XhoI-NotI, and cloned into pSR3"
+pSR96,pJK148 Pcdr2-Cdr2-Kcc4-GFP,"pSR94 was digested XhoI-NotI, and cloned into pSR2, digested KpnI-NotI; a second insert from pSR2 contained the sites KpnI-XhoI. "
+pSR97,pJK148 Pcdr2-Kcc4-GFP,"pSR95 was digested XhoI-NotI, and cloned into pSR2, digested KpnI-NotI; a second insert from pSR2 contained the sites KpnI-XhoI. "
+pSR98,pJK148 Pcdr2-Cdr2-Myc,"pSR2 was digested with KpnI-NotI, and Pcdr2+cdr2 were cloned into pAM22 previously digested KpnI-NotI"
+pSR99,pJK210 Pmid1-Pom1chimera-mCherry,"Pom1chimera was obtained from pAM18 digested with KpnI-SacI, and cloned into pMA63. For integration, StuI site cannot be used! AvrII is the site to use!!"
+pSR100,pFA6a EGFP:Pcdr2+Cdr2-Kcc4-GFP+Tcdr2,"Cdr2-Kcc4-GFP were amplified from pSR96 with oligos contaning BamHI-AscI and cloned into pSR20. For integration, digest the plasmid with SpeI!! Do not use NotI!!"
+pSR101,pFA6a EGFP:Pcdr2+GFP+(7-8-9-10)-Cdr2+Tcdr2,Cdr2 (591-775) was amplified from pSR34 with oligos containing PacI-AscI and cloned into pSR20
+pSR102,pFA6a EGFP:KanMX6 Pcdr2+GFP+(Deltabsc-8-9)-Cdr2+Tcdr2,Cdr2 (620-747) was amplified from pSR34 with oligos containing PacI-AscI and cloned into pSR20
+pSR103,KS-cdr2-(R682Q K684N R685Q R695Q),pSR88 was used as a template to introduce the mutation R685Q
+pSR104,KS-cdr2-(R682Q K684N R685Q k692N R695Q),pSR103 was used as a template to introduce the mutation K692N
+pSR105,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(R682Q K684N R685Q k692N R695Q)+mEGFP+Tcdr2,"cdr2-RKRKR was amplified with oligos containing BamHI and PacI using pSR104 as a template, digested and cloned into pSR34"
+pSR106,pFA6a EGFP:KanMX6 Pcdr2+cdr2-DeltaBasic(591-620)+mEGFP+Tcdr2,"First PCR amplified Cdr2 (1-590), second PCR amplified Cdr2 (621-775) with an oligo design to delete those 30 aa. Third PCR fused both products, with oligos including the sites BamHI-PacI and cloned into pSR34"
+pSR107,pFA6a EGFP:KanMX6 Pcdr2+cdr2-Delta10+mEGFP+Tcdr2,Cdr2 (1-747) was amplified from pJM637 with oligos containing BamHI-PacI and cloned into pSR34
+pSR108,pJK148 cdr2-FF-Myc,Cdr2 (F704D F705D) was obtained from digestion of pSR81 with NheI-NotI and cloned into pSR98
+pSR109,pFA6a EGFP:KanMX6 Pcdr2+GFP+(7-8-9)-Cdr2.hlx1*+Tcdr2,Cdr2 (591-747).hlx1* was amplified from pSR4 with oligos containing PacI-AscI and cloned into pSR21
+pSR110,pFA6a EGFP:KanMX6 Pcdr2+GFP+(7-8-9)-Cdr2.bsc*+Tcdr2,Cdr2 (591-747).bsc* was amplified from pSR17 with oligos containing PacI-AscI and cloned into pSR21
+pSR111,pFA6a EGFP:KanMX6 Pcdr2+GFP+(7-8-9)-Cdr2.FF+Tcdr2,Cdr2 (591-747).F704D F705D was amplified from pSR81 with oligos containing PacI-AscI and cloned into pSR21
+pSR112,pFA6a EGFP:KanMX6 Pcdr2+GFP+(7-8-9)-Cdr2.CC+Tcdr2,Cdr2 (591-747).C637A C639A was amplified from pSR83 with oligos containing PacI-AscI and cloned into pSR21
+pSR113,pFA6a EGFP:KanMX6 Pcdr2+GFP+(7-8-9)-Cdr2.RR+Tcdr2,Cdr2 (591-747).R624Q R628Q was amplified from pSR82 with oligos containing PacI-AscI and cloned into pSR21
+pSR114,pFA6a EGFP:KanMX6 Pcdr2+GFP+(7-8-9)-Cdr2.RKR+Tcdr2,Cdr2 (591-747).R682Q K684N R695Q was amplified from pSR88 with oligos containing PacI-AscI and cloned into pSR21
+pSR115,pFA6a EGFP:KanMX6 Pcdr2+GFP+(7-8-9)-Cdr2.RK+Tcdr2,Cdr2 (591-747).R685Q K692N was amplified from pSR90 with oligos containing PacI-AscI and cloned into pSR21
+pSR116,pFA6a EGFP:KanMX6 Pcdr2+GFP+(7-8-9)-Cdr2.RKRKR+Tcdr2,Cdr2 (591-747).R682Q K684N R685Q k692N R695 was amplified from pSR104 with oligos containing PacI-AscI and cloned into pSR21
+pSR117,KS-cdr2-bsc*+FF,"cdr2-F704D F705D was obtained from digestion of pSR81 with EcoRV-NotI and cloned into pSR80, which contains cdr2-bsc*"
+pSR118,KS-cdr2-bsc*+RKRKR,"cdr2-R682Q K684N R685Q k692N R695 was obtained from digestion of pSR104 with EcoRV-NotI and cloned into pSR80, which contains cdr2-bsc*"
+pSR119,KS-cdr2-RR+RKRKR,"cdr2-R682Q K684N R685Q k692N R695 was obtained from digestion of pSR104 with EcoRV-NotI and cloned into pSR82, which contains cdr2-R624Q R628Q"
+pSR120,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(bsc*+FF)+mEGFP+Tcdr2,cdr2-bsc*+F704D F705D was amplified from pSR117 with oligos containing BamHI-PacI sites and cloned into pSR34
+pSR121,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(bsc*+RKRKR)+mEGFP+Tcdr2,cdr2-bsc*+R682Q K684N R685Q k692N R695 was amplified from pSR118 with oligos containing BamHI-PacI sites and cloned into pSR34
+pSR122,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(RR+RKRKR)+mEGFP+Tcdr2,cdr2-R624Q R628Q+R682Q K684N R685Q k692N R695 was amplified from pSR119 with oligos containing BamHI-PacI sites and cloned into pSR34
+pSR123,pFA6a EGFP:KanMX6 Pcdr2+cdr2-Delta4(431-480)-(F704D F705D)+mEGFP+Tcdr2,cdr2-Delta (430-481) was obtained by digesting Mercè's pFA6a cdr2Delta4mEGFP (pMG24) with XbaI and cloning it ito pFA6a cdr2-(F704D F705D)-mEGFP (pSR84)
+pSR124,pFA6a EGFP:KanMX6 Pcdr2+cdr2-Delta4(431-480)DeltaBasic(591-620)+mEGFP+Tcdr2,cdr2-Delta (430-481) was obtained by digesting Mercè's pFA6a cdr2Delta4mEGFP (pMG24) with XbaI and cloning it ito pFA6a cdr2DeltaBasic-mEGFP (pSR106)
+pSR125,pFA6a EGFP:KanMX6 Pcdr2+cdr2-Delta4(431-480)-(R682Q K684N R685Q k692N R695Q)+mEGFP+Tcdr2,cdr2-Delta (430-481) was obtained by digesting Mercè's pFA6a cdr2Delta4mEGFP (pMG24) with XbaI and cloning it ito pFA6a cdr2-(R682Q K684N R685Q k692N R695Q)-mEGFP (pSR105)
+pSR126,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(1-619)-Delta4(431-480)-Kcc4-(917-1037)+GFP+Tcdr2,cdr2-Delta (430-481) was obtained by digesting Mercè's pFA6a cdr2Delta4mEGFP (pMG24) with XbaI and cloning it ito pFA6a cdr2-(1-619)-Kcc4-(917-1037)-mEGFP (pSR100)
+pSR127,KS-cdr2-bsc*+(R624Q R628Q),pSR80 (KS-cdr2-bsc*) was used as a template to mutagenize R624 and R628 with the corresponding oligos
+pSR128,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(R624Q R628Q)+bsc*+mEGFP+Tcdr2,cdr2-bsc*+(R624Q R628Q) was reamplified with oligos containing BamHI-PacI and cloned into pSR34
+pSR129,pREP42HA-(7-8-9)-(F704D F705D)-Cdr2,Cdr2-(591-747) (F704D F705D) was amplified from pSR84 with oligos containing SalI-BamHI sites and cloned into pSR93
+pSR130,pRS416 Pcdr2-Cdr2,"Cdr2 promoter and ORF were obtained by digesting pSR34 with SalI-BglII and cloned into the centromeric plasmid pRS416 (gift from Judith Lopes, UMR3244) as SalI-BamHI. BamHI site is destroyed"
+pSR131,pRS416 Pkcc4-Cdr2,"Kcc4 promoter was amplified with enzymes containing SalI-BamHI and cloned into pSR130, to exchange Cdr2 promoter for that of Kcc4"
+pSR132,pJK148-pom1-GFP,"Pom1 promoter and ORF were amplified from genomic DNA with oligos containing KpnI-NotI, and cloned into pSR2, to exchange Cdr2 promoter and ORF for those of Pom1"
+pSR133,pJK148-pom1-mCherry,"Pom1 promoter and ORF were obtained by digesting pSR132 with KpnI-NotI, and cloned into pAM18, to exchange Mid1 promoter and Pom1 chimera ORF for those of Pom1"
+pSR134,pFA6a EGFP:KanMX6 Pcdr2+(4-5-6-7-8-9-10)+mEGFP+Tcdr2,Region 4-5-6-7-8-9-10 (431-775) of Cdr2 was amplified from genomic DNA with oligos including sites BamHI-PacI and cloned into pSR34
+pSR135,pFA6a EGFP:KanMX6 Pcdr2+Cdr2Deltabasic-Kcc4-GFP+Tcdr2,"First PCR amplified Cdr2 (1-590), with an oligo containing BamHI; second PCR amplified Kcc4(KA-1)-GFP (917-1037 kcc4 + GFP) from pSR97 with a forward oligo that contained an homologous region to the Cdr2 region preceeding the basic motif plus the corresponding region of Kcc4, and a reverse oligo annealing in the end of GFP, with an AscI site; third PCR fused the two PCR products, with oligos containing BamHI-AscI, and was cloned into pSR34. To integrate this chimaera, plasmid should be digested with SpeI."
+pSR136,pFA6a EGFP:KanMX6 Pcdr2+Cdr2 Delta1+FF+mEGFP+Tcdr2,"Cdr2 Delta1 (281-330) was obtained by digesting pMG21 with BamHI-AgeI and cloned into the FF integration module, pSR84"
+pSR137,pFA6a EGFP:KanMX6 Pcdr2+Cdr2 Delta5+FF+mEGFP+Tcdr2,"Cdr2 Delta5 (481-530) was obtained by digesting pMG25 with BamHI-AgeI and cloned into the FF integration module, pSR84"
+pSR138,pSGP573a-Klp8,Klp8 ORF was amplified from genomic DNA with the sites XhoI-NotI and cloned into pSR1
+pSR139,pFA6a EGFP:KanMX6 Pcdr2+Cdr2-(E177A)-(F704D F705D)-mEGFP+Tcdr2,"Cdr2 (E177A) was obtained  from digestion of pMG52 with BamHI-NheI and cloned it into the FF integration module, pSR84"
+pSR140,pFA6a EGFP:KanMX6 Pcdr2+Cdr2-(E177A)-Delta(591-620)-mEGFP+Tcdr2,"Cdr2 (E177A) was obtained  from digestion of pMG52 with BamHI-NheI and cloned it into the DeltaBasic integration module, pSR106"
+pSR141,pJK210-Pom1-mCherry,"Pom1 promoter and ORF were obtained by digesting pSR133 with KpnI-NotI, and cloned into pJK210-pom1-chimaera-mCherry (pSR99), to exchange Mid1 promoter and Pom1 chimera ORF for those of Pom1. For integration, StuI site cannot be used! AvrII is the site to use!!"
+pSR142,pJK148 Kcc4-Cdr2,"First PCR amplified Kcc4 (1-892), with a forward oligo containing XhoI and a reverse oligo annealing before the KA-1 domain from pSR97; second PCR amplified Cdr2 (bsc+KA-1) (591-775) from pSR2 with a forward oligo that contained an homologous region to the Kcc4 region preceeding the KA-1 domain plus the corresponding region of Cdr2, and a reverse oligo annealing in the end of Cdr2, with a NotI site; third PCR fused the two PCR products, with oligos containing XhoI-NotI, and was cloned into pSR2"
+pSR143,pJK148 Kcc4-Bsc(Cdr2)-KA-1(Kcc4),"First PCR amplified Kcc4 (1-892) plus Cdr2 (591-621), with a forward oligo containing XhoI and a reverse oligo annealing right in the end of the basic motif (oligo 3' Kcc4-Cdr2-Kcc4) from pSR142; second PCR amplified KA-1 Kcc4 (920-1037) from pSR97 with a forward oligo that contained an homologous region to the en of Cdr2 basic motif plus the begining of the KA-1 of Kcc4, and a reverse oligo annealing in the end of Kcc4, with a NotI site; third PCR fused the two PCR products, with oligos containing XhoI-NotI, and was cloned into pSR2"
+pSR144,Intemediate step plasmid pJK148 Full length Cdr2 + KA-1Kcc4,"KA-1 Kcc4 (893-1037) was amplified with oligos containing NotI-SalI (with STOP) from pSR97 and cloned into pSR2, substituting GFP"
+pSR145,pJK148 Pcdr2+GFP-KA1 (Kcc4),"GFP was amplified from pSR2 with oligos containing XhoI (with ATG)-NotI and cloned into pSR144, substituting cdr2 for GFP"
+pSR146,Intemediate step plasmid pJK148 Full length Cdr2 + bscCdr2+KA-1Kcc4,"bsc-Cdr2 (591-620) + KA-1 Kcc4 (920-1037) was amplified with oligos containing NotI-SalI (with STOP) from pSR143 and cloned into pSR2, substituting GFP"
+pSR147,pJK148 Pcdr2+GFP-bscCdr2 + KA1 (Kcc4),"GFP was amplified from pSR2 with oligos containing XhoI (with ATG)-NotI and cloned into pSR146, substituting cdr2 for GFP"
+pSR148,pJK148 cdr2-Deltabasic-Myc,Cdr2DeltaBasic (591-620) was amplified from pSR106 with oligos containing XhoI-NotI sites and cloned into pSR98
+pSR149,pRS416 GFP(789)Cdr2,GFP-(591-747) Cdr2 was obtained by digestion of pSR25 with BamHI-AscI and cloned into pSR131
+pSR150,pRS416 GFP(789)-(F704D F705D)-Cdr2,GFP-(591-747)-(F704D F705D)-Cdr2 was obtained by digestion of pSR111 with BamHI-AscI and cloned into pSR131
+pSR151,pQE9 (789)-Cdr2,(591-747)-Cdr2 was amplified with oligos containing BamHI-SalI from pSR2 and cloned into pQE9
+pSR152,KZ (789)-Cdr2,"(591-747)-Cdr2 was amplified with oligos containing NdeI-NotI from pSR2 and cloned into pREP1-GST, from Pilar Perez lab"
+pSR153,KZ (789)-FF-Cdr2,"(591-747)-(F704D F705D) Cdr2 was amplified with oligos containing NdeI-NotI from pSR2 and cloned into pREP1-GST, from Pilar Perez lab"
+pSR154,pFA6a EGFP:KanMX6 Pcdr2+cdr2Delta(7-8-9-10)+mEGFP+Tcdr2,Cdr2 (1-590) was amplified with oligos containing BamHI-PacI sites and cloned into pSR34
+pSR155,pFA6a EGFP:KanMX6 Pcdr2+cdr2(1-2-3-4-5-6-7-8-9-10)+mEGFP+Tcdr2,Cdr2 (281-775) was amplified with oligos containing BamHI-PacI sites and cloned into pSR34
+pSR156,pFA6a EGFP:KanMX6 Pcdr2+cdr2(2-3-4-5-6-7-8-9-10)+mEGFP+Tcdr2,Cdr2 (331-775) was amplified with oligos containing BamHI-PacI sites and cloned into pSR34
+pSR157,pFA6a EGFP:KanMX6 Pcdr2+cdr2(3-4-5-6-7-8-9-10)+mEGFP+Tcdr2,Cdr2 (381-775) was amplified with oligos containing BamHI-PacI sites and cloned into pSR34
+pSR158,pRS416 cdr2FF,cdr2 F704D F705D was obtained from pSR84 by digesting with BamHI-PacI and cloned into pSR131
+pSR159,pET15b (7-8-9),Cdr2 (591-747) was amplified from pSR2 with oligos containing NdeI-BamHI sites and cloned into pET15b
+pSR160,pJK148 (7-8-9)-myc,Cdr2 (591-747) was amplified from pSR2 with oligos containing XhoI-NotI sites and cloned into pSR98
+pSR161,pJK148 (7-8-9)-(F704D F705D)myc,Cdr2 (591-747)-(F704D F705D) was amplified from pSR84 with oligos containing XhoI-NotI sites and cloned into pSR98
+pSR162,pJK148 Cdr2-DeltabasicKcc4 myc,Cdr2 (1-591)-Kcc4 (917-1037) was amplified from pSR135 with oligos containing XhoI-NotI sites and cloned into pSR148
+pSR163,pJK210 Cdr2-DeltabasicKcc4 myc,Pcdr2 + Cdr2 (1-591)-Kcc4 (917-1037) + 12 myc + Tnmt1 was obtained from pSR162 by digesting with KpnI-SacI and cloned into pSR99
+pSR164,pFA6a EGFP:KanMX6 Pcdr2+Cdr2-(S175D)-Deltabasic-Kcc4-GFP+Tcdr2,An EcoRI-XbaI fragment (which includes S175D mutation) was obtained from a plasmid from Payal with the mutated Cdr2 ORF. A second insert containing the Cterminus of Cdr2DeltabasicKcc4chimaera + GFP+ KanMX + Tcdr2 was obtained from pSR135 digested with XbaI-SacII. Both inserts were cloned into pSR135 digested with EcoRI-SacII
+pSR165,pGEX (7-8-9-10),Cdr2 (591-775) was amplified from pSR34 with oligos containing BamHI plus ATG and NotI plus STOP and cloned into pSR33
+pSR166,pFA6a EGFP:KanMX6 Pcdr2+Cdr2-(E177A)-Deltabasic-Kcc4-GFP+Tcdr2,An EcoRI-XbaI fragment (which includes E177A mutation) was obtained from a plasmid pMG51. A second insert containing the Cterminus of Cdr2DeltabasicKcc4chimaera + GFP+ KanMX + Tcdr2 was obtained from pSR164 digested with XbaI-SacII. Both inserts were cloned into pSR164 digested with EcoRI-SacII
+pSR167,pFA6a EGFP:KanMX6 Pcdr2+Pnmt81+Cdr2+mEGFP+Tcdr2,Pnmt81 was amplified from pREP81 with BamHI-BamHI sites and cloned into pSR34
+pSR168,pFA6a EGFP:KanMX6 Pcdr2+Pnmt41+Cdr2+mEGFP+Tcdr2,Pnmt81 was amplified from pREP41 with BamHI-BamHI sites and cloned into pSR34
+pSR169,pFA6a EGFP:KanMX6 Pcdr2+Pnmt1+Cdr2+mEGFP+Tcdr2,Pnmt81 was amplified from pREP1 with BamHI-BamHI sites and cloned into pSR34
+pSR170,new pSR2,cdr2-mEGFP was amplified from pSR34 with oligos containing XhoI-SalI sites. The PCR product was digested with NheI-SalI and cloned into pSR2
+pSR171,pFA6a EGFP:KanMX6 Pcdr2+cdr1-cdr2 chimera A+mEGFP+Tcdr2,"First PCR amplified Cdr1 kinase domain (1-280) with one oligo containing a BamHI site and another with an homologous sequence to region 1 of Cdr2. Second PCR amplified Cdr2 (281-775) with one oligo containing an homologous sequence to Cdr1 kinase domain and another with a PacI site. Third PCR fused the other two, and the product was cloned into pSR34"
+pSR172,pFA6a EGFP:KanMX6 Pcdr2+cdr1-cdr2 chimera B+mEGFP+Tcdr2,"First PCR amplified Cdr1 kinase domain (1-280) with one oligo containing a BamHI site and another with an homologous sequence to region 2 of Cdr2. Second PCR amplified Cdr2 (331-775) with one oligo containing an homologous sequence to Cdr1 kinase domain and another with a PacI site. Third PCR fused the other two, and the product was cloned into pSR34"
+pSR173,pFA6a EGFP:KanMX6 Pcdr2+cdr1-cdr2 chimera C+mEGFP+Tcdr2,"First PCR amplified Cdr1  (1-559) with one oligo containing a BamHI site and another with an homologous sequence to region 7 of Cdr2. Second PCR amplified Cdr2 (591-775) with one oligo containing an homologous sequence to Cdr1 kinase domain and another with a PacI site. Third PCR fused the other two, and the product was cloned into pSR34"
+pSR174,pFA6a-Pnmt1-NatMX6,"NatMX6 was obtained from digestion of pFA6a-Myc:NatMX6 with BglII-EcoRI and cloned into pFA6a-pnmt1:KanMX6, substituting the KanMX6 cassette"
+pSR175,pFA6a-Pnmt41-NatMX6,"NatMX6 was obtained from digestion of pFA6a-Myc:NatMX6 with BglII-EcoRI and cloned into pFA6a-pnmt41:KanMX6, substituting the KanMX6 cassette"
+pSR176,pFA6a-Pnmt81-NatMX6,"NatMX6 was obtained from digestion of pFA6a-Myc:NatMX6 with BglII-EcoRI and cloned into pFA6a-pnmt81:KanMX6, substituting the KanMX6 cassette"
+pSR177,KS cdr2 (L662A L663A),pSR3 was used as a template for mutagenesis
+pSR178,pFA6a EGFP:KanMX6 Pcdr2+cdr2-(L662A L663A)+mEGFP+Tcdr2,cdr2-(L662A L663A) was amplified from pSR177 with oligos containing BamHI-PacI sites and cloned into pSR84
+pSR179,pFA6a EGFP:KanMX6 Pcdr2+GFP-(591-747)-cdr2-(L662A L663A)+Tcdr2,Cdr2-(591-747)-(L662A L663A) was amplified from pSR177 with oligos containing PacI-AscI sites and cloned into pSR25
+pSR180,pYX213 GST (591-747)-Cdr2,GST-Cdr2-(591-747) was amplified from pSR152 with oligos containing SalI-SacI sites and cloned into pYX213 for S. cerevisiae expression upon Gal+Raf induction
+pSR181,pFA6a EGFP:KanMX6 Pcdr2+cdr2(L689D L691D)+mEGFP+Tcdr2,pSR34 was used for mutagenesis
+pSR182,pJK148 pom1-chimera-HA,HA+Tnmt1 was obtained from digestion of pSLF172 and cloned into pAM18 to sustitute mCherry+Tnmt1
+pSR183,pREP1-GST-(591-775)-Cdr2,Cdr2-(591-775) was amplified from pSR2 with oligos containing NdeI-NotI sites and cloned into pSR152
+pSR184,pFA6a EGFP:KanMX6 Pcdr2+Cdr2DeltabasicDelta10-mEGFP+Tcdr2,"A fragment BamHI-AgeI containing Cdr2Delta(591-620) from pSR106 was cloned into pSR107, to obtain Cdr2Delta(591-620)Delta(748-775)"
+pSR185,pSGP573a-Orb6,Orb6 ORF(plus introns!) was amplified from genomic DNA with oligos containing XhoI-NotI sites and cloned into pSR1
+pSR186,pFA6a EGFP:KanMX6 Pcdr2+Cdr2Delta4Delta10-mEGFP+Tcdr2,"A fragment BamHI-AgeI containing Cdr2Delta(431-480) from pMG24 was cloned into pSR107, to obtain Cdr2Delta(431-480)Delta(748-775)"
+pSR187,KS cdr2 S452D,pSR3 was used as a template for mutagenesis
+pSR188,KS cdr2 S452A,pSR3 was used as a template for mutagenesis
+pSR189,KS cdr2 S476D,pSR3 was used as a template for mutagenesis
+pSR190,KS cdr2 S476A,pSR3 was used as a template for mutagenesis
+pSR191,pFA6a cdr2 S452D-mEGFP,A NheI-AgeI fragment was cloned from pSR187 into pSR34
+pSR192,pFA6A cdr2 S452A-mEGFP,A NheI-AgeI fragment was cloned from pSR188 into pSR34
+pSR193,pFA6a cdr2 S476D-mEGFP,A NheI-AgeI fragment was cloned from pSR189 into pSR34
+pSR194,pFA6a cdr2 S476A-mEGFP,A NheI-AgeI fragment was cloned from pSR190 into pSR34
+pSR195,KS cdr2 S761D,pSR3 was used as a template for mutagenesis
+pSR196,KS cdr2 S455A,pSR3 was used as a template for mutagenesis
+pSR197,KS cdr2 S514A,pSR3 was used as a template for mutagenesis
+pSR198,KS cdr2 S526A,pSR3 was used as a template for mutagenesis
+pSR199,KS cdr2 S604R S607R,pSR3 was used as a template for mutagenesis
+pSR200,KS cdr2 S616R,pSR3 was used as a template for mutagenesis
+pSR201,KS cdr2 S616R S618R,pSR3 was used as a template for mutagenesis
+pSR202,pFA6a cdr2 S455A-mEGFP,A NheI-AgeI fragment was cloned from pSR196 into pSR34
+pSR203,pFA6a cdr2 S514A-mEGFP,A NheI-AgeI fragment was cloned from pSR197 into pSR34
+pSR204,pFA6a cdr2 S526A-mEGFP,A NheI-AgeI fragment was cloned from pSR198 into pSR34
+pSR205,pFA6a cdr2 S604R S607R-mEGFP,A NheI-AgeI fragment was cloned from pSR199 into pSR34
+pSR206,pFA6a cdr2 S616R-mEGFP,A NheI-AgeI fragment was cloned from pSR200 into pSR34
+pSR207,pFA6a cdr2 S616R S618R-mEGFP,A NheI-AgeI fragment was cloned from pSR201 into pSR34
+pSR208,pFA6a cdr2(1-590)-GFP-CaaX,A PCR fragment containing the codifying region for Cdr2 (1-590) was cloned into pSR58 using BamHI-PacI and sequenced
+pSR209,KS cdr2 S618R,pSR3 was used as a template for mutagenesis
+pSR210,KS cdr2 S604R S607R S616R S618R,pSR199 (Cdr2 S604R S607R) was used as a template to introduce the S616R S618R mutations
+pSR211,KS cdr2 S604R S607R S616R,pSR199 (Cdr2 S604R S607R) was used as a template to introduce the S616R mutation
+pSR212,KS cdr2 S604D S607D S616D S618D,pSM1125 (Cdr2 S604D S607D) was used as a template to introduce the S616D S618D mutations with the corresponding oligos. Note the backbone comes from Sophie's plasmid
+pSR213,pFA6a cdr2 S761D-mEGFP,"cdr2-S761D ORF was amplified from pSR195 using oligos 5'Cdr2 BamHI - 3'Cdr2 PacI, digested, cloned into pSR34 and sequenced"
+pSR214,pFA6a cdr2 (1-620)-GFP-CaaX,A PCR fragment containing the codifying region for Cdr2 (1-620) was cloned into pSR58 using BamHI-PacI and sequenced
+pSR215,pFA6a GFP Cdr2(590-747)-S604D S607D,Cdr2(591-747) S604D S607D was amplified from pSM1125 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR216,pFA6a GFP Cdr2(590-747)-S616D S618D,Cdr2(591-747) S616D S618D was amplified from pSM1126 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR217,pFA6a GFP Cdr2(590-747)-S616D,Cdr2(591-747) S616D was amplified from pSM1301 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR218,pFA6a GFP Cdr2(590-747)-S618D,Cdr2(591-747) S618D was amplified from pSM1200 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR219,pFA6a GFP Cdr2(590-747)-S604D S607D S616D,Cdr2(591-747) S604D S607D S616D was amplified from pSM1302 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR220,pFA6a GFP Cdr2(590-747)-S604D S607D S616D S618D,Cdr2(591-747) S604D S607D S616D S618D was amplified from pSR212 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR221,pFA6a GFP Cdr2(590-747)-S604R S607R,Cdr2(591-747) S604R S607R was amplified from pSR199 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR222,pFA6a GFP Cdr2(590-747)-S616R S618R,Cdr2(591-747) S616R S618R was amplified from pSR201 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR223,pFA6a GFP Cdr2(590-747)-S616R,Cdr2(591-747) S616R was amplified from pSR200 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR224,pFA6a GFP Cdr2(590-747)-S618R,Cdr2(591-747) S618R was amplified from pSR209 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR225,pFA6a GFP Cdr2(590-747)-S604R S607R S616R,Cdr2(591-747) S604R S607R S616R was amplified from pSR211 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR226,pFA6a GFP Cdr2(590-747)-S604R S607R S616R S618R,Cdr2(591-747) S604R S607R S616R S618R was amplified from pSR210 with oligos containing PacI and AscI and transferred into pSR25 and sequenced
+pSR227,pFA6a cdr2 S604D S607D-mEGFP,A NheI-AgeI fragment was cloned from pSM1125 into pSR34
+pSR228,pFA6a cdr2 S616D S618D-mEGFP,A NheI-AgeI fragment was cloned from pSM1126 into pSR34
+pSR229,pFA6a cdr2 S616D-mEGFP,A NheI-AgeI fragment was cloned from pSM1301 into pSR34
+pSR230,pFA6a cdr2 S618D-mEGFP,"cdr2-S618D ORF was amplified from pSM1200 with oligos containing BamHI-PacI, digested, cloned into pSR34 and sequenced"
+pSR231,pFA6a cdr2 S604D S607D S616D-mEGFP,A NheI-AgeI fragment was cloned from pSM1302 into pSR34
+pSR232,pFA6a cdr2 S604D S607D S616D S618D-mEGFP,A NheI-AgeI fragment was cloned from pSR212 into pSR34
+pSR233,pFA6a cdr2 S618R-mEGFP,A NheI-AgeI fragment was cloned from pSR209 into pSR34
+pSR234,pFA6a cdr2 S604R S607R S616R-mEGFP,A NheI-AgeI fragment was cloned from pSR211 into pSR34
+pSR235,pFA6a cdr2 S604R S607R S616R S618R-mEGFP,A NheI-AgeI fragment was cloned from pSR210 into pSR34
+pSR236,pFA6a cdr2 S604D-mEGFP,A NheI-AgeI fragment was cloned from pSM1124 into pSR34
+pSR237,KS cdr2 S632E,pSR3 was used as a template for mutagenesis
+pSR238,KS cdr2 S632A,pSR3 was used as a template for mutagenesis
+pSR239,KS cdr2 S476E,pSR3 was used as a template for mutagenesis
+pSR240,KS cdr2 S476A S632A,A XbaI-AgeI fragment was cloned from pSR238 into pSR190
+pSR241,pFA6a cdr2 S632E-mEGFP,A NheI-AgeI fragment was cloned from pSR237 into pSR34
+pSR242,pFA6a cdr2 S632A-mEGFP,A NheI-AgeI fragment was cloned from pSR238 into pSR34
+pSR243,pFA6a cdr2 S476E-mEGFP,A NheI-AgeI fragment was cloned from pSR239 into pSR34
+pSR244,pFA6a cdr2 S476A S632A-mEGFP,A NheI-AgeI fragment was cloned from pSR240 into pSR34
+pSR245,KS cdr2 S476A C637A C639A,A XbaI-AgeI fragment was cloned from pSR83 into pSR190
+pSR246,pFA6a cdr2 S476A C637A C639A-mEGFP,A NheI-AgeI fragment was cloned from pSR245 into pSR34
+pSR247,KS cdr2 S604R,pSR3 was used as a template for mutagenesis
+pSR248,KS cdr2 S604R S616R,pSR200 was used as a template for mutagenesis
+pSR249,pFA6a cdr2 S604R-mEGFP,A NheI-AgeI fragment was cloned from pSR247 into pSR34
+pSR250,pFA6a cdr2 S604R S616R-mEGFP,A NheI-AgeI fragment was cloned from pSR248 into pSR34
+pSR251,KS cdr2 S593R,pSR3 was used as a template for mutagenesis
+pSR252,KS cdr2 S593R S604R S616R,pSR248 was used as a template for mutagenesis
+pSR253,pFA6a cdr2 S593R-mEGFP,A NheI-AgeI fragment was cloned from pSR251 into pSR34
+pSR254,pFA6a cdr2 S593R S604R S616R-mEGFP,A NheI-AgeI fragment was cloned from pSR252 into pSR34
+pSR255,pFA6a cdr2 E177A S604D S607D S616D-mEGFP,A XbaI fragment was cloned from pMG52 into pSR231
+pSR256,pFA6a cdr2 E177A S604R S607R S616R-mEGFP,A XbaI fragment was cloned from pMG52 into pSR234
+pSR257,pFA6a cdr2 S604D S607D S616D Delta(748-775)-mEGFP,A NheI-AgeI fragment was cloned from pSR231 into pSR107
+pSR258,pFA6a cdr2 S604R S607R S616R Delta(748-775)-mEGFP,A NheI-AgeI fragment was cloned from pSR234 into pSR107
+pSR259,KS cdr2 S604D S616D,pSM1301 was used as a template for mutagenesis
+pSR260,KS cdr2 S755A,pSR3 was used as a template for mutagenesis
+pSR261,KS cdr2 S755A S758A,pSR3 was used as a template for mutagenesis
+pSR262,KS cdr2 S604R S616R S755A,pSR248 was used as a template for mutagenesis
+pSR263,KS cdr2 S604R S616R S755A S758A,pSR248 was used as a template for mutagenesis
+pSR264,pFA6a cdr2 S604D S616D-mEGFP,A NheI-AgeI fragment was cloned from pSR259 into pSR34
+pSR265,pFA6a cdr2 S755A-mEGFP,"cdr2-S755A ORF was amplified from pSR260 with oligos containing BamHI-PacI, digested, cloned into pSR34 and sequenced"
+pSR266,pFA6a cdr2 S755A S758A-mEGFP,"cdr2-S755A S758A ORF was amplified from pSR261 with oligos containing BamHI-PacI, digested, cloned into pSR34 and sequenced"
+pSR267,pFA6a cdr2 S604R S616R S755A-mEGFP,"cdr2-S604R S616R S755A ORF was amplified from pSR262 with oligos containing BamHI-PacI, digested, cloned into pSR34 and sequenced"
+pSR268,pFA6a cdr2 S604R S616R S755A S758A-mEGFP,"cdr2-S604R S616R S755A S758A ORF was amplified from pSR263 with oligos containing BamHI-PacI, digested, cloned into pSR34 and sequenced"
+pSR269,pFA6a cdr2 S604R S607R S616R (no tag),A NheI-AgeI fragment was cloned from pSR211 into pMG40
+pSR270,pFA6a GFP Cdr2 (591-775)-(S604D S607D S616D),A PacI-AgeI fragment from pSR219 was cloned into pSR101
+pSR271,pJK148 GFP Cdr2 (591-747),Cdr2 (591-747) was amplified from pSR34 with oligos containing NotI and SalI (plus STOP) sites and cloned into pSR145
+pSR272,pJK148 GFP Cdr2 (591-747)-(F704D F705D),Cdr2 (591-747) was amplified from pSR84 with oligos containing NotI and SalI (plus STOP) sites and cloned into pSR145
+pSR273,pFA6a GFP Kcc4 (893-1037),Kcc4 (893-1037) was amplified from pSR145 with oligos containing BamHI and AscI (plus STOP) sites and cloned into pSR25
+pSR274,pSM1029 (S604A S607A) + S616A,Mutagenesis of S616A was performed on pSM1029
+pSR275,pSM1120 (S604A) + S616A,Mutagenesis of S616A was performed on pSM1120
+pSR276,pJK148 Cdr2 (620-747)-myc,Cdr2 (620-747) was amplified from pSR2 with oligos containing XhoI (plus ATG) and NotI sites and cloned into pSR160 in a 3-way ligation (Pcdr2 KpnI-XhoI+pJK148 backbone KpnI-NotI)
+pSR277,KZ Cdr2 (620-747),Cdr2 (620-747) was amplified from pSR2 with oligos containing NdeII and NotI (plus STOP) sites and cloned into pSR152
+pSR278,pFA6a Cdr2 (S604A S607A S616A)-mEGFP,A NheI-AgeI fragment of pSR274 was cloned into pSR34
+pSR279,pFA6a Cdr2 (S604A S616A)-mEGFP,A NheI-AgeI fragment of pSR275 was cloned into pSR34
+pSR280,pFA6a Cdr2 (E177A S604A S607A S616A)-mEGFP,A XbaI fragment was cloned from pMG52 into pSR278
+pSR281,pFA6a Cdr2 (E177A S604A S616A)-mEGFP,A XbaI fragment was cloned from pMG52 into pSR279
+pSR282,pFA6a GFP Cdr2 (591-747)-(S604A S607A S616A),Cdr2 (591-747)(S604A S607A S616A) was amplified from pSR278 with oligos containing PacI and AscI (plus STOP) sites and cloned into pSR25
+pSR283,pFA6a GFP Cdr2 (591-747)-(S604A S616A),Cdr2 (591-747)(S604A S616A) was amplified from pSR279 with oligos containing PacI and AscI (plus STOP) sites and cloned into pSR25
+pSR284,pFA6a Cdr2 (E177A S604D S616D)-mEGFP,A XbaI fragment was cloned from pMG52 into pSR264
+pSR285,pFA6a Cdr2 (E177A S604R S616R)-mEGFP,A XbaI fragment was cloned from pMG52 into pSR250
+pSR286,pGEX Cdr2 (591-747)-(F704D F705D),Cdr2 (591-747)(F704D F705D) was amplified from pSR84 with oligos containing BamHI and NotI (plus STOP) sites and cloned into pSR32
+pSR287,pGEX Cdr2 (620-747),Cdr2 (620-747) was amplified from pSR84 with oligos containing BamHI and NotI (plus STOP) sites and cloned into pSR32
+pSR288,pJK148 Kcc4 (893-1037)-myc,Kcc4 (893-1037) was amplified from pSR95 with oligos containing XhoI (plus ATG) and NotI sites and cloned into pSR160 in a 3-way ligation (Pcdr2 KpnI-XhoI+pJK148 backbone KpnI-NotI)
+pSR289,KZ Kcc4 (893-1037),Kcc4 (893-1037) was amplified from pSR95 with oligos containing NdeII and NotI (plus STOP) sites and cloned into pSR152
+pSR290,pGEX Kcc4 (893-1037),Kcc4 (893-1037) was amplified from pSR95 with oligos containing BamHI and NotI (plus STOP) sites and cloned into pSR32
+pSR291,KS cdr2(S604A),pSM1120
+pSR292,pFA6a cdr2(S604A)-mEGFP,"cdr2-S604A ORF was amplified from pSR291 with oligos containing BamHI-PacI, digested, cloned into pSR34 and sequenced"
+pSR293,KS cdr2(S476A S604A S607A S616A),An XbaI-AgeI fragment from pSR274 was cloned into pSR291
+pSR294,KS cdr2(S476A S604A S607A S616A S632A),Mutagenesis of S632A was performed on pSR293
+pSR295,pFA6a cdr2(S476A S604A S607A S616A S632A)-mEGFP,Cdr2(S476A S604A S607A S616A S632A) was amplified from pSR294 and cloned into pSR34
+pSR296,pFA6a cdr2-mEGFP:natMX6,A BglI-SacI fragment containing the natMX6 cassette from pFA6a-myc was cloned into pSR34
+pSR297,pFA6a cdr2(S476A S632A) (noTAG):natMX6,cdr2(S476A S632A) ORF was amplified from pSR240 with oligos containing BamHI-AscI and cloned into pSR296
+pSR298,pFA6a-BleMX6,Plasmid from Philadelphia's collection pPT336
+pSR299,pFA6a-P3Xnmt1-BleMX6,A BglII-PmeI fragment from pSR298 was cloned into pFA6a-P3Xnmt1-KanMX6
+pSR300,pFA6a-P41Xnmt1-BleMX6,A BglII-PmeI fragment from pSR298 was cloned into pFA6a-P41Xnmt1-KanMX6
+pSR301,pFA6a-P81Xnmt1-BleMX6,A BglII-PmeI fragment from pSR298 was cloned into pFA6a-P81Xnmt1-KanMX6
+pSR302,pFA6a-P3Xnmt1-GST-BleMX6,A BglII-PmeI fragment from pSR298 was cloned into pFA6a-P3X-GST-nmt1-KanMX6
+pSR303,pFA6a-P41Xnmt1-GST-BleMX6,A BglII-PmeI fragment from pSR298 was cloned into pFA6a-P41X-GST-nmt1-KanMX6
+pSR304,pFA6a-P81Xnmt1-GST-BleMX6,A BglII-PmeI fragment from pSR298 was cloned into pFA6a-P81X-GST-nmt1-KanMX6
+pSR305,pFA6a-13myc-BleMX6,A BglII-PmeI fragment from pSR298 was cloned into pFA6a-13myc-KanMX6
+pSR306,pFA6a-mEGFP-BleMX6,A BglII-PmeI fragment from pSR298 was cloned into pFA6a-mEGFP-KanMX6 (pJM228)
+pSR307,pFA6a-P3Xnmt1-ura4+,A BglII-EcoRI fragment from KS-ura4+ was cloned into pFA6a-P3Xnmt1-KanMX6
+pSR308,pFA6a-P3Xnmt1-GST-ura4+,A BglII-EcoRI fragment from KS-ura4+ was cloned into pFA6a-P3X-GST-nmt1-KanMX6
+pSR309,pFA6a-IAA17:kanMX6,"IAA17 was amplified from the plasmid Mcm4-IAA17 (pKM40) sent from the Nakamura lab, with oligos containing PacI-AscI sites, and cloned into pFA6a-mEGFP, replacing the mEGFP for IAA17"
+pSR310,pFA6a-mEGFP-kanMX6+Tklp9,klp9 terminator was amplified from genomic DNA with oligos containing SacI-SpeI and cloned into pFA6a-mEGFP
+pSR311,pFA6a-mEGFP-kanMX6+Pklp9+Tklp9,klp9 promoter was amplified from genomic DNA with oligos containing BsiWI-BamHI and cloned into pSR310
+pSR312,pFA6a-mEGFP-kanMX6+Pklp9+mEGFP+Tklp9,mEGFP with no STOP codon was amplified from pFA6A-mEGFP:kanMX6 with a forward oligo including a BamHII site and a reverse oligo containing a PacI site and cloned into pSR311
+pSR313,pFA6a-mEGFP-kanMX6+Pklp9+mCherry+Tklp9,mCherry with no STOP codon was amplified from pFA6A-mCherry:natMX6 with a forward oligo including a BamHII site and a reverse oligo containing a PacI site and cloned into pSR311
+pSR314,pFA6a-mEGFP-kanMX6+Pklp9+Pnmt41+mEGFP+Tklp9,Pnmt41 promoter was obtained as a BamHI-BamHI fragment from pSR168 and cloned into pSR312
+pSR315,pFA6a-mEGFP-kanMX6+Pklp9+Pnmt41+mCherry+Tklp9,Pnmt41 promoter was obtained as a BamHI-BamHI fragment from pSR168 and cloned into pSR313
+pSR316,pFA6a-mEGFP-kanMX6+Pklp9+mEGFP+klp9+Tklp9,klp9 ORF was amplified with oligos containing PacI-AscI and cloned into pSR312
+pSR317,pFA6a-mEGFP-kanMX6+Pklp9+mCherry+klp9+Tklp9,klp9 ORF was amplified with oligos containing PacI-AscI and cloned into pSR313
+pSR318,pFA6a-mEGFP-kanMX6+Pklp9+Pnmt41+mEGFP+klp9+Tklp9,klp9 ORF was obtained as a PacI-AscI fragment from pSR316 and cloned into pSR314 
+pSR319,pFA6a-mEGFP-kanMX6+Pklp9+Pnmt41+mCherry+klp9+Tklp9,klp9 ORF was obtained as a PacI-AscI fragment from pSR316 and cloned into pSR315 
+pSR320,pJK148 Psid4+sid4+GFP+Tnmt1,"Psid4 and sid4 ORF were amplified altogether with oligos containing KpnI and NotI sites (without STOP codon) and cloned into pSR2, replacing Pcdr2 and cdr2 ORF"
+pSR321,pFA6a-mEGFP-kanMX6+Pklp9+mEGFP+klp9(S3A)+Tklp9,klp9 S3A ORF with no introns was amplified with oligos containing PacI-AscI from pPT257 and cloned into pSR312
+pSR322,pFA6a-mEGFP-kanMX6+Pklp9+mCherry+klp9(S3A)+Tklp9,klp9 S3A ORF with no introns was amplified with oligos containing PacI-AscI and cloned into pSR313
+pSR323,pFA6a-mEGFP-kanMX6+Pklp9+Pnmt41+mEGFP+klp9(S3A)+Tklp9,klp9 S3A ORF with no introns was obtained as a PacI-AscI fragment from pSR316 and cloned into pSR314 
+pSR324,pFA6a-mEGFP-kanMX6+Pklp9+Pnmt41+mCherry+klp9(S3A)+Tklp9,klp9 S3A ORF with no introns was obtained as a PacI-AscI fragment from pSR316 and cloned into pSR315 
+pSR325,KS-blt1,"blt1 ORF was amplified from genomic DNA with oligos containing XhoI-NoI sites and cloned into pSR3, replacing cdr2 ORF - needs to be fully sequenced!"
+pSR326,pFA6a-mEGFP-kanMX6+Tblt1,blt1 terminator was amplified from genomic DNA with oligos containing SacI-SpeI sites and cloned into pFA6a-mEGFP-kanMX6
+pSR327,pFA6a-mEGFP-kanMX6+ Pblt1+Tblt1,blt1 promoter was amplified from genomic DNA with oligos containing SalI-BamHI sites and cloned into pSR326
+pSR328,pJK148-Tnmt1,Tnmt1 was amplified from pSR2 with oligos containing NotI-SacI and cloned into pJK148
+pSR329,pJK148-P3nmt1+Tnmt1,P3nmt1 was amplified from pFA6a-P41nmt1 with oligos containing KpnI-SalI and cloned into pSR328
+pSR330,pJK148-P41nmt1+Tnmt1,P41nmt1 was amplified from pFA6a-P41nmt1 with oligos containing KpnI-SalI and cloned into pSR328
+pSR331,pJK148-P81nmt1+Tnmt1,P81nmt1 was amplified from pFA6a-P41nmt1 with oligos containing KpnI-SalI and cloned into pSR328
+pSR332,pJK148-P3nmt1+mCherry+Tnmt1,mCherry was obtained as an EcoRI-NotI fragment from pSR333 and cloned into pSR329
+pSR333,pJK148-P41nmt1+mCherry+Tnmt1,mCherry was amplified from pFA6a-mCherry-natMX6 with oligos containing EcoRI-NotI sites and cloned into pSR330 
+pSR334,pJK148-P81nmt1+mCherry+Tnmt1,mCherry was obtained as an EcoRI-NotI fragment from pSR333 and cloned into pSR331
+pSR335,pJK148-P3nmt1+cut7+mCherry+Tnmt1,cut7 ORF without STOP codon was as a SalI-EcoRI fragment from pSR336 and cloned into pSR332 - Use AfeI to linearize before transforming a leu1-32 strain!!!
+pSR336,pJK148-P41nmt1+cut7+mCherry+Tnmt1,cut7 ORF without STOP codon was amplified from the strain TP1123 genomic DNA with oligos containing SalI-EcoRI sites and cloned into pSR333 - Use AfeI to linearize before transforming a leu1-32 strain!!!
+pSR337,pJK148-P81nmt1+cut7+mCherry+Tnmt1,cut7 ORF without STOP codon was as a SalI-EcoRI fragment from pSR336 and cloned into pSR334 - Use AfeI to linearize before transforming a leu1-32 strain!!!
+pSR338,pJK148-P3nmt1+GFP-Ase1D(665-731)+Tnmt1,"GFP-Ase1D(665-731) was amplified with oligos containing SalI+ATG and NotI+STOP from TP2558 genomic DNA and cloned into pSR336, replacing Cut7-mCherry"
+pSR339,pJK148-P41nmt1+GFP-Ase1D(665-731)+Tnmt1,"GFP-Ase1D(665-731) was amplified with oligos containing SalI+ATG and NotI+STOP from TP2558 genomic DNA and cloned into pSR335, replacing Cut7-mCherry"
+pSR340,pJK148 Pcut11+cut11+GFP+Tnmt1,"Pcut11 and cut11 ORF were amplified altogether with oligos containing KpnI and NotI sites (without STOP codon) and cloned into pSR2, replacing Pcdr2 and cdr2 ORF"
+pSR341,pJK148 Psid4+sid4+mCherry+Tnmt1,"Psid4 and sid4 ORF were amplified altogether with oligos containing KpnI and EcoRI sites (without STOP codon) and cloned into pSR333, replacing cut7 ORF"
+pSR342,pFA6a-mEGFP-kanMX6+Tase1,ase1 terminator was amplified from genomic DNA with oligos containing SacI-SpeI sites and cloned into pFA6a-mEGFP-kanMX6
+pSR343,pFA6a-mEGFP-kanMX6+ Pase1+Tase1,ase1 promoter was amplified from genomic DNA with oligos containing SalI-BamHI sites and cloned into pSR342
+pSR344,pFA6a-mEGFP-kanMX6+ Pase1+GFP(noSTOP)+Tase1,mEGFP ORF with no STOP codon from pFA6a-mEGFP-kanMX6 was amplified with oligos containing BamHI-XmaI sites and cloned into pSR343
+pSR345,pFA6a-mEGFP-kanMX6+ Pase1+GFP(noSTOP)+ase1+Tase1,ase1 ORF was amplified from genomic DNA with oligos containing XmaI-AscI sites and cloned into pSR344
+pSR346,pFA6a-mEGFP-kanMX6+ Pase1+GFP(noSTOP)+ase1D(1-142)+Tase1,ase1D(1-142) ORF was amplified from genomic DNA with oligos containing XmaI-AscI sites and cloned into pSR344
+pSR347,pFA6a-mEGFP-kanMX6+ Pase1+ase1D(1-142)+Tase1,ase1D(1-142) ORF was amplified from genomic DNA with oligos containing BamHI-AscI sites and cloned into pSR343
+pSR348,pFA6a-P81nmt1-IAA17-kanMX6,IAA17 was amplified from the plasmid pSR309 with oligos containing PacI+ATG and AscI (with no STOP codon) and cloned into pFA6a-P81-GFP-kanMX6
+pSR349,pGEX6p-Cdr2 (Federica),Cdr2 was amplified with oligos containing BamHI and SalI sites and cloned into pGEX6p (apparently the oligos included an extra Cys in the GST-Cdr2 linker)
+pSR350,pGEX6p-Cdr2(S476A S632A),Cdr2(S476A S632A) was amplified with Federica's oligos containing BamHI and SalI sites from pSR240 and cloned into pGEX6p
+pSR351,KS cdr2 (S476D S632D),Mutagenesis on pSR189 to introduces the S632D mutation
+pSR352,pFA6a cdr2 (S476D S632D)-mEGFP,Cdr2 (S476D S632D) was amplified from pSR351 with oligos containing BamHI and PacI sites and cloned into pSR20
+pSR353,pGEX6p-Cdr2 peptide S476S,"Oligos containing the sequence corresponding to Cdr2 (S471 to S480) and the overhanging sequence for BamHI and SalI were annealed and ligated into a pGEX6p previously digested with BamHI and SalI, not dephosphorylated"
+pSR354,pGEX6p-Cdr2 peptide S476A,"Oligos containing the sequence corresponding to Cdr2 (S471 to S480), with the mutation S476A and the overhanging sequence for BamHI and SalI were annealed and ligated into a pGEX6p previously digested with BamHI and SalI, not dephosphorylated"
+pSR355,pGEX6p-Cdr2 peptide S632S,"Oligos containing the sequence corresponding to Cdr2 (R628 to K638) and the overhanging sequence for BamHI and SalI were annealed and ligated into a pGEX6p previously digested with BamHI and SalI, not dephosphorylated"
+pSR356,pGEX6p Cdr2 peptide S632A,"Oligos containing the sequence corresponding to Cdr2 (R628 to K638), with the mutation S632A and the overhanging sequence for BamHI and SalI were annealed and ligated into a pGEX6p previously digested with BamHI and SalI, not dephosphorylated"
+pSR357,pJK148-Pmis12+mis12+GFP+Tnmt1,"Pmis12 and mis12 ORF were amplified altogether with oligos containing KpnI and NotI sites (without STOP codon) and cloned into pSR2, replacing Pcdr2 and cdr2 ORF"
+extra_box1,pFA6a-kanMX6,
+extra_box2,pFA6a-natMX6,
+extra_box3,pFA6a-hphMX6,
+extra_box4,pFA6a-mEGFP-kanMX6,
+extra_box5,pFA6a-mEGFP-natMX6,
+extra_box6,pFA6a-mEGFP-hphMX6,
+extra_box7,pFA6a-Envy-kanMX6,
+extra_box8,pFA6a-Envy-natMX6,
+extra_box9,pFA6a-Envy-hphMX6,
+extra_box10,pFA6a-mCherry-kanMX6,
+extra_box11,pFA6a-mCherry-natMX6,
+extra_box12,pFA6a-mCherry-hphMX6,
+extra_box13,pFA6a-tdTomato-kanMX6,
+extra_box14,pFA6a-tdTomato-natMX6,
+extra_box15,pFA6a-tdTomato-hphMX6,
+extra_box16,pFA6a-13myc-natMX6,
+extra_box17,pFA6a-GFP-IAA17-kanMX6,
+extra_box18,pFA6a-P3Xnmt1-mEGFP-kanMX6,
+extra_box19,pFA6a-P41Xnmt1-mEGFP-kanMX6,
+extra_box20,pFA6a-P81Xnmt1-mEGFP-kanMX6,
+extra_box21,pFA6a-P3Xnmt1-kanMX6,
+extra_box22,pFA6a-P41Xnmt1-kanMX6,
+extra_box23,pFA6a-P81Xnmt1-kanMX6,

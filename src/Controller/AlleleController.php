@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Allele;
+use App\Entity\AlleleChunky;
 use App\Repository\AlleleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
