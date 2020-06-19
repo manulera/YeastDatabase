@@ -90,6 +90,7 @@ class SequenceService
             "GGA" => "G",
             "GGG" => "G"
         );
+        $this->updateAa2Codon();
     }
 
     public function getAminoAcids(): array
@@ -102,11 +103,16 @@ class SequenceService
         return $this->nucleotides;
     }
 
-    public function updateAa2Codon()
+    private function updateAa2Codon()
     {
         $this->aa2codons = [];
         foreach ($this->codon2aa as $codon => $aa) {
             $this->aa2codons[$aa][] = $codon;
         }
+    }
+
+    public function getCodonsFromAminoAcid(string $aa): array
+    {
+        return $this->aa2codons[$aa];
     }
 }

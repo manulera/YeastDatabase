@@ -3,6 +3,30 @@ import { createPopper } from '@popperjs/core';
 import mRNA from './classes/mrna.js';
 var sequence_utils= require('ve-sequence-utils');
 
+const codon_dict = { 
+    "A": ["GCA","GCC","GCG","GCT"], 
+    "C": ["TGC","TGT"], 
+    "D": ["GAC", "GAT"],
+    "E": ["GAA","GAG"],
+    "F": ["TTC","TTT"],
+    "G": ["GGA","GGC","GGG","GGT"],
+    "H": ["CAC","CAT"],
+    "I": ["ATA","ATC","ATT"],
+    "K": ["AAA","AAG"],
+    "L": ["CTA","CTC","CTG","CTT","TTA","TTG"],
+    "M": ["ATG"],
+    "N": ["AAC","AAT"],
+    "P": ["CCA","CCC","CCG","CCT"],
+    "Q": ["CAA","CAG"],
+    "R": ["AGA","AGG","CGA","CGC","CGG","CGT"],
+    "S": ["AGC","AGT","TCA","TCC","TCG","TCT"],
+    "T": ["ACA","ACC","ACG","ACT"],
+    "V": ["GTA","GTC","GTG","GTT"],
+    "W": ["TGG"],
+    "Y": ["TAC","TAT"],
+   }
+
+
 function range(start,stop,step)
 {
     var array = new Array();
@@ -31,6 +55,33 @@ function renderSequence()
         {name: "Selected codons", color: 'red'}
 
     ]
+    console.log($("table.pointmutation-table"));
+    var extra_coverage = [];
+    $("table.pointmutation-table").each(function(){
+        // Zero indexing
+        var position = $(this).find(':input')[0].value;
+        if (position)
+        {
+        var seq_position=parseInt(position)-1;
+        extra_coverage.push({
+            start: seq_position,
+            end:seq_position+1,
+            bgcolor: "red"
+        });
+        }
+    });
+    $("table.truncation-table").each(function(){
+        // Zero indexing
+        var seq_start=parseInt($(this).find(':input')[0].value)-1;
+        var seq_end=parseInt($(this).find(':input')[1].value)-1;
+        if (seq_start && seq_end){
+        extra_coverage.push({
+            start: seq_start,
+            end:seq_end+1,
+            bgcolor: "red"
+        });
+        }
+    });
     
     seq_dna.coverage(thismRNA.coverage);
     seq_dna.addLegend(my_legend);
@@ -39,6 +90,9 @@ function renderSequence()
     var seq_protein = new Sequence(thismRNA.protein_sequence);
     
     seq_protein.render('#protein-sequence-viewer',{'badge': false,'title':'','charsPerLine':100,'search': false,});
+    console.log(extra_coverage);
+    if (extra_coverage.length)
+    {seq_protein.coverage(extra_coverage);}
     seq_protein.addLegend([{name: "Selected aminoacids", color: 'red'}]);
 }
 function getCodon(codon_ind)
@@ -87,6 +141,25 @@ function updatePointMutation()
         $(select_original_aa).val(null);
         $(select_original_codon).val(null);
     }
+    renderSequence();
+}
+
+function updateNewCodon()
+{
+    var table = $(this).closest('table');
+    var select_new_aa=$(table).find('select')[0];
+    var select_new_codon=$(table).find('select')[1];
+    
+    // Remove all the options from the select element of new codon
+    $(select_new_codon).empty();
+    var new_aa = $(select_new_aa).val();
+    var codons = codon_dict[new_aa];
+    
+    $(select_new_codon).append($("<option></option>").attr("value", "unknown").text("unknown"))
+    $.each(codons, function(i,codon) {
+        $(select_new_codon).append($("<option></option>").attr("value", codon).text(codon));
+    });
+    
 }
 
 function addEntityTypeForm(collectionHolder, newLinkButt) {
@@ -137,8 +210,20 @@ $(document).ready(function () {
             {
                 let newForm = addEntityTypeForm(ch, newLinkButt);
                 let input_ind=$(newForm).find(':input')[0];
-                $(input_ind).on("keyup",updatePointMutation);
-                $(input_ind).on("change",updatePointMutation);
+                if ($(input_ind).closest('table').hasClass("pointmutation-table"))
+                {
+                    let new_aa_select=$(newForm).find('select')[0];
+                    $(input_ind).on("keyup",updatePointMutation);
+                    $(input_ind).on("change",updatePointMutation);
+                    $(new_aa_select).each(updateNewCodon);
+                    $(new_aa_select).on("change",updateNewCodon);
+                }
+                else if ($(input_ind).closest('table').hasClass("truncation-table"))
+                {
+                    $(newForm).find('input').on("change",renderSequence);
+                }
+                
+
                 if (!sequence_displayed)
                 {
                     mRNA_json= makeAjaxRequest().responseJSON;

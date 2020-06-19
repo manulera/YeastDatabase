@@ -10,7 +10,30 @@
 {% endfor %}
 
 <h1>Strain {{strain.id}}</h1>
-<h3>{{strain.genotype}}</h3>
+<h4>Genotype</h4>
+{{strain.genotype}}
 {{form(delete_form)}}
+<h4>Parent strain(s)</h4>
+{% for strain in strain.source.strainsIn %}
+<ul>
+    <li>{% include "strain/reference.html.twig" %}</li>  
+</ul>
+{% endfor %}
+
+<h4>Alleles</h4>
+
+{% for allele in strain.alleles %}
+    <ul><li><a href="{{ path('allele.show', { 'id': allele.id }) }}">
+    {{allele.name}}
+    </a></li></ul>
+{% endfor %}
+
+<h4>Children</h4>
+{% for strain in children %}
+<ul>
+    <li>{% include "strain/reference.html.twig" %}</li>  
+</ul>
+{% endfor %}
+
 
 {% endblock %}

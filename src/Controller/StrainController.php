@@ -101,10 +101,15 @@ class StrainController extends AbstractController
     public function showAction(Strain $strain)
     {
         $delete_form = $this->createDeleteForm($strain);
+        $children = [];
+        $sources = $strain->getStrainSourcesIn();
+        foreach ($sources as $source) {
+            $children = array_merge($children, $source->getStrainsOut()->ToArray());
+        }
         return $this->render('strain/show.html.twig', array(
             'strain' => $strain,
-            'delete_form' => $delete_form->createView()
-
+            'delete_form' => $delete_form->createView(),
+            'children' => $children
         ));
     }
 

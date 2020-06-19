@@ -103,10 +103,11 @@ class AlleleChunky extends Allele
             $name .= $locus->getPombaseId();
         }
         if (count($this->getPointMutations())) {
-            $pm_name = "";
+            $pm_name = [];
             foreach ($this->getPointMutations() as $pm) {
-                $pm_name .= strval($pm);
+                $pm_name[] = strval($pm);
             }
+            $pm_name = implode(",", $pm_name);
             $name .= "($pm_name)";
         }
 

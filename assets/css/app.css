@@ -23,3 +23,7 @@
 .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+
+h4 {
+  line-height: 40px;
+}

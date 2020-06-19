@@ -8,16 +8,30 @@
 
 <p>This allele is found in the locus {% include "locus/reference.html.twig"  with {'locus': allele.locus}%}</p>
 
-<div id="my_dataviz">
-</div>
+{# <div id="my_dataviz">
+</div> #}
 
-<h2> Strains: </h2>
+<h4> Strains: </h4>
 <ul>
 {% for strain in allele.getStrains %}
     <li>{% include "strain/reference.html.twig" %}</li>              
 {% endfor %}    
 </ul>
 <div id="allele_jsonBottom" data-jsonarray="{{serialized_allele}}"></div>
+<h4>Resources used:</h4>
+<h5>Plasmids</h5>
+<ul>
+{% for plasmid in allele.strainSource.plasmids %}
+    <li>{{plasmid}}</li>    
+{% endfor %}
+</ul>
+<h5>Oligos</h5>
+<ul>
+{% for oligo in allele.strainSource.oligos %}
+    <li>{{oligo}}</li>    
+{% endfor %}
+</ul>
+
 {% endblock %}
 
 {% block javascripts %}

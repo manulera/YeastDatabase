@@ -39,6 +39,7 @@ abstract class Allele
     private $locus;
 
     /**
+     * @Groups("allele")
      * @ORM\ManyToOne(targetEntity="App\Entity\StrainSource", inversedBy="alleles")
      * @ORM\JoinColumn(nullable=false)
      */

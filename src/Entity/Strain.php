@@ -75,7 +75,7 @@ class Strain
         // they will also be changed in the other)
         $this->alleles = clone $this->alleles;
         $this->plasmids = clone $this->plasmids;
-        
+
         $this->strainSourcesIn = null;
         $this->id = null;
         $this->source = null;
