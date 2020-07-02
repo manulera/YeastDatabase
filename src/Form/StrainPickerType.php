@@ -7,11 +7,13 @@ use App\Repository\StrainRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StrainPickerType extends AbstractType implements DataMapperInterface
@@ -111,6 +113,14 @@ class StrainPickerType extends AbstractType implements DataMapperInterface
         if (null === $viewData) {
             return;
         }
-        //TODO
+        if (!$viewData instanceof Strain) {
+            throw new UnexpectedTypeException($viewData, Strain::class);
+        }
+
+        /** @var FormInterface[] $forms */
+        $forms = iterator_to_array($forms);
+
+        // initialize form field values
+        $forms['strain']->setData($viewData);
     }
 }

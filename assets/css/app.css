@@ -27,3 +27,9 @@
 h4 {
   line-height: 40px;
 }
+
+td.no-break
+{
+  overflow: hidden;
+  white-space: nowrap;
+}

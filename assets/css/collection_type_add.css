@@ -51,3 +51,10 @@ table.pointmutation-table {
   #tooltip[data-popper-placement^='right'] > #arrow {
     left: -4px;
   }
+
+  .truncation-warning
+  {
+    color:red;
+    padding-left: 12px;
+    visibility: hidden;
+  }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Form\AlleleChunkyType;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -70,6 +71,12 @@ class AlleleChunky extends Allele
         $this->truncations = new ArrayCollection();
     }
 
+    public function __clone()
+    {
+        parent::__clone();
+        $this->pointMutations = clone $this->pointMutations;
+        $this->truncations = clone $this->truncations;
+    }
     public function getPromoter(): ?Promoter
     {
         return $this->promoter;
@@ -223,5 +230,15 @@ class AlleleChunky extends Allele
         }
 
         return $this;
+    }
+
+    public function hasMarker(): bool
+    {
+        return boolval($this->getCMarker() || $this->getNMarker());
+    }
+
+    public function getAssociatedForm(): string
+    {
+        return AlleleChunkyType::class;
     }
 }

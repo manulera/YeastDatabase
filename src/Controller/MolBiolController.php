@@ -6,7 +6,9 @@ use App\Entity\Allele;
 use App\Entity\StrainSource;
 use App\Entity\Strain;
 use App\Entity\StrainSourceTag;
+use App\Form\AlleleChunkyType;
 use App\Form\AlleleDeletionType;
+use App\Form\MarkerSwitchType;
 use App\Form\MolBiolAlleleChunkyType;
 use App\Form\MolBiolAlleleDeletionType;
 use App\Form\StrainSourceType;
@@ -28,7 +30,9 @@ class MolBiolController extends StrainSourceController
             'Bahler Method: Promoter Change' => 'bahler.promoter',
             'Bahler Method: Promoter Change + N-term tag' => 'bahler.promoter_nTag',
             'Bahler Method: C-term tag' => 'bahler.cTag',
+            'Marker Switch' => 'markerswitch',
             'Custom Transformation' => 'transformation',
+
         ];
     }
 
@@ -93,6 +97,25 @@ class MolBiolController extends StrainSourceController
             [
                 'form' => $form->createView(),
                 'allele_form_template' => $allele_form_template
+            ]
+        );
+    }
+
+    /**
+     * @Route("/markerswitch", name="markerswitch")
+     */
+    public function markerSwitchAction(Request $request)
+    {
+        $strain = $this->getDoctrine()->getRepository(Strain::class)->find(35);
+        $ss = new StrainSource;
+        $ss->addStrainsIn($strain);
+        $form = $this->createForm(MarkerSwitchType::class, $ss);
+        $form->handleRequest($request);
+
+        return $this->render(
+            'forms/allele/marker_switch.html.twig',
+            [
+                'form' => $form->createView(),
             ]
         );
     }

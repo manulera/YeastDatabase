@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Form\AlleleDeletionType;
 use Doctrine\ORM\Mapping\JoinColumn;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -45,5 +46,20 @@ class AlleleDeletion extends Allele
         }
 
         $this->setName($name . "Δ::" . $this->marker);
+    }
+
+    public function hasMarker(): bool
+    {
+        return boolval($this->getMarker());
+    }
+
+    public function getAssociatedForm(): string
+    {
+        return AlleleDeletionType::class;
+    }
+
+    public function __clone()
+    {
+        parent::__clone();
     }
 }

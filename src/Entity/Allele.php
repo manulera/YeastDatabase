@@ -50,6 +50,11 @@ abstract class Allele
      */
     private $strains;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Allele::class, cascade={"persist", "remove"})
+     */
+    private $parentAllele;
+
     public function __construct()
     {
         $this->strains = new ArrayCollection();
@@ -132,5 +137,35 @@ abstract class Allele
         }
 
         return $this;
+    }
+
+    public function getParentAllele(): ?self
+    {
+        return $this->parentAllele;
+    }
+
+    public function setParentAllele(?self $parentAllele): self
+    {
+        $this->parentAllele = $parentAllele;
+
+        return $this;
+    }
+
+    public function hasMarker(): bool
+    {
+        return false;
+    }
+
+    public function getAssociatedForm(): string
+    {
+        return "";
+    }
+
+    public function __clone()
+    {
+        $this->strains = null;
+        $this->strainSource = null;
+        $this->id = null;
+        $this->parentAllele = null;
     }
 }

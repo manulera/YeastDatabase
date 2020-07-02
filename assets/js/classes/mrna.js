@@ -48,7 +48,6 @@ export default class mRNA {
     translate()
     {
         this.aa_array= sequence_utils.getAminoAcidDataForEachBaseOfDna(this.cds,true,null,false);
-        console.log(this.aa_array);
         this.protein_sequence="";
         for (let i = 0; i < this.aa_array.length; i+=3) {
             this.protein_sequence+=this.aa_array[i].aminoAcid.value;

@@ -32,7 +32,7 @@ class StrainSourceController extends AbstractController
         // We create a form with the subroutes of the other controllers
         $this->controllerPossibilities = [
             'Import strain' => 'custom',
-            'Edit/ delete locus' => 'molbiol',
+            'Transformation' => 'molbiol',
             'Mating' => 'mating',
             'Add plasmid' => 'plasmid'
         ];

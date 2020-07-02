@@ -28,6 +28,7 @@ $(document).ready(function () {
                     options.forEach(option => {
                         select_element.add(option);
                     });
+                    select_element.selectedIndex = 0;
                     
                 },
                 error: function()
