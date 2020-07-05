@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Tag a protein in the N-term using Bahler method</h1>
+
+{{form_start(form)}}
+{% include "forms/strain_source/molbiol_allele_chunky_type.html.twig" with {'form': form} %}
+{{form_end(form)}}
+{% endblock %}
+

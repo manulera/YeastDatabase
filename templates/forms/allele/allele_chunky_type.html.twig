@@ -29,19 +29,19 @@
 {% block body %}
 {{ parent() }}
 {% if form.nMarker is defined %}
-{{form_row(form.nMarker,{attr:{class:'chosen-select', 'data-placeholder':'Select marker'}})}}
+{{form_row(form.nMarker,{label: "N-terminal marker",attr:{class:'chosen-select', 'data-placeholder':'Select marker'}})}}
 {% endif %}
 {% if form.promoter is defined %}
 {{form_row(form.promoter,{attr:{class:'chosen-select', 'data-placeholder':'Select promoter'}})}}
 {% endif %}
 {% if form.nTag is defined %}
-{{form_row(form.nTag,{attr:{class:'chosen-select', 'data-placeholder':'Select tag'}})}}
+{{form_row(form.nTag,{label: "N-terminal tag",attr:{class:'chosen-select', 'data-placeholder':'Select tag'}})}}
 {% endif %}
 {% if form.cTag is defined %}
-{{form_row(form.cTag,{attr:{class:'chosen-select', 'data-placeholder':'Select tag'}})}}
+{{form_row(form.cTag,{label: "C-terminal tag",attr:{class:'chosen-select', 'data-placeholder':'Select tag'}})}}
 {% endif %}
 {% if form.cMarker is defined %}
-{{form_row(form.cMarker,{attr:{class:'chosen-select', 'data-placeholder':'Select marker'}})}}
+{{form_row(form.cMarker,{label: "C-terminal marker",attr:{class:'chosen-select', 'data-placeholder':'Select marker'}})}}
 {% endif %}
 {% if form.pointMutations is defined %}
 <div>Point mutations</div>

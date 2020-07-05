@@ -2,9 +2,12 @@
 
 {% block allele_section %}
 {{ parent() }}
-{% for allele_deletion in form.alleles %}
-{% include "forms/allele/allele_deletion_type.html.twig"  with {'form': allele_deletion}%}    
+{% for allele in form.alleles %}
+{% include "forms/allele/marker_switch_type.html.twig"  with {'form': allele}%}    
 {% endfor %}
+{% if form.alleles|length==0 %}
+    {{ form_widget(form.alleles) }}
+{% endif %}
 {% endblock %}
 
 {% block javascripts %}

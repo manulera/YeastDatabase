@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Plasmid;
 use App\Entity\Oligo;
+use App\Entity\Strain;
 use App\Repository\OligoRepository;
 use App\Repository\PlasmidRepository;
 use Doctrine\ORM\EntityRepository;
@@ -26,11 +27,6 @@ class MolBiolType extends StrainSourceType
 
         parent::buildForm($builder, $options);
         $builder
-            ->add('strainsIn', CollectionType::class, [
-                'entry_type' => StrainPickerType::class,
-                'allow_add' => false,
-                'required' => true,
-            ])
             ->add('plasmids', EntityType::class, [
                 'class' => Plasmid::class,
                 'multiple' => true,
@@ -55,8 +51,25 @@ class MolBiolType extends StrainSourceType
             FormEvents::POST_SET_DATA,
             function (FormEvent $event) {
                 $form = $event->getForm();
-                if ($form->get('strainsIn')->getData() === null) {
+                $strains_in = $form->getData()->getStrainsIn();
+                if (count($strains_in) == 0) {
+                    $form->add('strainsIn', CollectionType::class, [
+                        'entry_type' => StrainPickerType::class,
+                        'allow_add' => false,
+                        'required' => true,
+                    ]);
                     $form->get('strainsIn')->setData([null]);
+                } elseif (count($strains_in) == 1) {
+                    $form->add('strainsIn', CollectionType::class, [
+                        'entry_type' => EntityType::class,
+                        'allow_add' => false,
+                        'required' => true,
+                        'attr' => ['readonly' => true],
+                        'entry_options' => [
+                            'class' => Strain::class,
+                            'choices' => [$strains_in[0]]
+                        ]
+                    ]);
                 }
             }
 

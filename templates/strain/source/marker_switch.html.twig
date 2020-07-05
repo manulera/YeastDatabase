@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Change the marker of an allele</h1>
+
+{{form_start(form)}}
+{% include "forms/strain_source/molbiol_marker_switch_type.html.twig" with {'form': form} %}
+{{form_end(form)}}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('strain/source/marker_switch') }}
+{% endblock %}

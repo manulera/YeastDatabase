@@ -28,6 +28,8 @@ function makeAjaxRequest(i) {
                 // Here we select the first element of the list. This is important when filtering with the id.
                 // For example, when querying id 31, you want the id=31 to show up before id=331
                 select_element.selectedIndex = 0;
+                var this_event = new Event('strains_added');
+                select_element.dispatchEvent(this_event);
             },
             error: function()
             {

@@ -41,8 +41,8 @@ var ajaxRequestFunction = function() {
 $(document).ready( function() {
     
     $('#form_strain1_strain').change(ajaxRequestFunction);
-    $('#form_strain1_strain').on('DOMNodeInserted',ajaxRequestFunction);
+    $('#form_strain1_strain').on('strains_added',ajaxRequestFunction);
     $('#form_strain2_strain').change(ajaxRequestFunction);
-    $('#form_strain2_strain').on('DOMNodeInserted',ajaxRequestFunction);
+    $('#form_strain2_strain').on('strains_added',ajaxRequestFunction);
 
 });

@@ -2,20 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\Allele;
 use App\Entity\StrainSource;
 use App\Entity\Strain;
 use App\Entity\StrainSourceTag;
-use App\Form\AlleleChunkyType;
-use App\Form\AlleleDeletionType;
 use App\Form\MarkerSwitchType;
 use App\Form\MolBiolAlleleChunkyType;
 use App\Form\MolBiolAlleleDeletionType;
-use App\Form\StrainSourceType;
 use App\Service\Genotyper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authentication\RememberMe\PersistentToken;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * @Route("/strain/new/molbiol", name="strain.source.molbiol.")
@@ -61,21 +57,33 @@ class MolBiolController extends StrainSourceController
     {
 
         if ($option == 'deletion') {
-            $allele_form_template = "forms/allele/allele_deletion_type.html.twig";
+            $template = "strain/source/molbiol_deletion.html.twig";
             $form = $this->createForm(MolBiolAlleleDeletionType::class);
         } else {
-            $allele_form_template = "forms/allele/allele_chunky_type.html.twig";
             $form = $this->createForm(MolBiolAlleleChunkyType::class, null, ['allele_options' => ['fields2show' => $option]]);
+            switch ($option) {
+                case "cTag":
+                    $template = "strain/source/bahler_cTag.html.twig";
+                    break;
+                case "nTag":
+                    $template = "strain/source/bahler_nTag.html.twig";
+                    break;
+                case "promoter":
+                    $template = "strain/source/bahler_promoter.html.twig";
+                    break;
+                case "promoter_nTag":
+                    $template = "strain/source/bahler_promoter_nTag.html.twig";
+                    break;
+            }
         }
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->persistMolBiol($form->getData(), $form->get("numberOfClones")->getData());
         }
         return $this->render(
-            'strain/source/molbiol.html.twig',
+            $template,
             [
-                'form' => $form->createView(),
-                'allele_form_template' => $allele_form_template
+                'form' => $form->createView()
             ]
         );
     }
@@ -85,7 +93,6 @@ class MolBiolController extends StrainSourceController
      */
     public function transformationAction(Request $request)
     {
-        $allele_form_template = "forms/allele/allele_chunky_type.html.twig";
         $form = $this->createForm(MolBiolAlleleChunkyType::class, null, ['allele_options' => ['fields2show' => "all"]]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -93,27 +100,32 @@ class MolBiolController extends StrainSourceController
             return $this->persistMolBiol($form->getData(), $form->get("numberOfClones")->getData());
         }
         return $this->render(
-            'strain/source/molbiol.html.twig',
+            'strain/source/transformation_custom.html.twig',
             [
                 'form' => $form->createView(),
-                'allele_form_template' => $allele_form_template
             ]
         );
     }
 
     /**
-     * @Route("/markerswitch", name="markerswitch")
+     * @Route("/markerswitch/{strain}", name="markerswitch")
+     * @Method("GET")
      */
-    public function markerSwitchAction(Request $request)
+    public function markerSwitchAction(Request $request, Strain $strain = null)
     {
-        $strain = $this->getDoctrine()->getRepository(Strain::class)->find(35);
         $ss = new StrainSource;
-        $ss->addStrainsIn($strain);
+        if ($strain !== null) {
+            $ss->addStrainsIn($strain);
+        }
+
         $form = $this->createForm(MarkerSwitchType::class, $ss);
         $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->persistMolBiol($form->getData(), $form->get("numberOfClones")->getData());
+        }
 
         return $this->render(
-            'forms/allele/marker_switch.html.twig',
+            'strain/source/marker_switch.html.twig',
             [
                 'form' => $form->createView(),
             ]

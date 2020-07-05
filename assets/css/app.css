@@ -33,3 +33,9 @@ td.no-break
   overflow: hidden;
   white-space: nowrap;
 }
+
+label.label-left{
+  text-align: left;
+  align-items: left;
+  justify-content: left;
+}

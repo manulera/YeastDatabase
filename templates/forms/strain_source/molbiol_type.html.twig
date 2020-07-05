@@ -1,26 +1,32 @@
 {% extends "forms/strain_source/strain_source_type.html.twig" %}
 
 {% block body %}
-{{ parent() }}
-<div>Strain</div>
-{% for strainPicker in form.strainsIn %}
-    <div class="form-inline picker-form flex">
-    {% include "forms/strain_picker.html.twig"  with {'form': strainPicker}%}
-    </div>    
-{% endfor %}
-{% for allele in form.alleles %}
-{% include allele_form_template  with {'form': allele}%}    
-{% endfor %}
-
-{{form_row(form.plasmids,{attr:{class:'chosen-select'}})  }}
-{{form_row(form.oligos,{attr:{class:'chosen-select'}})  }}
-{{form_row(form.numberOfClones)  }}
+	{{ parent() }}
+	<div>Select input strain</div>
+	{% for strainPicker in form.strainsIn %}
+		{% if strainPicker.filterById is defined %}
+		<div class="form-inline picker-form flex">
+			{% include "forms/strain_picker.html.twig"  with {'form': strainPicker}%}
+		</div>
+		{% else %}
+		{{form_row(strainPicker,{label: false})}}
+		{% endif %}
+	{% endfor %}
+	<div id="allele_section">
+    {% block allele_section %}
+    {% endblock %}
+	</div>
+	{{form_row(form.numberOfClones)  }}
+	<h2>Resources</h2>
+	{{form_row(form.plasmids,{attr:{class:'chosen-select'}})  }}
+	{{form_row(form.oligos,{attr:{class:'chosen-select'}})  }}
+	
 
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}    
+	{{ parent() }}
 {% endblock %}
 {% block stylesheets %}
-    {{ parent() }}
+	{{ parent() }}
 {% endblock %}

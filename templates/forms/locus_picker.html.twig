@@ -1,8 +1,8 @@
 {% form_theme form 'form_themes/spanfields2.html.twig' %}
 
-{{form_row(form.filterByLocusName,{ attr: {placeholder:'Filter by locus name'}, 'row_attr' : { 'class': 'filter-locus' }})}}
-{{form_row(form.filterByPombaseId,{ attr: {placeholder:'Filter by Pombase Id'}, 'row_attr' : { 'class': 'filter-locus' }})}}
-{{form_row(form.locus,{ 'row_attr' : { 'style': 'min-width:200px;' }})}}
+{{form_row(form.filterByLocusName,{ label: false, attr: {placeholder:'Filter by locus name'}, 'row_attr' : { 'class': 'filter-locus' }})}}
+{{form_row(form.filterByPombaseId,{ label: false, attr: {placeholder:'Filter by Pombase Id'}, 'row_attr' : { 'class': 'filter-locus' }})}}
+{{form_row(form.locus,{ label: false, 'row_attr' : { 'style': 'min-width:200px;' }})}}
 
 
 

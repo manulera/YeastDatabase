@@ -28,12 +28,12 @@ Encore
     .addEntry('strain/source/mating', './assets/js/strain/source/mating.js')
     .addEntry('strain/source/custom_allele', './assets/js/strain/source/custom_allele.js')
     .addEntry('strain/network', './assets/js/strain/network.js')
-    .addEntry('strain/source/molbiol', './assets/js/strain/source/molbiol.js')
     .addEntry('custom-file-label', './assets/js/custom-file-label.js')
     .addEntry('form_type/locus_picker', './assets/js/form_type/locus_picker.js')
     .addEntry('form_type/strain_picker', './assets/js/form_type/strain_picker.js')
     .addEntry('external_imports/chosen', './assets/js/external_imports/chosen')
     .addEntry('dummy', './assets/js/dummy/dummy.js')
+    .addEntry('strain/source/marker_switch', './assets/js/strain/source/marker_switch.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
     //TODO: Is this ok?

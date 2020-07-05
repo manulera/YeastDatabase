@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Change the promoter of a protein gene with Bahler method</h1>
+{# The following form allows you to create a new strain with a c-term tag.
+<ul>
+<li>Select the input strain</li>
+<li>Select the target locus</li>
+<li>Select the C-terminal tag</li>
+<li>Select the marker added at the c-terminus</li>
+<li>Select the number of clones that you will include in the collection</li>
+<li>Document the resources used (plasmids and oligos)</li>
+</ul> #}
+
+{{form_start(form)}}
+{% include "forms/strain_source/molbiol_allele_chunky_type.html.twig" with {'form': form} %}
+{{form_end(form)}}
+{% endblock %}
+

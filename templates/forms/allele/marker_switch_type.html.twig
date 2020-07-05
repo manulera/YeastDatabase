@@ -1,0 +1,19 @@
+{% extends 'forms/allele/allele_type.html.twig' %}
+
+{% block body %}
+{{ parent() }}
+<div class="form-inline">
+{% form_theme form 'form_themes/spanfields2.html.twig' %}
+{{form_row(form.name, {'label_attr': {'class': 'label-left'}, label: "Original allele"})}}
+{% if form.nMarker is defined %}
+    {{form_row(form.nMarker, {label: 'New N-term marker','label_attr': {'class': 'label-left'}})}}
+{% endif %}
+{% if form.cMarker is defined %}
+    {{form_row(form.cMarker, {label: 'New C-term marker','label_attr': {'class': 'label-left'}})}}
+{% endif %}
+{% if form.marker is defined %}
+    {{form_row(form.marker, {label: 'New marker','label_attr': {'class': 'label-left'}})}}
+{% endif %}
+
+</div>
+{% endblock %}

@@ -44,6 +44,7 @@ class MolBiolAlleleDeletionType extends MolBiolType
         parent::configureOptions($resolver);
         $resolver->setDefaults([
             'allele_options' => null,
+            
         ]);
     }
 }
