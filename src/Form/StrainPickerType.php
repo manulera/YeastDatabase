@@ -57,6 +57,7 @@ class StrainPickerType extends AbstractType implements DataMapperInterface
             ->setDataMapper($this);
 
         $formModifier = function (Form $form, array $filter_array) {
+
             $id = $filter_array['filterById'];
             $genotype = $filter_array['filterByGenotype'];
             // We only filter in any of these criteria are met
@@ -73,6 +74,15 @@ class StrainPickerType extends AbstractType implements DataMapperInterface
             FormEvents::POST_SET_DATA,
             function (FormEvent $event) use ($formModifier) {
                 $form = $event->getForm();
+                $strain = $form->getData();
+                if ($strain) {
+                    $form->add('strain', EntityType::class, [
+                        'required' => true,
+                        'class' => Strain::class,
+                        'choices' => [$strain],
+
+                    ]);
+                }
                 $arr = [
                     'filterById' => $form->get('filterById')->getData(),
                     'filterByGenotype' => $form->get('filterByGenotype')->getData(),
@@ -120,7 +130,7 @@ class StrainPickerType extends AbstractType implements DataMapperInterface
         /** @var FormInterface[] $forms */
         $forms = iterator_to_array($forms);
 
-        // initialize form field values
+        // initialize form field values    
         $forms['strain']->setData($viewData);
     }
 }

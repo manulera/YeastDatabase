@@ -57,7 +57,7 @@ class MolBiolController extends StrainSourceController
     {
 
         if ($option == 'deletion') {
-            $template = "strain/source/molbiol_deletion.html.twig";
+            $template = "strain/source/bahler_deletion.html.twig";
             $form = $this->createForm(MolBiolAlleleDeletionType::class);
         } else {
             $form = $this->createForm(MolBiolAlleleChunkyType::class, null, ['allele_options' => ['fields2show' => $option]]);
@@ -113,12 +113,14 @@ class MolBiolController extends StrainSourceController
      */
     public function markerSwitchAction(Request $request, Strain $strain = null)
     {
-        $ss = new StrainSource;
-        if ($strain !== null) {
-            $ss->addStrainsIn($strain);
-        }
 
-        $form = $this->createForm(MarkerSwitchType::class, $ss);
+        if ($strain !== null) {
+            $ss = new StrainSource;
+            $ss->addStrainsIn($strain);
+            $form = $this->createForm(MarkerSwitchType::class, $ss);
+        } else {
+            $form = $this->createForm(MarkerSwitchType::class);
+        }
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->persistMolBiol($form->getData(), $form->get("numberOfClones")->getData());

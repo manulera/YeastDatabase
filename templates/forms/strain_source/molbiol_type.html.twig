@@ -4,13 +4,10 @@
 	{{ parent() }}
 	<div>Select input strain</div>
 	{% for strainPicker in form.strainsIn %}
-		{% if strainPicker.filterById is defined %}
 		<div class="form-inline picker-form flex">
 			{% include "forms/strain_picker.html.twig"  with {'form': strainPicker}%}
 		</div>
-		{% else %}
-		{{form_row(strainPicker,{label: false})}}
-		{% endif %}
+		
 	{% endfor %}
 	<div id="allele_section">
     {% block allele_section %}
