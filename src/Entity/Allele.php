@@ -39,13 +39,6 @@ abstract class Allele
     private $locus;
 
     /**
-     * @Groups("allele")
-     * @ORM\ManyToOne(targetEntity="App\Entity\StrainSource", inversedBy="allelesIn")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $strainSourceIn;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Strain", mappedBy="alleles")
      */
     private $strains;
@@ -81,18 +74,6 @@ abstract class Allele
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getStrainSource(): ?StrainSource
-    {
-        return $this->strainSource;
-    }
-
-    public function setStrainSource(?StrainSource $strainSource): self
-    {
-        $this->strainSource = $strainSource;
 
         return $this;
     }
@@ -155,7 +136,6 @@ abstract class Allele
     public function __clone()
     {
         $this->strains = null;
-        $this->strainSource = null;
         $this->id = null;
     }
 
