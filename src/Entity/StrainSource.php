@@ -89,11 +89,14 @@ class StrainSource
                 return $id1 . "x$id2 mating";
             case "MolBiol":
                 $id1 = $strains_in[0]->getId();
-                return "$id1 modified";
+                return "$id1 transformed";
             case "Plasmid":
                 $id1 = $strains_in[0]->getId();
                 $plasmid = $this->getPlasmids()[0];
                 return "Plasmid $plasmid into $id1";
+            case "MarkerSwitch":
+                $id1 = $strains_in[0]->getId();
+                return "Marker switch in $id1";
         }
     }
 

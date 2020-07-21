@@ -8,7 +8,10 @@ var ajaxRequestFunction = function() {
     $.ajax({
         url: "/strain/new/molbiol/markerswitch/" + $(this).val(),
         success: function (html) {
-            $("#allele_section").replaceWith($(html).find("#allele_section"));
+            if ($(html).find("#allele_section").length)
+            {
+                $("#allele_section").replaceWith($(html).find("#allele_section"));
+            }
             
             // if ($(html).find("#form_save").length)
             // {

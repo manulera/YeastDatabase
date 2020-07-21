@@ -7,7 +7,7 @@ import '../../css/strain/network.css';
 $(document).ready(function () {
     // set the dimensions and margins of the graph
     var width = 900,
-        height = 400;
+        height = 900;
 
     // append the svg object to the body of the page
     var svg = d3.select("#my_dataviz")

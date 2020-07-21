@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\DataClass\MarkerSwitchAlleleChunky;
+use App\Entity\AlleleChunky;
 use App\Entity\Locus;
-use App\Form\MolBiolAlleleChunkyType;
+use App\Entity\Marker;
+use App\Form\MarkerSwitchAlleleChunkyType;
 use App\Form\MolBiolType;
 use App\Form\StrainPickerType;
 use App\Form\StrainSourceType;
@@ -23,24 +26,11 @@ class DummyController extends AbstractController
      */
     public function index(Request $request)
     {
-        // $builder = $this->createFormBuilder();
-        // $builder
-        //     ->add('strain', StrainPickerType::class)
-        //     ->add('submit', SubmitType::class, [
-        //         'attr' => [
-        //             'class' => 'btn btn-primary float-right',
-        //         ]
-        //     ]);
-        // $form = $builder->getForm();
-        // $form->handleRequest($request);
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     dump($form->getData());
-        // }
+        $allele_chunky_repository = $this->getDoctrine()->getRepository(AlleleChunky::class);
+        $form = $this->createForm(MarkerSwitchAlleleChunkyType::class, [
+            'originalAllele' => $allele_chunky_repository->find(2),
+        ]);
 
-        // return $this->render('dummy/index.html.twig', [
-        //     'form' => $form->createView(),
-        // ]);
-        $form = $this->createForm(MolBiolAlleleChunkyType::class, null, ['allele_options' => ['fields2show' => 'all']]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             dump($form->getData());

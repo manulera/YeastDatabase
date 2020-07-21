@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Plasmid;
 use App\Entity\Oligo;
+use App\Entity\Strain;
 use App\Repository\OligoRepository;
 use App\Repository\PlasmidRepository;
 use Doctrine\ORM\EntityRepository;
@@ -30,6 +31,7 @@ class MolBiolType extends StrainSourceType
                 'entry_type' => StrainPickerType::class,
                 'allow_add' => false,
                 'required' => true,
+                'empty_data' => []
             ])
             ->add('plasmids', EntityType::class, [
                 'class' => Plasmid::class,

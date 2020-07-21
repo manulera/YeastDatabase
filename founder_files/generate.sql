@@ -18,4 +18,6 @@ insert into strain_source_tag (name)
 values ('Import'),
 ('Mating'),
 ('MolBiol'),
-('Plasmid');
+('Plasmid'),
+('MarkerSwitch')
+;

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\StrainSource;
 use App\Entity\Strain;
+use App\Entity\MolBiol;
 use App\Entity\StrainSourceTag;
 use App\Form\MarkerSwitchType;
 use App\Form\MolBiolAlleleChunkyType;
@@ -12,6 +13,8 @@ use App\Service\Genotyper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\Test\FormInterface;
 
 /**
  * @Route("/strain/new/molbiol", name="strain.source.molbiol.")
@@ -96,7 +99,7 @@ class MolBiolController extends StrainSourceController
         $form = $this->createForm(MolBiolAlleleChunkyType::class, null, ['allele_options' => ['fields2show' => "all"]]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // dump($form->getData());
+            dump($form->getData());
             return $this->persistMolBiol($form->getData(), $form->get("numberOfClones")->getData());
         }
         return $this->render(
@@ -121,9 +124,11 @@ class MolBiolController extends StrainSourceController
         } else {
             $form = $this->createForm(MarkerSwitchType::class);
         }
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->persistMolBiol($form->getData(), $form->get("numberOfClones")->getData());
+            $ss = $this->processMarkerSwitchForm($form);
+            return $this->persistMarkerSwitch($ss, $form->get("numberOfClones")->getData());
         }
 
         return $this->render(
@@ -134,15 +139,92 @@ class MolBiolController extends StrainSourceController
         );
     }
 
+    private function processMarkerSwitchForm(Form $form)
+    {
+
+        $strain_source = $form->getData();
+        $markerSwitchFormsChunky = $form->get('alleleChunkies')->getData();
+
+
+        foreach ($markerSwitchFormsChunky as $this_form) {
+
+            // Here we check both conditions because it could be that both markers have been changed.
+            $n_changed = array_key_exists('nMarker', $this_form) && $this_form['nMarker'];
+            $c_changed = array_key_exists('cMarker', $this_form) && $this_form['cMarker'];
+            if ($n_changed || $c_changed) {
+                $new_allele = clone $this_form['originalAllele'];
+                if ($n_changed) {
+                    $new_allele->setNMarker($this_form['nMarker']);
+                }
+                if ($c_changed) {
+                    $new_allele->setCMarker($this_form['cMarker']);
+                }
+                $new_allele->setParentAllele($this_form['originalAllele']);
+                $strain_source->addAllele($new_allele);
+            }
+        }
+        // $allele_deletions = $form->get('alleleDeletions')->getData();
+        // foreach ($allele_deletions as $allele_deletion) {
+        //     $changed = array_key_exists('marker', $allele_deletion) && $allele_deletion['marker'];
+        //     if ($changed) {
+        //         $strain_source->addAllele($allele_deletion);
+        //     }
+        // }
+
+        return $strain_source;
+    }
+
+    public function persistMarkerSwitch(StrainSource $strain_source, int $nb_clones)
+    {
+        // A few checks:
+        dump($strain_source->getStrainsIn());
+        if (count($strain_source->getStrainsIn()) != 1) {
+            return "Input strains should be 1";
+        }
+        if (count($strain_source->getStrainsOut()) != 0) {
+            return "Output strains should be empty";
+        }
+        if ($nb_clones === null || $nb_clones < 0) {
+            return "Number of clones should be bigger than zero";
+        }
+
+        $new_alleles = $strain_source->getAlleles();
+
+        foreach ($strain_source->getAlleles() as $allele) {
+            $allele->updateName();
+        }
+
+
+        if ($nb_clones > 1) {
+            for ($i = 1; $i < $nb_clones; $i++) {
+                foreach ($new_alleles as $allele) {
+                    $strain_source->addAllele(clone $allele);
+                }
+            }
+        }
+        dump($new_alleles);
+        for ($i = 0; $i < $nb_clones; $i++) {
+            $this_allele = $strain_source->getAlleles()[$i];
+            $this_strain = clone $strain_source->getStrainsIn()[0];
+            $this_strain->addAllele($this_allele);
+            $this_strain->removeAllele($this_allele->getParentAllele());
+            $this_strain->updateGenotype($this->genotyper);
+            $strain_source->addStrainsOut($this_strain);
+        }
+
+
+        $tag = $this->getDoctrine()->getRepository(StrainSourceTag::class)->findOneBy(['name' => 'MarkerSwitch']);
+        $strain_source->addStrainSourceTag($tag);
+        return $this->persistStrainSource($strain_source);
+    }
+
     public function persistMolBiol(StrainSource $strain_source, int $nb_clones)
     {
         // A few checks:
         if (count($strain_source->getStrainsIn()) != 1) {
             return "Input strains should be 1";
         }
-        if (count($strain_source->getAlleles()) != 1) {
-            return "Input alleles should be 1";
-        }
+
         if (count($strain_source->getStrainsOut()) != 0) {
             return "Output strains should be empty";
         }

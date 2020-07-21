@@ -11,6 +11,14 @@
 {# <div id="my_dataviz">
 </div> #}
 
+<h4>Source:</h4>
+
+{% if allele.parentAllele %}
+<p>This allele was generated from a pre-existing allele: {% include "allele/reference.html.twig" with {"allele": allele.parentAllele} %}</p>
+{% else %}
+<p>This allele was generated from the wild type locus.</p>
+{% endif %}
+
 <h4> Strains: </h4>
 <ul>
 {% for strain in allele.getStrains %}

@@ -22,29 +22,12 @@ class AlleleChunkyType extends AlleleType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $options_parent = $options;
-        unset($options_parent['fields2show']);
 
-        parent::buildForm($builder, $options_parent);
 
         switch ($options['fields2show']) {
-            case "marker_switch":
-                $builder->remove('locus');
-                $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
-
-                    $form = $event->getForm();
-                    $data = $form->getData();
-                    $form->add('name', null, ['attr' => array('readonly' => true)]);
-                    if ($data->getNMarker()) {
-                        $form->add('nMarker');
-                    }
-                    if ($data->getCMarker()) {
-                        $form->add('cMarker');
-                    }
-                });
-                break;
             case "promoter":
                 $builder
-                    ->add('nMarker')
+                    // ->add('nMarker')
                     ->add('promoter');
                 break;
             case "promoter_nTag":
@@ -93,7 +76,6 @@ class AlleleChunkyType extends AlleleType
         parent::configureOptions($resolver);
         $resolver->setDefaults([
             'data_class' => AlleleChunky::class,
-            'fields2show' => ''
         ]);
     }
 }

@@ -32,6 +32,7 @@ class AlleleType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Allele::class,
+            'fields2show' => ''
         ]);
     }
 }

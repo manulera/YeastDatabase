@@ -13,6 +13,14 @@ svg circle {
   stroke: #1b3978;
   r:5;
  }
+
+ g .MarkerSwitch circle
+ {
+  fill: #505050;
+  stroke: #202020;
+  r:5;
+ }
+
  g .Plasmid circle
  {
   fill: #858585;

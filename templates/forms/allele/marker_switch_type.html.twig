@@ -4,15 +4,17 @@
 {{ parent() }}
 <div class="form-inline">
 {% form_theme form 'form_themes/spanfields2.html.twig' %}
-{{form_row(form.name, {'label_attr': {'class': 'label-left'}, label: "Original allele"})}}
+{% if form.originalAllele is defined %}
+    {{form_row(form.originalAllele, {label: 'Original allele','label_attr': {'class': 'label-left'}})}}
+{% endif %}
 {% if form.nMarker is defined %}
-    {{form_row(form.nMarker, {label: 'New N-term marker','label_attr': {'class': 'label-left'}})}}
+    {{form_row(form.nMarker, {label: 'New N-term marker (if changed)','label_attr': {'class': 'label-left'}})}}
 {% endif %}
 {% if form.cMarker is defined %}
-    {{form_row(form.cMarker, {label: 'New C-term marker','label_attr': {'class': 'label-left'}})}}
+    {{form_row(form.cMarker, {label: 'New C-term marker (if changed)','label_attr': {'class': 'label-left'}})}}
 {% endif %}
 {% if form.marker is defined %}
-    {{form_row(form.marker, {label: 'New marker','label_attr': {'class': 'label-left'}})}}
+    {{form_row(form.marker, {label: 'New marker (if changed)','label_attr': {'class': 'label-left'}})}}
 {% endif %}
 
 </div>

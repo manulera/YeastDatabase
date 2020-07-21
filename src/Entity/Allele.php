@@ -40,10 +40,10 @@ abstract class Allele
 
     /**
      * @Groups("allele")
-     * @ORM\ManyToOne(targetEntity="App\Entity\StrainSource", inversedBy="alleles")
+     * @ORM\ManyToOne(targetEntity="App\Entity\StrainSource", inversedBy="allelesIn")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $strainSource;
+    private $strainSourceIn;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Strain", mappedBy="alleles")
@@ -51,9 +51,12 @@ abstract class Allele
     private $strains;
 
     /**
-     * @ORM\OneToOne(targetEntity=Allele::class, cascade={"persist", "remove"})
+     * @Groups("allele")
+     * @ORM\ManyToOne(targetEntity=Allele::class)
      */
     private $parentAllele;
+
+
 
     public function __construct()
     {
@@ -139,18 +142,6 @@ abstract class Allele
         return $this;
     }
 
-    public function getParentAllele(): ?self
-    {
-        return $this->parentAllele;
-    }
-
-    public function setParentAllele(?self $parentAllele): self
-    {
-        $this->parentAllele = $parentAllele;
-
-        return $this;
-    }
-
     public function hasMarker(): bool
     {
         return false;
@@ -166,6 +157,17 @@ abstract class Allele
         $this->strains = null;
         $this->strainSource = null;
         $this->id = null;
-        $this->parentAllele = null;
+    }
+
+    public function getParentAllele(): ?self
+    {
+        return $this->parentAllele;
+    }
+
+    public function setParentAllele(?self $parentAllele): self
+    {
+        $this->parentAllele = $parentAllele;
+
+        return $this;
     }
 }
