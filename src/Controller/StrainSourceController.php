@@ -84,7 +84,7 @@ class StrainSourceController extends AbstractController
         $strain_source->setDate(new \DateTime(date('Y-m-d H:i:s')));
         $strain_source->setCreator($this->container->get('security.token_storage')->getToken()->getUser());
         $em->persist($strain_source);
-        foreach ($strain_source->getAlleles() as $allele) {
+        foreach ($strain_source->getAllelesOut() as $allele) {
             $em->persist($allele);
         }
         foreach ($strain_source->getStrainsOut() as $strain) {

@@ -17,7 +17,7 @@ class MolBiolAlleleDeletionType extends MolBiolType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('alleles', CollectionType::class, [
+        $builder->add('allelesOut', CollectionType::class, [
             'entry_type' => AlleleDeletionType::class,
             'allow_add' => false,
             'required' => true,
@@ -31,8 +31,8 @@ class MolBiolAlleleDeletionType extends MolBiolType
             FormEvents::POST_SET_DATA,
             function (FormEvent $event) {
                 $form = $event->getForm();
-                if ($form->get('alleles')->getData() === null) {
-                    $form->get('alleles')->setData([new AlleleDeletion()]);
+                if ($form->get('allelesOut')->getData() === null) {
+                    $form->get('allelesOut')->setData([new AlleleDeletion()]);
                 }
             }
 
@@ -44,7 +44,7 @@ class MolBiolAlleleDeletionType extends MolBiolType
         parent::configureOptions($resolver);
         $resolver->setDefaults([
             'allele_options' => null,
-            
+
         ]);
     }
 }

@@ -16,7 +16,7 @@ class MolBiolAlleleChunkyType extends MolBiolType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('alleles', CollectionType::class, [
+        $builder->add('allelesOut', CollectionType::class, [
             'entry_type' => AlleleChunkyType::class,
             'allow_add' => false,
             'required' => true,
@@ -30,8 +30,8 @@ class MolBiolAlleleChunkyType extends MolBiolType
             FormEvents::POST_SET_DATA,
             function (FormEvent $event) {
                 $form = $event->getForm();
-                if ($form->get('alleles')->getData() === null) {
-                    $form->get('alleles')->setData([new AlleleChunky()]);
+                if ($form->get('allelesOut')->getData() === null) {
+                    $form->get('allelesOut')->setData([new AlleleChunky()]);
                 }
             }
 

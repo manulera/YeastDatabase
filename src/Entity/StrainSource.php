@@ -28,11 +28,6 @@ class StrainSource
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Allele", mappedBy="strainSource")
-     */
-    protected $alleles;
-
-    /**
      * @ORM\Column(type="date")
      */
     private $date;
@@ -66,14 +61,25 @@ class StrainSource
      */
     private $strainSourceTags;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Allele::class, mappedBy="strainSource")
+     */
+    private $allelesOut;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Allele::class, inversedBy="strainSourcesIn")
+     */
+    private $allelesIn;
+
     public function __construct()
     {
         $this->strainsOut = new ArrayCollection();
-        $this->alleles = new ArrayCollection();
         $this->plasmids = new ArrayCollection();
         $this->oligos = new ArrayCollection();
         $this->strainsIn = new ArrayCollection();
         $this->strainSourceTags = new ArrayCollection();
+        $this->allelesOut = new ArrayCollection();
+        $this->allelesIn = new ArrayCollection();
     }
 
     public function __toString()
@@ -140,37 +146,6 @@ class StrainSource
             // set the owning side to null (unless already changed)
             if ($strainsOut->getSource() === $this) {
                 $strainsOut->setSource(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Allele[]
-     */
-    public function getAlleles(): Collection
-    {
-        return $this->alleles;
-    }
-
-    public function addAllele(Allele $allele): self
-    {
-        if (!$this->alleles->contains($allele)) {
-            $this->alleles[] = $allele;
-            $allele->setStrainSource($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAllele(Allele $allele): self
-    {
-        if ($this->alleles->contains($allele)) {
-            $this->alleles->removeElement($allele);
-            // set the owning side to null (unless already changed)
-            if ($allele->getStrainSource() === $this) {
-                $allele->setStrainSource(null);
             }
         }
 
@@ -302,6 +277,63 @@ class StrainSource
         if ($this->strainSourceTags->contains($strainSourceTag)) {
             $this->strainSourceTags->removeElement($strainSourceTag);
             $strainSourceTag->removeStrainSource($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Allele[]
+     */
+    public function getAllelesOut(): Collection
+    {
+        return $this->allelesOut;
+    }
+
+    public function addAllelesOut(Allele $allelesOut): self
+    {
+        if (!$this->allelesOut->contains($allelesOut)) {
+            $this->allelesOut[] = $allelesOut;
+            $allelesOut->setStrainSource($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAllelesOut(Allele $allelesOut): self
+    {
+        if ($this->allelesOut->contains($allelesOut)) {
+            $this->allelesOut->removeElement($allelesOut);
+            // set the owning side to null (unless already changed)
+            if ($allelesOut->getStrainSource() === $this) {
+                $allelesOut->setStrainSource(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Allele[]
+     */
+    public function getAllelesIn(): Collection
+    {
+        return $this->allelesIn;
+    }
+
+    public function addAllelesIn(Allele $allelesIn): self
+    {
+        if (!$this->allelesIn->contains($allelesIn)) {
+            $this->allelesIn[] = $allelesIn;
+        }
+
+        return $this;
+    }
+
+    public function removeAllelesIn(Allele $allelesIn): self
+    {
+        if ($this->allelesIn->contains($allelesIn)) {
+            $this->allelesIn->removeElement($allelesIn);
         }
 
         return $this;

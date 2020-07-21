@@ -2,7 +2,7 @@
 
 {% block allele_section %}
 {{ parent() }}
-{% for allele_deletion in form.alleles %}
+{% for allele_deletion in form.allelesOut %}
 {% include "forms/allele/allele_deletion_type.html.twig"  with {'form': allele_deletion}%}    
 {% endfor %}
 {% endblock %}

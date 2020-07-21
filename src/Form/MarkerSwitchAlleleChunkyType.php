@@ -114,35 +114,5 @@ class MarkerSwitchAlleleChunkyType extends AbstractType
                 $formModifier($event, $data);
             }
         );
-
-        // $data = $builder->getData();
-        // dump($data);
-        // $builder
-        //     ->add(
-        //         'originalAllele',
-        //         EntityType::class,
-        //         [
-        //             'class' => AlleleChunky::class,
-        //             'choices' => [$data['originalAllele']]
-        //         ]
-        //     );
-        // if ($data['originalAllele']->getNMarker()) {
-        //     $builder->add(
-        //         'nMarker',
-        //         EntityType::class,
-        //         [
-        //             'class' => Marker::class,
-        //         ]
-        //     );
-        // }
-        // if ($data['originalAllele']->getCMarker()) {
-        //     $builder->add(
-        //         'cMarker',
-        //         EntityType::class,
-        //         [
-        //             'class' => Marker::class,
-        //         ]
-        //     );
-        // }
     }
 }

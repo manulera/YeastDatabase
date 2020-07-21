@@ -141,7 +141,7 @@ class StrainController extends AbstractController
 
             // If you orphan an allele, it should be deleted (you are sure the allele only 
             // exist in this strain because you already checked this strain has no children)
-            $alleles = $source->getAlleles();
+            $alleles = $source->getAllelesOut();
             foreach ($alleles as $allele) {
                 $em->remove($allele);
             }

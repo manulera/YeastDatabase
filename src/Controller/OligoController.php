@@ -137,6 +137,7 @@ class OligoController extends AbstractController
         while (!feof($input)) {
             $line = fgets($input);
             $split = explode(",", $line);
+            // TODO: There is a trailing comma at the end of each line
             if (count($split) != 3) {
                 continue;
             }

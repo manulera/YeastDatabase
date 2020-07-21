@@ -22,7 +22,7 @@ class AlleleChunkyType extends AlleleType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $options_parent = $options;
-
+        parent::buildForm($builder, $options_parent);
 
         switch ($options['fields2show']) {
             case "promoter":

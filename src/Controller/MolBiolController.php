@@ -79,6 +79,7 @@ class MolBiolController extends StrainSourceController
                     break;
             }
         }
+        dump($form);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->persistMolBiol($form->getData(), $form->get("numberOfClones")->getData());
@@ -188,9 +189,9 @@ class MolBiolController extends StrainSourceController
             return "Number of clones should be bigger than zero";
         }
 
-        $new_alleles = $strain_source->getAlleles();
+        $new_alleles = $strain_source->getAllelesOut();
 
-        foreach ($strain_source->getAlleles() as $allele) {
+        foreach ($strain_source->getAllelesOut() as $allele) {
             $allele->updateName();
         }
 
@@ -198,13 +199,13 @@ class MolBiolController extends StrainSourceController
         if ($nb_clones > 1) {
             for ($i = 1; $i < $nb_clones; $i++) {
                 foreach ($new_alleles as $allele) {
-                    $strain_source->addAllele(clone $allele);
+                    $strain_source->addAllelesOut(clone $allele);
                 }
             }
         }
         dump($new_alleles);
         for ($i = 0; $i < $nb_clones; $i++) {
-            $this_allele = $strain_source->getAlleles()[$i];
+            $this_allele = $strain_source->getAllelesOut()[$i];
             $this_strain = clone $strain_source->getStrainsIn()[0];
             $this_strain->addAllele($this_allele);
             $this_strain->removeAllele($this_allele->getParentAllele());
@@ -235,16 +236,16 @@ class MolBiolController extends StrainSourceController
         // If more than one clone has been generated, the alleles are different even though
         // their genotype is the same
 
-        $strain_source->getAlleles()[0]->updateName();
+        $strain_source->getAllelesOut()[0]->updateName();
 
         if ($nb_clones > 1) {
             for ($i = 1; $i < $nb_clones; $i++) {
-                $strain_source->addAllele(clone $strain_source->getAlleles()[0]);
+                $strain_source->addAllelesOut(clone $strain_source->getAllelesOut()[0]);
             }
         }
 
         for ($i = 0; $i < $nb_clones; $i++) {
-            $this_allele = $strain_source->getAlleles()[$i];
+            $this_allele = $strain_source->getAllelesOut()[$i];
             $this_strain = clone $strain_source->getStrainsIn()[0];
             $this_strain->addAllele($this_allele);
             $this_strain->updateGenotype($this->genotyper);

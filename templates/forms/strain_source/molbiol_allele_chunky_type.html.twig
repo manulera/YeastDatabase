@@ -2,7 +2,7 @@
 
 {% block allele_section %}
 {{ parent() }}
-{% for alleleChunky in form.alleles %}
+{% for alleleChunky in form.allelesOut %}
 {% include "forms/allele/allele_chunky_type.html.twig"  with {'form': alleleChunky}%}    
 {% endfor %}
 {% endblock %}

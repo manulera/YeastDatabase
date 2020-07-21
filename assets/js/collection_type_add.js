@@ -106,7 +106,7 @@ function makeAjaxRequest() {
     return $.ajax({
         url: "/sequencejson",
         data: {
-            locus_id: document.getElementById('mol_biol_allele_chunky_alleles_0_locus_locus').value,
+            locus_id: document.getElementById('mol_biol_allele_chunky_allelesOut_0_locus_locus').value,
         },
         dataType: 'json',
         async: false,
@@ -191,7 +191,7 @@ var thismRNA = null;
 
 $(document).ready(function () {
     var collection_holder = $('ul.entityType_list');
-    var locus_selector = document.getElementById('mol_biol_allele_chunky_alleles_0_locus_locus');
+    var locus_selector = document.getElementById('mol_biol_allele_chunky_allelesOut_0_locus_locus');
     // add the "add a EntityType" anchor and li to the EntityTypes ul
     // collection_holder.append(newLinkButt);
 
@@ -205,7 +205,7 @@ $(document).ready(function () {
         let button = $(ch.find('.add_EntityType_link'));
         button.on('click', function (e) {
             // add a new EntityType form (see next code block)
-            if (document.getElementById('mol_biol_allele_chunky_alleles_0_locus_locus').value != '') {
+            if (document.getElementById('mol_biol_allele_chunky_allelesOut_0_locus_locus').value != '') {
                 let new_form = addEntityTypeForm(ch, newLinkButt);
                 let input_ind = $(new_form).find(':input')[0];
                 if ($(input_ind).closest('table').hasClass("pointmutation-table")) {

@@ -49,11 +49,23 @@ abstract class Allele
      */
     private $parentAllele;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=StrainSource::class, inversedBy="allelesOut")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $strainSource;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=StrainSource::class, mappedBy="allelesIn")
+     */
+    private $strainSourcesIn;
+
 
 
     public function __construct()
     {
         $this->strains = new ArrayCollection();
+        $this->strainSourcesIn = new ArrayCollection();
     }
 
     public function __toString()
@@ -147,6 +159,46 @@ abstract class Allele
     public function setParentAllele(?self $parentAllele): self
     {
         $this->parentAllele = $parentAllele;
+
+        return $this;
+    }
+
+    public function getStrainSource(): ?StrainSource
+    {
+        return $this->strainSource;
+    }
+
+    public function setStrainSource(?StrainSource $strainSource): self
+    {
+        $this->strainSource = $strainSource;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|StrainSource[]
+     */
+    public function getStrainSourcesIn(): Collection
+    {
+        return $this->strainSourcesIn;
+    }
+
+    public function addStrainSourcesIn(StrainSource $strainSourcesIn): self
+    {
+        if (!$this->strainSourcesIn->contains($strainSourcesIn)) {
+            $this->strainSourcesIn[] = $strainSourcesIn;
+            $strainSourcesIn->addAllelesIn($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStrainSourcesIn(StrainSource $strainSourcesIn): self
+    {
+        if ($this->strainSourcesIn->contains($strainSourcesIn)) {
+            $this->strainSourcesIn->removeElement($strainSourcesIn);
+            $strainSourcesIn->removeAllelesIn($this);
+        }
 
         return $this;
     }
