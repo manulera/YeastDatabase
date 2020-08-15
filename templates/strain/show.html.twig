@@ -12,7 +12,6 @@
 <h1>Strain {{strain.id}}</h1>
 <h4>Genotype</h4>
 {{strain.genotype}}
-{{form(delete_form)}}
 <h4>Parent strain(s)</h4>
 {% for strain in strain.source.strainsIn %}
 <ul>
@@ -34,6 +33,6 @@
     <li>{% include "strain/reference.html.twig" %}</li>  
 </ul>
 {% endfor %}
-
+{{form(delete_form)}}
 
 {% endblock %}

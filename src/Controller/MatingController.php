@@ -19,9 +19,14 @@ use Symfony\Component\Form\Form;
  */
 class MatingController extends StrainSourceController
 {
+    /**
+     * @var MatingForm
+     */
+    private $formBuilder;
 
     public function __construct(MatingForm $formBuilder, Genotyper $genotyper)
     {
+        parent::__construct($genotyper);
         $this->formBuilder = $formBuilder;
         $this->genotyper = $genotyper;
     }

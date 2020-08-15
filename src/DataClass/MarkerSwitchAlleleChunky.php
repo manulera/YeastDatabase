@@ -8,7 +8,6 @@ use App\Entity\AlleleChunky;
 
 class MarkerSwitchAlleleChunky
 {
-
     public function __construct(array $in_array  = [])
     {
         foreach ($in_array as $key => $value) {

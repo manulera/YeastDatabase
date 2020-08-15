@@ -2,11 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\AlleleChunky;
-use App\Entity\AlleleDeletion;
-use App\Entity\StrainSource;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -18,10 +14,10 @@ class MarkerSwitchType extends MolBiolType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        $builder->add('alleleChunkies', CollectionType::class, [
+        $builder->add('allelesMarkerSwitch', CollectionType::class, [
             'allow_add' => true,
-            'entry_type' => MarkerSwitchAlleleChunkyType::class,
-            'mapped' => false,
+            'entry_type' => MarkerSwitchAlleleType::class,
+            'mapped' => false
         ]);
 
         $formModifier = function (FormEvent $event, $strainSource) {
@@ -33,16 +29,15 @@ class MarkerSwitchType extends MolBiolType
             $nb_strains_in = count($strainSource->getStrainsIn());
             if ($nb_strains_in == 1) {
                 $strain_in = $strainSource->getStrainsIn()[0];
-                $allele_chunky = [];
-                $allele_deletion = [];
+                $data = [];
                 foreach ($strain_in->getAlleles() as $allele) {
                     if ($allele->hasMarker()) {
-                        if (get_class($allele) == AlleleChunky::class) {
-                            $allele_chunky[] = ['originalAllele' => $allele];
-                        }
+
+                        // Nasty php syntax
+                        $data[]['originalAllele'] = $allele;
                     }
                 }
-                $form->get('alleleChunkies')->setData($allele_chunky);
+                $form->get('allelesMarkerSwitch')->setData($data);
             }
         };
 

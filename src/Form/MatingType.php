@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Mating;
 use App\Entity\Strain;
 use App\Repository\StrainRepository;
 use App\Service\Genotyper;
@@ -227,16 +226,6 @@ class MatingType extends AbstractType
             $temp[] = $in_list[$depth][$i];
             $this->recursiveStrainCombination($in_list, $result_list, $depth + 1, $temp);
         }
-    }
-
-
-
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => Mating::class,
-        ]);
     }
 
     /**

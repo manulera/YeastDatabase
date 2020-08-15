@@ -26,11 +26,6 @@ class Tag
      */
     private $color;
 
-    public function __construct()
-    {
-        $this->allele = new ArrayCollection();
-    }
-
     public function __toString()
     {
         return $this->name;

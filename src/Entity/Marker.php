@@ -21,11 +21,6 @@ class Marker
      */
     private $name;
 
-    public function __construct()
-    {
-        $this->allele = new ArrayCollection();
-    }
-
     public function __toString()
     {
         return $this->name;

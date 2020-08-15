@@ -3,14 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LocusNameRepository")
  */
 class LocusName
 {
-
     /**
      * @ORM\Id()
      * @ORM\Column(type="string", length=100)

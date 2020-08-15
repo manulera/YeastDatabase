@@ -2,11 +2,11 @@
 
 {% block allele_section %}
 {{ parent() }}
-{% for allele in form.alleleChunkies %}
+{% for allele in form.allelesMarkerSwitch %}
 {% include "forms/allele/marker_switch_type.html.twig"  with {'form': allele}%}    
 {% endfor %}
-{% if form.alleleChunkies|length==0 %}
-    {{ form_widget(form.alleleChunkies) }}
+{% if form.allelesMarkerSwitch|length==0 %}
+    {{ form_widget(form.allelesMarkerSwitch) }}
 {% endif %}
 {% endblock %}
 

@@ -15,6 +15,11 @@ use Symfony\Component\Serializer\SerializerInterface;
  */
 class AlleleController extends AbstractController
 {
+    /**
+     * @var SerializerInterface
+     */
+    private $serializer;
+
     public function __construct(SerializerInterface $serializer)
     {
         $this->serializer = $serializer;

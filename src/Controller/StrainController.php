@@ -21,20 +21,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class StrainController extends AbstractController
 {
 
-    /**
-     * Returns an array to pass as choice
-     *
-     * @return array
-     */
-    public function strainSourceControllersChoice()
-    {
-        $out = [];
-        foreach (array_keys($this->strainSourceControllers) as $value) {
-            $out[$value] = $value;
-        }
-        return $out;
-    }
-
     private function getFilterFromUrl(Request $request): array
     {
         $filters = ['genotype', 'id', 'creator'];

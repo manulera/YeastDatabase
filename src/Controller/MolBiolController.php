@@ -144,15 +144,18 @@ class MolBiolController extends StrainSourceController
     {
 
         $strain_source = $form->getData();
-        $markerSwitchFormsChunky = $form->get('alleleChunkies')->getData();
+        $markerSwitchForms = $form->get('allelesMarkerSwitch')->getData();
 
 
-        foreach ($markerSwitchFormsChunky as $this_form) {
+        foreach ($markerSwitchForms as $this_form) {
+
+            $original_allele = $this_form['originalAllele'];
 
             // Here we check both conditions because it could be that both markers have been changed.
             $n_changed = array_key_exists('nMarker', $this_form) && $this_form['nMarker'];
             $c_changed = array_key_exists('cMarker', $this_form) && $this_form['cMarker'];
-            if ($n_changed || $c_changed) {
+            $del_changed = array_key_exists('marker', $this_form) && $this_form['marker'];
+            if ($n_changed || $c_changed || $del_changed) {
                 $new_allele = clone $this_form['originalAllele'];
                 if ($n_changed) {
                     $new_allele->setNMarker($this_form['nMarker']);
@@ -160,8 +163,11 @@ class MolBiolController extends StrainSourceController
                 if ($c_changed) {
                     $new_allele->setCMarker($this_form['cMarker']);
                 }
+                if ($del_changed) {
+                    $new_allele->setMarker($this_form['marker']);
+                }
                 $new_allele->setParentAllele($this_form['originalAllele']);
-                $strain_source->addAllele($new_allele);
+                $strain_source->addAllelesOut($new_allele);
             }
         }
         // $allele_deletions = $form->get('alleleDeletions')->getData();

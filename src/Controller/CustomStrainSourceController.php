@@ -12,6 +12,7 @@ use App\Entity\StrainSourceTag;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/strain/new/custom", name="strain.source.custom.")
@@ -22,7 +23,7 @@ class CustomStrainSourceController extends StrainSourceController
     /**
      * @Route("/", name="index")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): Response
     {
         $strain_source = new StrainSource;
         $form = $this->makeForm();
@@ -42,7 +43,8 @@ class CustomStrainSourceController extends StrainSourceController
         );
     }
 
-    public function processStrains(Form $form, StrainSource $strain_source)
+
+    public function processStrains(Form $form, StrainSource $strain_source): void
     {;
         $new_strain = new Strain;
 
@@ -52,6 +54,7 @@ class CustomStrainSourceController extends StrainSourceController
         $tag = $this->getDoctrine()->getRepository(StrainSourceTag::class)->findOneBy(['name' => 'Import']);
         $strain_source->addStrainSourceTag($tag);
     }
+
 
     public function makeForm($options = [])
     {
