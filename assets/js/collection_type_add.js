@@ -48,6 +48,7 @@ function renderSequence() {
 
     ]    
     var extra_coverage = [];
+    var extra_coverage_dna = [];
     $("table.pointmutation-table").each(function () {
         // Zero indexing
         var position = $(this).find(':input')[0].value;
@@ -58,7 +59,19 @@ function renderSequence() {
                 end: seq_position + 1,
                 bgcolor: "red"
             });
+            var codon_edges = thismRNA.findAminoacidInSequence(seq_position*3,(seq_position+1)*3);
+            for (let i = 0; i < codon_edges.length; i+=2) {
+                extra_coverage_dna.push({
+                    start: codon_edges[i],
+                    end: codon_edges[i+1],
+                    bgcolor: "red"
+                });    
+            }
+            
+
         }
+        
+        
     });
     $("table.truncation-table").each(function () {
         // Zero indexing
@@ -72,7 +85,14 @@ function renderSequence() {
                     bgcolor: "red"
                 });
                 $(this).find('.truncation-warning').css('visibility', 'hidden');
-                
+                var codon_edges = thismRNA.findAminoacidInSequence(seq_start*3,(seq_end+1)*3);
+                for (let i = 0; i < codon_edges.length; i+=2) {
+                    extra_coverage_dna.push({
+                        start: codon_edges[i],
+                        end: codon_edges[i+1],
+                        bgcolor: "red"
+                    });    
+                }
             }
             else{
                 console.log($(this).find('.truncation-warning'));
@@ -82,7 +102,7 @@ function renderSequence() {
 
     });
 
-    seq_dna.coverage(thismRNA.coverage);
+    seq_dna.coverage([...thismRNA.coverage, ...extra_coverage_dna]);
     seq_dna.addLegend(my_legend);
 
 

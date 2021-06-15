@@ -35,12 +35,12 @@ class CustomAlleleController extends MolBiolController
      */
     public function indexAction(Request $request)
     {
-
+        
         $form = $this->createForm(MolBiolAlleleChunkyType::class, null, ['allele_options' => ['fields2show' => 'all']]);
         $form->handleRequest($request);
         // dump($form);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
+            // dump($form->getData());
             // return $this->render('strain/source/custom_allele.html.twig', [
             //     'form' => $form->createView(),
             // ]);

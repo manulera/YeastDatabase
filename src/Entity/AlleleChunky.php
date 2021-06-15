@@ -69,6 +69,7 @@ class AlleleChunky extends Allele
         parent::__construct();
         $this->pointMutations = new ArrayCollection();
         $this->truncations = new ArrayCollection();
+        // $this->getPointMutations()[0];
     }
 
     public function __clone()
@@ -85,7 +86,6 @@ class AlleleChunky extends Allele
     public function setPromoter(?Promoter $promoter): self
     {
         $this->promoter = $promoter;
-
         return $this;
     }
 
@@ -183,7 +183,7 @@ class AlleleChunky extends Allele
     /**
      * @return Collection|PointMutation[]
      */
-    public function getPointMutations(): Collection
+    public function getPointMutations()
     {
         return $this->pointMutations;
     }

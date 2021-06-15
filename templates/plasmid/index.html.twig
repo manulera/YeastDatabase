@@ -10,9 +10,23 @@
     </div>
 {% endfor %}
 <h1>Plasmids</h1>
-<a href="{{ path('plasmid.import') }}">
-   <button class="btn btn-primary">Import from .csv file</button>
-</a>
+
+<div class="d-flex bd-highlight mb-3">
+<span>
+<ul class="nav nav-pills mb-2">
+  <li class="nav-item pr-md-5">
+  <a class="nav-link" href="/plasmid/new/">Create plasmid</a>    
+  </li>
+</ul>
+</span>
+<span class="form-inline">
+        <form name="form" method="post">
+    <input type="text" id="form_id" name="form[id]" placeholder="Filter code" class="form-control">
+    <input type="text" id="form_genotype" name="form[genotype]" placeholder="Filter name" class="form-control">
+    <button type="submit" id="form_filter" name="form[filter]" class="btn-primary btn">Filter</button>
+</span>
+</div>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -31,5 +45,7 @@
     {% endfor %}
     </tbody>
 </table>
-
+<a href="{{ path('plasmid.import') }}">
+   <button class="btn btn-primary">Import from .csv file</button>
+</a>
 {% endblock %}

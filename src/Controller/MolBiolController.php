@@ -79,7 +79,7 @@ class MolBiolController extends StrainSourceController
                     break;
             }
         }
-        dump($form);
+        // dump($form);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             return $this->persistMolBiol($form->getData(), $form->get("numberOfClones")->getData());
@@ -100,7 +100,7 @@ class MolBiolController extends StrainSourceController
         $form = $this->createForm(MolBiolAlleleChunkyType::class, null, ['allele_options' => ['fields2show' => "all"]]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
+            // dump($form->getData());
             return $this->persistMolBiol($form->getData(), $form->get("numberOfClones")->getData());
         }
         return $this->render(
@@ -184,7 +184,7 @@ class MolBiolController extends StrainSourceController
     public function persistMarkerSwitch(StrainSource $strain_source, int $nb_clones)
     {
         // A few checks:
-        dump($strain_source->getStrainsIn());
+        // dump($strain_source->getStrainsIn());
         if (count($strain_source->getStrainsIn()) != 1) {
             return "Input strains should be 1";
         }

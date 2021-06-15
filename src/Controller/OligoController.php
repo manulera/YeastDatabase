@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class OligoController extends AbstractController
 {
+
     /**
      * @Route("/", name="index")
      * @Method("GET")

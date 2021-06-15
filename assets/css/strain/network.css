@@ -1,6 +1,33 @@
 svg circle {
     stroke-width: 1.5px;
   }
+
+.legend
+{
+  margin-right: 10px;
+  font-size: x-large;
+}
+
+.legend-strain
+{
+  color:#FF8000;
+}
+.legend-markerswitch
+{
+  color:#505050;
+}
+.legend-transformation
+{
+  color:#3b5998;
+}
+.legend-import
+{
+  color: #72EB29;
+}
+.legend-mating
+{
+  color: #F983F2;
+}
   g .strain circle
  {
   fill:#FF8000;
@@ -66,10 +93,10 @@ svg line {
     border-radius: 8px;           
     pointer-events: none;     
     background-size: auto;
-    font-size: 10px; 
+    font-size: 16px; 
   }
 
   .tooltip_main
   {
-    font-size: 16px; 
+    font-size: 20px; 
   }

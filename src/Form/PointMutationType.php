@@ -49,7 +49,7 @@ class PointMutationType extends AbstractType
             FormEvents::PRE_SUBMIT,
             function (FormEvent $event) {
                 $new_aa = $event->getData()['newAminoAcid'];
-                dump($new_aa);
+                // dump($new_aa);
                 $possible_codons = array_merge($this->sequence->getCodonsFromAminoAcid($new_aa), ['unknown']);
                 $event->getForm()->add(
                     'newCodon',

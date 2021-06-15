@@ -45,7 +45,7 @@ class MarkerSwitchType extends MolBiolType
         $builder->addEventListener(
             FormEvents::POST_SET_DATA,
             function (FormEvent $event) use ($formModifier) {
-                dump($event->getData());
+                // dump($event->getData());
                 $formModifier($event, $event->getData());
             }
         );

@@ -33,7 +33,7 @@ class DummyController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
+            // dump($form->getData());
         }
         return $this->render('dummy/index.html.twig', [
             'form' => $form->createView(),

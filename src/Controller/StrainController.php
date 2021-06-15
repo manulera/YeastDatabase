@@ -201,7 +201,8 @@ class StrainController extends AbstractController
             $source_name = 'source_' . implode('_', $tags) . '_' . strval($source->getId());
             $nodes[] = ['id' => $source_id, 'name' => $source_name];
             $info[] = [
-                'main' => 'Source ' . strval($source->getId()),
+                // 'main' => 'Source ' . strval($source->getId()),
+                'main' => ' ',
                 'rest' => strval($source),
             ];
             foreach ($source->getStrainsIn() as $strain_in) {

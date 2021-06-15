@@ -13,7 +13,7 @@ class MarkerSwitchAlleleChunky
         foreach ($in_array as $key => $value) {
             $this->$key = $value;
         }
-        dump($this, $in_array);
+        // dump($this, $in_array);
     }
 
     /**
