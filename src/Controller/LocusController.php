@@ -37,7 +37,8 @@ class LocusController extends AbstractController
         $updateForm = $formBuilder->getForm();
         $updateForm->handleRequest($request);
         if ($updateForm->isSubmitted() && $updateForm->isValid()) {
-            return $this->updateLoci();
+            // We do nothing here
+            // return $this->updateLoci();
         }
         // Create the filter form
         $formBuilder = $this->createFormBuilder()
