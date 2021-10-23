@@ -8,10 +8,14 @@ Clone the repository and install the dependencies
 ~~~bash
 git clone https://github.com/manulera/YeastDatabase
 cd YeastDatabase
+# Install php dependencies
 composer install
-npm i
+# Install javascript dependencies
+yarn install
+yarn encore dev
+# Initialize the database
+bash bin/restart_database.sh
+# Serve with symfony
+symfony server:start
 ~~~
 
-For production use `npm run build` and for dev use `npm run dev-server`. See commands in the `scripts` part of `package.json`.
-
-Start the symfony server with: `symfony server:start`.
