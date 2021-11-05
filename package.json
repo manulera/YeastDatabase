@@ -19,6 +19,7 @@
     "dependencies": {
         "@popperjs/core": "^2.4.0",
         "chosen": "github:harvesthq/chosen",
+        "chosen-js": "^1.8.7",
         "d3": "^5.15.0",
         "float-label-css": "^1.0.2",
         "handlebars": "^4.7.6",
