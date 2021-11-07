@@ -1,6 +1,4 @@
 node_modules
-build
-.dockerignore
 var
 vendor
-
+public/build/

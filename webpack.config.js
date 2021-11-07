@@ -31,7 +31,7 @@ Encore
     .addEntry('custom-file-label', './assets/js/custom-file-label.js')
     .addEntry('form_type/locus_picker', './assets/js/form_type/locus_picker.js')
     .addEntry('form_type/strain_picker', './assets/js/form_type/strain_picker.js')
-    .addEntry('external_imports/chosen', './assets/js/external_imports/chosen')
+    .addEntry('external_imports/chosen', './assets/js/external_imports/chosen.js')
     .addEntry('dummy', './assets/js/dummy/dummy.js')
     .addEntry('strain/source/marker_switch', './assets/js/strain/source/marker_switch.js')
     //.addEntry('page1', './assets/js/page1.js')

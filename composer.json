@@ -11,7 +11,6 @@
         "doctrine/doctrine-migrations-bundle": "^2",
         "doctrine/orm": "^2",
         "friendsofsymfony/rest-bundle": "dev-master",
-        "harvesthq/chosen": "dev-master",
         "knplabs/knp-menu-bundle": "^3.0",
         "knplabs/knp-paginator-bundle": "^5.2",
         "mbostock/d3": "^3.5",

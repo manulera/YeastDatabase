@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1c8ac9fdf2c54d7815fca1a6f6045f8",
+    "content-hash": "a51899846211dc53958510004515dec2",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -365,12 +365,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "01595c011c1aff35088a1f3ae6823222738c511d"
+                "reference": "089ba109f550ba5c170e5d5a7894196a4026930f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/01595c011c1aff35088a1f3ae6823222738c511d",
-                "reference": "01595c011c1aff35088a1f3ae6823222738c511d",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/089ba109f550ba5c170e5d5a7894196a4026930f",
+                "reference": "089ba109f550ba5c170e5d5a7894196a4026930f",
                 "shasum": ""
             },
             "require": {
@@ -448,7 +448,7 @@
                 "sqlserver",
                 "sqlsrv"
             ],
-            "time": "2021-11-04T21:25:55+00:00"
+            "time": "2021-11-06T21:46:43+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -587,12 +587,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "0a081b55a88259a887af7be654743a8c5f703e99"
+                "reference": "7d29ceb8c29516ae67a67255e06048e989dadf93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/0a081b55a88259a887af7be654743a8c5f703e99",
-                "reference": "0a081b55a88259a887af7be654743a8c5f703e99",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/7d29ceb8c29516ae67a67255e06048e989dadf93",
+                "reference": "7d29ceb8c29516ae67a67255e06048e989dadf93",
                 "shasum": ""
             },
             "require": {
@@ -606,7 +606,8 @@
                 "mikey179/vfsstream": "^1.6",
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+                "phpunit/phpunit": "^7.0|^8.0|^9.0",
+                "vimeo/psalm": "^4.11"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -642,7 +643,7 @@
                 "migrations",
                 "schema"
             ],
-            "time": "2021-03-18T20:55:50+00:00"
+            "time": "2021-11-06T20:24:35+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -1455,55 +1456,6 @@
             "time": "2020-06-15T21:24:56+00:00"
         },
         {
-            "name": "harvesthq/chosen",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/harvesthq/chosen-package.git",
-                "reference": "d3037b68036fe0d7453962cf11ab00294f990145"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/harvesthq/chosen-package/zipball/d3037b68036fe0d7453962cf11ab00294f990145",
-                "reference": "d3037b68036fe0d7453962cf11ab00294f990145",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Koen Punt",
-                    "homepage": "https://github.com/koenpunt"
-                },
-                {
-                    "name": "Patrick Filler",
-                    "homepage": "https://github.com/pfiller"
-                },
-                {
-                    "name": "Christophe Coevoet",
-                    "homepage": "https://github.com/stof"
-                },
-                {
-                    "name": "Ken Earley",
-                    "homepage": "https://github.com/kenearley"
-                }
-            ],
-            "description": "Chosen is a JavaScript plugin that makes select boxes user-friendly. It is currently available in both jQuery and Prototype flavors.",
-            "homepage": "https://harvesthq.github.io/chosen/",
-            "keywords": [
-                "dropdown",
-                "form",
-                "input",
-                "multiselect",
-                "select",
-                "ui"
-            ],
-            "time": "2019-06-04T19:43:48+00:00"
-        },
-        {
             "name": "knplabs/knp-components",
             "version": "dev-master",
             "source": {
@@ -2020,20 +1972,20 @@
         },
         {
             "name": "psr/container",
-            "version": "1.1.x-dev",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf"
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf",
-                "reference": "8622567409010282b7aeebe4bb841fe98b58dcaf",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/513e0666f7216c7459170d56df27dfcefe1689ea",
+                "reference": "513e0666f7216c7459170d56df27dfcefe1689ea",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.0"
+                "php": ">=7.4.0"
             },
             "type": "library",
             "autoload": {
@@ -2060,7 +2012,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2021-03-05T17:36:06+00:00"
+            "time": "2021-11-05T16:50:12+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -5701,12 +5653,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/twig-extra-bundle.git",
-                "reference": "fa92b8301ff8878e45fe9f54ab7ad99872e080f3"
+                "reference": "61f250da9fb2c922bda88a62c40a2d87d26fe565"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/fa92b8301ff8878e45fe9f54ab7ad99872e080f3",
-                "reference": "fa92b8301ff8878e45fe9f54ab7ad99872e080f3",
+                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/61f250da9fb2c922bda88a62c40a2d87d26fe565",
+                "reference": "61f250da9fb2c922bda88a62c40a2d87d26fe565",
                 "shasum": ""
             },
             "require": {
@@ -5758,7 +5710,7 @@
                 "extra",
                 "twig"
             ],
-            "time": "2021-05-20T14:28:34+00:00"
+            "time": "2021-11-05T16:53:41+00:00"
         },
         {
             "name": "twig/twig",
@@ -5766,12 +5718,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "d87d6a0b6dae29aad043bf225d523cbb440275de"
+                "reference": "7cf279d3d64e12a7d6b2ab4fa8f4a3e7176fd41d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/d87d6a0b6dae29aad043bf225d523cbb440275de",
-                "reference": "d87d6a0b6dae29aad043bf225d523cbb440275de",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7cf279d3d64e12a7d6b2ab4fa8f4a3e7176fd41d",
+                "reference": "7cf279d3d64e12a7d6b2ab4fa8f4a3e7176fd41d",
                 "shasum": ""
             },
             "require": {
@@ -5820,7 +5772,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2021-11-04T17:53:43+00:00"
+            "time": "2021-11-05T16:53:41+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -6161,7 +6113,6 @@
     "stability-flags": {
         "composer/package-versions-deprecated": 20,
         "friendsofsymfony/rest-bundle": 20,
-        "harvesthq/chosen": 20,
         "phpstan/phpstan-symfony": 20,
         "symfony/phpunit-bridge": 20
     },

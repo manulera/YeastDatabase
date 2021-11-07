@@ -1,64 +1,48 @@
+
 FROM node:16-alpine as build
 
 # set working directory
-WORKDIR /app
+WORKDIR /application
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+# add `/application/node_modules/.bin` to $PATH
+ENV PATH /application/node_modules/.bin:$PATH
 
-# install app dependencies
+# install application dependencies
 COPY package.json ./
 COPY yarn.lock ./
+RUN yarn cache clean
 RUN yarn install
 RUN ls
 RUN pwd
 
-# add app
+# add application
 COPY . ./
 
-# start app
+# start application
 RUN yarn build
 
-FROM php:7.4-cli
 
-WORKDIR /app
+FROM phpdockerio/php74-fpm:latest
+WORKDIR "/application"
+COPY --from=build /application/public/build ./public/build
 
-COPY --from=build /app/build ./build
+RUN apt-get update; \
+    apt-get install php7.4-sqlite3 -y; \
+    apt-get -y --no-install-recommends install \
+        git; \
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
-# Required for composer
-RUN apt update \
-    && apt install -y zlib1g-dev g++ git libicu-dev zip libzip-dev zip \
-    && docker-php-ext-install intl opcache pdo pdo_mysql \
-    && pecl install apcu \
-    && docker-php-ext-enable apcu \
-    && docker-php-ext-configure zip \
-    && docker-php-ext-install zip
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+ENV COMPOSER_MEMORY_LIMIT=-1
+RUN composer self-update 1.9.1
 
-# set working directory
-WORKDIR /app
-
-# Copy files
 COPY . ./
+RUN composer install
+RUN bin/console cache:clear
+RUN php bin/console doctrine:database:create
+RUN bash bin/restart_database.sh
+RUN chmod ugo+rwx ./var/data.db
+RUN echo fourth_time
+RUN find . -name *.css|grep build
 
-# Install dependencies - php
-# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-# ENV COMPOSER_MEMORY_LIMIT=-1
-# RUN composer self-update 1.9.1
-# RUN composer install
-
-COPY package.json ./
-COPY yarn.lock ./
-
-# Install dependencies - javascript
-
-RUN apt remove cmdtest
-RUN apt remove yarn
-RUN apt-get update
-RUN apt-get install yarn -y
-RUN yarn install
-RUN yarn encore dev
-# RUN bash bin/restart_database.sh
-
-
-# add app
-COPY . ./

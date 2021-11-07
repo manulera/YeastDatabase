@@ -1673,10 +1673,6 @@ chosen-js@^1.8.7:
   resolved "https://registry.yarnpkg.com/chosen-js/-/chosen-js-1.8.7.tgz#9bfa5597f5081d602ff4ae904af9aef33265bb1d"
   integrity sha512-eVdrZJ2U5ISdObkgsi0od5vIJdLwq1P1Xa/Vj/mgxkMZf14DlgobfB6nrlFi3kW4kkvKLsKk4NDqZj1MU1DCpw==
 
-"chosen@github:harvesthq/chosen":
-  version "1.8.7"
-  resolved "https://codeload.github.com/harvesthq/chosen/tar.gz/91041bc9dd6867f9a1668050a1b092d92027f13b"
-
 chownr@^1.1.1:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"

@@ -93,9 +93,6 @@
             "config/packages/fos_rest.yaml"
         ]
     },
-    "harvesthq/chosen": {
-        "version": "dev-master"
-    },
     "knplabs/knp-components": {
         "version": "v2.3.4"
     },
