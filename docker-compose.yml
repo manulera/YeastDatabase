@@ -5,7 +5,7 @@ version: '3.1'
 volumes:
   js-files:
 services:
-  webserver:
+  nginx:
     image: 'nginx:alpine'
     working_dir: /application
     volumes:
@@ -13,9 +13,17 @@ services:
       - './public/index.php:/application/public/index.php'
       - 'js-files:/application/public/build'
       - './phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     ports:
       - '80:80'
       - '443:443'
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
 
   php-fpm:
       build: ./
