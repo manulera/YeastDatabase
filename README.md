@@ -27,3 +27,8 @@ bash bin/restart_database.sh
 symfony server:start
 ~~~
 
+<!-- ```
+docker build -t manulera/shareyourcloning_frontend -f Dockerfile-prod .
+# push to the repository:
+docker push manulera/shareyourcloning_frontend
+``` -->
