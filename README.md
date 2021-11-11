@@ -3,6 +3,8 @@ A symfony PHP/MySQL web application to track your yeast collection.
 
 This is just a prototype to illustrate the kind of information that one could access by tracking the provenance of strains. For example, see which strains contain a given allele, which alleles exist for a given locus, etc.
 
+You can find a hosted version of this at [https://prototype.genestorian.org/](https://prototype.genestorian.org/).
+
 This web application was a prove of concept and will not be developed further.
 
 A video illustrating how to use the application can be found [here](https://www.youtube.com/watch?v=34GMuHpl7f0). To install the application see below.
@@ -27,8 +29,3 @@ bash bin/restart_database.sh
 symfony server:start
 ~~~
 
-<!-- ```
-docker build -t manulera/shareyourcloning_frontend -f Dockerfile-prod .
-# push to the repository:
-docker push manulera/shareyourcloning_frontend
-``` -->
