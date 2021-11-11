@@ -13,8 +13,8 @@ class PlasmidType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('code')
             ->add('name')
-            ->add('file')
             ->add('Save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary float-right',
