@@ -38,7 +38,7 @@ ENV COMPOSER_MEMORY_LIMIT=-1
 RUN composer self-update 1.9.1
 
 COPY . ./
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install
 RUN bin/console cache:clear
 RUN php bin/console doctrine:database:create
 RUN bash bin/restart_database.sh
