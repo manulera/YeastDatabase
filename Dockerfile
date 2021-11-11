@@ -38,11 +38,10 @@ ENV COMPOSER_MEMORY_LIMIT=-1
 RUN composer self-update 1.9.1
 
 COPY . ./
-RUN composer install
+RUN composer install --no-dev --optimize-autoloader
 RUN bin/console cache:clear
 RUN php bin/console doctrine:database:create
 RUN bash bin/restart_database.sh
 RUN chmod ugo+rwx ./var/data.db
-RUN echo fourth_time
-RUN find . -name *.css|grep build
+RUN composer dump-env prod
 
