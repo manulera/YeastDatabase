@@ -9,6 +9,15 @@
 		</div>
 		
 	{% endfor %}
+    <div class="mt-3 alert alert-info" role="alert">
+        <h4>NOTE</h4>
+        <p>This is a proof of concept demo, where you select  tags, markers, promoters and / or
+        sequence mutations manually, and the resources (plasmids and oligos) that you used for a genetic modification.</p>
+        <p>In the real app, you will select the locus or genome position where a change is made, the plasmid and/or oligos used, and the transformation method.
+        Then, the resulting allele sequence will be generated automatically, and the tags, markers, etc. will be directly populated.
+        You can see a prototype of the interface to simulate cloning at
+        <a href="https://shareyourcloning.netlify.app/" target="_blank" rel="noopener noreferrer" >https://shareyourcloning.netlify.app/</a></p>
+    </div>
 	<div id="allele_section">
     {% block allele_section %}
     {% endblock %}

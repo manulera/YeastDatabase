@@ -5,7 +5,17 @@
 {% block body %}
 <h1>Dashboard</h1>
 Hello {{ app.user.username }}, welcome to your collection!
-
+<div class="mt-3 alert alert-info" role="alert">
+<h5>Read before going further</h5>
+    <p>This is a proof of concept demo to showcase how you can browse a <i>S. pombe</i> strain collection in which we keep track of the
+    origin of alleles and strains, so that you can quickly access all strains that have a certain allele, the ancestry and progeny of a strain, etc.</p>
+    <p>In this demo, when you create a new allele you select tags, markers, promoters and / or
+    sequence mutations manually, and the resources (plasmids and oligos) that you used for a genetic modification.</p>
+    <p>In the real app, you will select the locus or genome position where a change is made, the plasmid and/or oligos used, and the transformation method.
+    Then, the resulting allele sequence will be generated automatically, and the tags, markers, etc. will be directly populated.
+    You can see a prototype of the interface to simulate cloning at
+    <a href="https://shareyourcloning.netlify.app/" target="_blank" rel="noopener noreferrer" >https://shareyourcloning.netlify.app/</a></p>
+</div>
 <h5 class='mt-3'>This is a video on how to use this demo:</h5>
 <div>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/34GMuHpl7f0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
