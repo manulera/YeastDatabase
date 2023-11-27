@@ -6,5 +6,8 @@ services:
 
   yeastdatabase:
       image: manulera/yeastdatabase_php
+      volumes:
+      # This ensures that the database is not lost when restarting the container
+        - ./example.db:/application/var/data.db
       ports:
         - "8000:8000"
